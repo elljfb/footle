@@ -1,15 +1,15 @@
 # Footle - The Daily Football Player Guessing Game
 
-A fun daily game where players try to guess a mystery football player based on various attributes like position, age, nationality, club, and more.
+A fun and engaging daily game where players try to guess the mystery football player using various attributes like position, age, nationality, club, and more.
 
 ## Features
 
-- Daily mystery player
-- 5 attempts to guess
-- Color-coded feedback (green for exact matches, orange for close matches)
-- Share results on social media
+- Daily mystery player challenge
+- 5 attempts to guess the player
+- Color-coded feedback for each attribute
+- Social media sharing
 - Mobile-friendly design
-- Progressive Web App support
+- PWA support
 
 ## Tech Stack
 
@@ -20,36 +20,23 @@ A fun daily game where players try to guess a mystery football player based on v
 
 ## Getting Started
 
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/football-guess.git
-cd football-guess
-```
-
+1. Clone the repository
 2. Install dependencies:
-```bash
-npm install
-```
-
+   ```bash
+   npm install
+   ```
 3. Run the development server:
-```bash
-npm run dev
-```
-
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ## Deployment
 
-This project is deployed on Vercel. To deploy your own instance:
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy!
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+The application is deployed on Vercel. Any push to the main branch will trigger an automatic deployment.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This software is proprietary and confidential. All rights reserved. Unauthorized copying, modification, distribution, or use of this software is strictly prohibited.
+
+For licensing inquiries, please contact the copyright holder. 
