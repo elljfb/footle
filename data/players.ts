@@ -120,16 +120,16 @@ export const players: Player[] = [
   },
   {
     id: 10,
-    name: 'Victor Osimhen',
-    position: 'Forward',
-    subPosition: 'Striker',
-    dateOfBirth: '1998-12-29',
-    nationality: 'Nigeria',
+    name: 'Scott McTominay',
+    position: 'Midfielder',
+    subPosition: 'Central Midfielder',
+    dateOfBirth: '1996-03-08',
+    nationality: 'Scotland',
     club: 'Napoli',
     league: 'Serie A',
-    height: 185,
+    height: 193,
     foot: 'Right',
-    image: '/players/osimhen.jpg'
+    image: '/players/mctominay.jpg'
   },
   {
     id: 11,
