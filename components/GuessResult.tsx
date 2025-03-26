@@ -1,5 +1,5 @@
 import React from 'react';
-import { GuessResponseWithValues } from '../services/gameService';
+import { GuessResponseWithValues } from '../types/player';
 
 interface GuessResultProps {
   guess: GuessResponseWithValues;
