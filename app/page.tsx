@@ -6,7 +6,6 @@ import { getDailyPlayer, checkGuess, GuessResponseWithValues } from '../services
 import GuessResult from '../components/GuessResult';
 import SearchBar from '../components/SearchBar';
 import InstructionsModal from '../components/InstructionsModal';
-import Footer from '../components/Footer';
 import { GameState } from '../types/game';
 
 const STORAGE_KEY = 'footle_game_state';
@@ -290,7 +289,6 @@ export default function Home() {
         isOpen={showInstructions}
         onClose={() => setShowInstructions(false)}
       />
-      <Footer />
     </main>
   );
 }
