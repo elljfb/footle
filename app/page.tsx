@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Player } from '../types/player';
-import { getDailyPlayer, checkGuess, GuessResponseWithValues } from '../services/gameService';
+import { Player, GuessResponseWithValues } from '../types/player';
+import { getDailyPlayer, checkGuess } from '../services/gameService';
 import GuessResult from '../components/GuessResult';
 import SearchBar from '../components/SearchBar';
 import InstructionsModal from '../components/InstructionsModal';
