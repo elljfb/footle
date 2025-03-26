@@ -15,8 +15,9 @@ function comparePositions(guess: Position, target: Position): GuessResult {
   return guess === target ? 'correct' : 'incorrect';
 }
 
-function compareSubPositions(guess: SubPosition, target: SubPosition): GuessResult {
-  return guess === target ? 'correct' : 'incorrect';
+function compareSubPositions(guess: SubPosition, target: SubPosition, guessPosition: Position, targetPosition: Position): GuessResult {
+  if (guessPosition !== targetPosition) return 'incorrect';
+  return guess === target ? 'correct' : 'close';
 }
 
 function compareAges(guess: number, target: number): GuessResult {
@@ -27,6 +28,16 @@ function compareAges(guess: number, target: number): GuessResult {
 
 function compareStrings(guess: string, target: string): GuessResult {
   return guess === target ? 'correct' : 'incorrect';
+}
+
+function compareNationalities(guess: string, target: string): GuessResult {
+  if (guess === target) return 'correct';
+  return areInSameContinent(guess, target) ? 'close' : 'incorrect';
+}
+
+function compareClubs(guess: string, target: string, guessLeague: string, targetLeague: string): GuessResult {
+  if (guess === target) return 'correct';
+  return guessLeague === targetLeague ? 'close' : 'incorrect';
 }
 
 function compareHeights(guess: number, target: number): GuessResult {
@@ -58,10 +69,10 @@ export function checkGuess(target: Player, guess: string): GuessResponseWithValu
   return {
     isCorrect: guessedPlayer.id === target.id,
     position: comparePositions(guessedPlayer.position, target.position),
-    subPosition: compareSubPositions(guessedPlayer.subPosition, target.subPosition),
+    subPosition: compareSubPositions(guessedPlayer.subPosition, target.subPosition, guessedPlayer.position, target.position),
     age: compareAges(guessAge, targetAge),
-    nationality: compareStrings(guessedPlayer.nationality, target.nationality),
-    club: compareStrings(guessedPlayer.club, target.club),
+    nationality: compareNationalities(guessedPlayer.nationality, target.nationality),
+    club: compareClubs(guessedPlayer.club, target.club, guessedPlayer.league, target.league),
     league: compareStrings(guessedPlayer.league, target.league),
     height: compareHeights(guessedPlayer.height, target.height),
     foot: guessedPlayer.foot === target.foot ? 'correct' : 'incorrect',
