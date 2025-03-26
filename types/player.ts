@@ -40,4 +40,17 @@ export interface GuessResponse {
   height: GuessResult;
   foot: GuessResult;
   isCorrect: boolean;
+}
+
+export interface GuessResponseWithValues extends GuessResponse {
+  values: {
+    position: Position;
+    subPosition: SubPosition;
+    age: number;
+    nationality: string;
+    club: string;
+    league: string;
+    height: number;
+    foot: Foot;
+  };
 } 

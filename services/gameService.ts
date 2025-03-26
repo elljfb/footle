@@ -1,4 +1,4 @@
-import { Player, Position, SubPosition, GuessResult, GuessResponse, Foot } from '../types/player';
+import { Player, Position, SubPosition, GuessResult, GuessResponse, Foot, GuessResponseWithValues } from '../types/player';
 import { players } from '../data/players';
 import { areInSameContinent } from '../utils/continents';
 
@@ -9,19 +9,6 @@ export function getDailyPlayer(): Player {
   const daysSinceEpoch = Math.floor(today.getTime() / MILLISECONDS_IN_DAY);
   const playerIndex = daysSinceEpoch % players.length;
   return players[playerIndex];
-}
-
-export interface GuessResponseWithValues extends GuessResponse {
-  values: {
-    position: Position;
-    subPosition: SubPosition;
-    age: number;
-    nationality: string;
-    club: string;
-    league: string;
-    height: number;
-    foot: Foot;
-  };
 }
 
 function comparePositions(guess: Position, target: Position): GuessResult {
