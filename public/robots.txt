@@ -1,0 +1,9 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://footle.online/sitemap.xml
+
+# Crawl-delay for rate limiting
+Crawl-delay: 10 
