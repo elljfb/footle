@@ -79,8 +79,8 @@ export default function PrivacyPolicy() {
               If you have any questions about this Privacy Policy, please contact us at:
             </p>
             <p className="mt-2">
-              <a href="mailto:privacy@footle.online" className="text-blue-400 hover:text-blue-300">
-                privacy@footle.online
+              <a href="mailto:dailyguessthefootballer@gmail.com" className="text-blue-400 hover:text-blue-300">
+                dailyguessthefootballer@gmail.com
               </a>
             </p>
           </section>
