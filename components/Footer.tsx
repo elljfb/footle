@@ -1,12 +1,11 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
-    <footer className="mt-8 py-4 text-center text-gray-400 text-sm">
-      <a 
-        href="/privacy" 
-        className="hover:text-white transition-colors"
-      >
+    <footer className="py-4 text-center text-sm text-gray-500">
+      <Link href="/privacy" className="hover:text-gray-700">
         Privacy Policy
-      </a>
+      </Link>
     </footer>
   );
 } 

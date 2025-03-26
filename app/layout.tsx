@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -48,6 +49,14 @@ export const metadata: Metadata = {
   },
   manifest: '/manifest.json',
   robots: 'index, follow',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Footle",
+  },
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export default function RootLayout({
@@ -57,7 +66,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-QVKN2HSME2');
+            `,
+          }}
+        />
+      </head>
+      <body className={inter.className}>
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
