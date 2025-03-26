@@ -1,4 +1,4 @@
-import { Player, GuessResponse } from '../types/player';
+import { Player, Position, SubPosition, GuessResult, GuessResponse, Foot } from '../types/player';
 import { players } from '../data/players';
 import { areInSameContinent } from '../utils/continents';
 
@@ -13,54 +13,81 @@ export function getDailyPlayer(): Player {
 
 export interface GuessResponseWithValues extends GuessResponse {
   values: {
-    position: string;
-    subPosition: string;
+    position: Position;
+    subPosition: SubPosition;
     age: number;
     nationality: string;
     club: string;
     league: string;
     height: number;
-    foot: string;
-  }
+    foot: Foot;
+  };
 }
 
-export function checkGuess(player: Player, guessedName: string): GuessResponseWithValues | null {
-  const guessedPlayer = players.find(p => 
-    p.name.toLowerCase() === guessedName.toLowerCase()
-  );
+function comparePositions(guess: Position, target: Position): GuessResult {
+  return guess === target ? 'correct' : 'incorrect';
+}
 
-  if (!guessedPlayer) {
-    return null;
-  }
+function compareSubPositions(guess: SubPosition, target: SubPosition): GuessResult {
+  return guess === target ? 'correct' : 'incorrect';
+}
 
-  const ageDiff = Math.abs(player.age - guessedPlayer.age);
-  const heightDiff = Math.abs(player.height - guessedPlayer.height);
+function compareAges(guess: number, target: number): GuessResult {
+  const diff = Math.abs(guess - target);
+  return diff === 0 ? 'correct' : 
+    (diff <= 3 ? 'close' : 'incorrect');
+}
+
+function compareStrings(guess: string, target: string): GuessResult {
+  return guess === target ? 'correct' : 'incorrect';
+}
+
+function compareHeights(guess: number, target: number): GuessResult {
+  const diff = Math.abs(guess - target);
+  return diff === 0 ? 'correct' : 
+    (diff <= 5 ? 'close' : 'incorrect');
+}
+
+export function checkGuess(target: Player, guess: string): GuessResponseWithValues | null {
+  const guessedPlayer = players.find(p => p.name.toLowerCase() === guess.toLowerCase());
+  if (!guessedPlayer) return null;
+
+  const calculateAge = (dateOfBirth: string): number => {
+    const today = new Date();
+    const birthDate = new Date(dateOfBirth);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    
+    return age;
+  };
+
+  const targetAge = calculateAge(target.dateOfBirth);
+  const guessAge = calculateAge(guessedPlayer.dateOfBirth);
 
   return {
-    position: player.position === guessedPlayer.position ? 'correct' : 'incorrect',
-    subPosition: player.subPosition === guessedPlayer.subPosition ? 'correct' : 
-      (player.position === guessedPlayer.position ? 'close' : 'incorrect'),
-    age: ageDiff === 0 ? 'correct' : 
-      (ageDiff <= 3 ? 'close' : 'incorrect'),
-    nationality: player.nationality === guessedPlayer.nationality ? 'correct' : 
-      (areInSameContinent(player.nationality, guessedPlayer.nationality) ? 'close' : 'incorrect'),
-    club: player.club === guessedPlayer.club ? 'correct' : 
-      (player.league === guessedPlayer.league ? 'close' : 'incorrect'),
-    league: player.league === guessedPlayer.league ? 'correct' : 'incorrect',
-    height: heightDiff === 0 ? 'correct' : 
-      (heightDiff <= 5 ? 'close' : 'incorrect'),
-    foot: player.foot === guessedPlayer.foot ? 'correct' : 'incorrect',
-    isCorrect: player.id === guessedPlayer.id,
+    isCorrect: guessedPlayer.id === target.id,
+    position: comparePositions(guessedPlayer.position, target.position),
+    subPosition: compareSubPositions(guessedPlayer.subPosition, target.subPosition),
+    age: compareAges(guessAge, targetAge),
+    nationality: compareStrings(guessedPlayer.nationality, target.nationality),
+    club: compareStrings(guessedPlayer.club, target.club),
+    league: compareStrings(guessedPlayer.league, target.league),
+    height: compareHeights(guessedPlayer.height, target.height),
+    foot: guessedPlayer.foot === target.foot ? 'correct' : 'incorrect',
     values: {
       position: guessedPlayer.position,
       subPosition: guessedPlayer.subPosition,
-      age: guessedPlayer.age,
+      age: guessAge,
       nationality: guessedPlayer.nationality,
       club: guessedPlayer.club,
       league: guessedPlayer.league,
       height: guessedPlayer.height,
       foot: guessedPlayer.foot,
-    }
+    },
   };
 }
 

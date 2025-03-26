@@ -15,18 +15,17 @@ export type SubPosition =
 export type Foot = 'Left' | 'Right' | 'Both';
 
 export interface Player {
-  id: string;
+  id: number;
   name: string;
   position: Position;
   subPosition: SubPosition;
-  age: number;
-  dateOfBirth: string;
+  dateOfBirth: string; // Format: "YYYY-MM-DD"
   nationality: string;
   club: string;
   league: string;
   height: number;
   foot: Foot;
-  image: string;
+  image?: string;
 }
 
 export type GuessResult = 'correct' | 'close' | 'incorrect';
