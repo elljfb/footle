@@ -2,11 +2,10 @@ import { Player } from '../types/player';
 
 export const players: Player[] = [
   {
-    id: '1',
+    id: 1,
     name: 'Erling Haaland',
     position: 'Forward',
     subPosition: 'Striker',
-    age: 23,
     dateOfBirth: '2000-07-21',
     nationality: 'Norway',
     club: 'Manchester City',
@@ -16,11 +15,10 @@ export const players: Player[] = [
     image: '/players/haaland.jpg'
   },
   {
-    id: '2',
+    id: 2,
     name: 'Jude Bellingham',
     position: 'Midfielder',
     subPosition: 'Central Midfielder',
-    age: 20,
     dateOfBirth: '2003-06-29',
     nationality: 'England',
     club: 'Real Madrid',
@@ -30,11 +28,10 @@ export const players: Player[] = [
     image: '/players/bellingham.jpg'
   },
   {
-    id: '3',
+    id: 3,
     name: 'Kylian Mbappé',
     position: 'Forward',
     subPosition: 'Striker',
-    age: 25,
     dateOfBirth: '1998-12-20',
     nationality: 'France',
     club: 'Paris Saint-Germain',
@@ -44,11 +41,10 @@ export const players: Player[] = [
     image: '/players/mbappe.jpg'
   },
   {
-    id: '4',
+    id: 4,
     name: 'Virgil van Dijk',
     position: 'Defender',
     subPosition: 'Center-Back',
-    age: 32,
     dateOfBirth: '1991-07-08',
     nationality: 'Netherlands',
     club: 'Liverpool',
@@ -58,11 +54,10 @@ export const players: Player[] = [
     image: '/players/vandijk.jpg'
   },
   {
-    id: '5',
+    id: 5,
     name: 'Kevin De Bruyne',
     position: 'Midfielder',
     subPosition: 'Attacking Midfielder',
-    age: 32,
     dateOfBirth: '1991-06-28',
     nationality: 'Belgium',
     club: 'Manchester City',
@@ -72,11 +67,10 @@ export const players: Player[] = [
     image: '/players/debruyne.jpg'
   },
   {
-    id: '6',
+    id: 6,
     name: 'Mohamed Salah',
     position: 'Forward',
     subPosition: 'Right Winger',
-    age: 31,
     dateOfBirth: '1992-06-15',
     nationality: 'Egypt',
     club: 'Liverpool',
@@ -86,11 +80,10 @@ export const players: Player[] = [
     image: '/players/salah.jpg'
   },
   {
-    id: '7',
+    id: 7,
     name: 'Rodri',
     position: 'Midfielder',
     subPosition: 'Defensive Midfielder',
-    age: 27,
     dateOfBirth: '1996-06-22',
     nationality: 'Spain',
     club: 'Manchester City',
@@ -100,11 +93,10 @@ export const players: Player[] = [
     image: '/players/rodri.jpg'
   },
   {
-    id: '8',
+    id: 8,
     name: 'Vinicius Jr',
     position: 'Forward',
     subPosition: 'Left Winger',
-    age: 23,
     dateOfBirth: '2000-07-12',
     nationality: 'Brazil',
     club: 'Real Madrid',
@@ -114,11 +106,10 @@ export const players: Player[] = [
     image: '/players/vinicius.jpg'
   },
   {
-    id: '9',
+    id: 9,
     name: 'Harry Kane',
     position: 'Forward',
     subPosition: 'Striker',
-    age: 30,
     dateOfBirth: '1993-07-28',
     nationality: 'England',
     club: 'Bayern Munich',
@@ -128,11 +119,10 @@ export const players: Player[] = [
     image: '/players/kane.jpg'
   },
   {
-    id: '10',
+    id: 10,
     name: 'Victor Osimhen',
     position: 'Forward',
     subPosition: 'Striker',
-    age: 25,
     dateOfBirth: '1998-12-29',
     nationality: 'Nigeria',
     club: 'Napoli',
@@ -142,11 +132,10 @@ export const players: Player[] = [
     image: '/players/osimhen.jpg'
   },
   {
-    id: '11',
+    id: 11,
     name: 'Trent Alexander-Arnold',
     position: 'Defender',
     subPosition: 'Right-Back',
-    age: 25,
     dateOfBirth: '1998-10-07',
     nationality: 'England',
     club: 'Liverpool',
@@ -156,11 +145,10 @@ export const players: Player[] = [
     image: '/players/alexander-arnold.jpg'
   },
   {
-    id: '12',
+    id: 12,
     name: 'Bukayo Saka',
     position: 'Forward',
     subPosition: 'Right Winger',
-    age: 22,
     dateOfBirth: '2001-09-05',
     nationality: 'England',
     club: 'Arsenal',
@@ -170,11 +158,10 @@ export const players: Player[] = [
     image: '/players/saka.jpg'
   },
   {
-    id: '13',
+    id: 13,
     name: 'Lautaro Martínez',
     position: 'Forward',
     subPosition: 'Striker',
-    age: 26,
     dateOfBirth: '1997-08-22',
     nationality: 'Argentina',
     club: 'Inter Milan',
@@ -184,11 +171,10 @@ export const players: Player[] = [
     image: '/players/martinez.jpg'
   },
   {
-    id: '14',
+    id: 14,
     name: 'Frenkie de Jong',
     position: 'Midfielder',
     subPosition: 'Central Midfielder',
-    age: 26,
     dateOfBirth: '1997-05-12',
     nationality: 'Netherlands',
     club: 'Barcelona',
@@ -198,11 +184,10 @@ export const players: Player[] = [
     image: '/players/dejong.jpg'
   },
   {
-    id: '15',
+    id: 15,
     name: 'Alisson',
     position: 'Goalkeeper',
     subPosition: 'Goalkeeper',
-    age: 31,
     dateOfBirth: '1992-10-02',
     nationality: 'Brazil',
     club: 'Liverpool',
@@ -212,11 +197,10 @@ export const players: Player[] = [
     image: '/players/alisson.jpg'
   },
   {
-    id: '16',
+    id: 16,
     name: 'Leroy Sané',
     position: 'Forward',
     subPosition: 'Right Winger',
-    age: 28,
     dateOfBirth: '1996-01-11',
     nationality: 'Germany',
     club: 'Bayern Munich',
@@ -226,11 +210,10 @@ export const players: Player[] = [
     image: '/players/sane.jpg'
   },
   {
-    id: '17',
+    id: 17,
     name: 'Federico Valverde',
     position: 'Midfielder',
     subPosition: 'Central Midfielder',
-    age: 25,
     dateOfBirth: '1998-07-22',
     nationality: 'Uruguay',
     club: 'Real Madrid',
@@ -240,11 +223,10 @@ export const players: Player[] = [
     image: '/players/valverde.jpg'
   },
   {
-    id: '18',
+    id: 18,
     name: 'Rafael Leão',
     position: 'Forward',
     subPosition: 'Left Winger',
-    age: 24,
     dateOfBirth: '1999-06-10',
     nationality: 'Portugal',
     club: 'AC Milan',
@@ -254,11 +236,10 @@ export const players: Player[] = [
     image: '/players/leao.jpg'
   },
   {
-    id: '19',
+    id: 19,
     name: 'Florian Wirtz',
     position: 'Midfielder',
     subPosition: 'Attacking Midfielder',
-    age: 20,
     dateOfBirth: '2003-05-03',
     nationality: 'Germany',
     club: 'Bayer Leverkusen',
@@ -268,11 +249,10 @@ export const players: Player[] = [
     image: '/players/wirtz.jpg'
   },
   {
-    id: '20',
+    id: 20,
     name: 'William Saliba',
     position: 'Defender',
     subPosition: 'Center-Back',
-    age: 22,
     dateOfBirth: '2001-03-24',
     nationality: 'France',
     club: 'Arsenal',
