@@ -3,7 +3,7 @@ export type Position = 'Goalkeeper' | 'Defender' | 'Midfielder' | 'Forward';
 export type SubPosition = 
   | 'Goalkeeper'
   | 'Right-Back'
-  | 'Center-Back'
+  | 'Centre-Back'
   | 'Left-Back'
   | 'Defensive Midfielder'
   | 'Central Midfielder'

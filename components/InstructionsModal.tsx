@@ -31,7 +31,7 @@ export default function InstructionsModal({ isOpen, onClose }: InstructionsModal
               <h3 className="font-bold mb-2">Attributes Compared:</h3>
               <ul className="list-disc list-inside space-y-1">
                 <li>Position (e.g., Forward, Midfielder)</li>
-                <li>Sub-Position (e.g., Striker, Center-Back)</li>
+                <li>Sub-Position (e.g., Striker, Centre-Back)</li>
                 <li>Age</li>
                 <li>Nationality (orange for same continent)</li>
                 <li>Club</li>
