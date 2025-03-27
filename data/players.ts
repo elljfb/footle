@@ -2230,9 +2230,13 @@ export const players: Player[] = [
     position: 'Midfielder',
     subPosition: 'Central Midfielder',
     dateOfBirth: '1999-08-20',
-import { Player } from '../types/player';
-
-export const players: Player[] = [
+    nationality: 'England',
+    club: 'Newcastle',
+    league: 'Premier League',
+    height: 183,
+    foot: 'Right',
+    image: '/players/joe-willock.jpg'
+  },
   {
     id: 1,
     name: 'Erling Haaland',
@@ -4798,7 +4802,7 @@ export const players: Player[] = [
     id: 215,
     name: 'Jacob Ramsey',
     position: 'Midfielder',
-    subPosition: 'Left Midfielder',
+    subPosition: 'Attacking Midfielder',
     dateOfBirth: '2001-05-28',
     nationality: 'England',
     club: 'Aston Villa',
@@ -5799,7 +5803,7 @@ export const players: Player[] = [
     id: 292,
     name: 'Eric da Silva Moreira',
     position: 'Midfielder',
-    subPosition: 'Right Midfielder',
+    subPosition: 'Attacking Midfielder',
     dateOfBirth: '2006-05-03',
     nationality: 'Germany',
     club: 'Nottm Forest',
@@ -6342,19 +6346,6 @@ export const players: Player[] = [
     image: '/players/matai-akinmboni.jpg'
   },
   {
-    id: 334,
-    name: 'Max Kinsey',
-    position: 'Defender',
-    subPosition: 'Centre-Back',
-    dateOfBirth: '2005-02-02',
-    nationality: 'England',
-    club: 'Bournemouth U21',
-    league: NaN,
-    height: 184,
-    foot: 'Right',
-    image: '/players/max-kinsey.jpg'
-  },
-  {
     id: 335,
     name: 'Milos Kerkez',
     position: 'Defender',
@@ -6462,7 +6453,7 @@ export const players: Player[] = [
     id: 343,
     name: 'Marcus Tavernier',
     position: 'Midfielder',
-    subPosition: 'Left Midfielder',
+    subPosition: 'Attacking Midfielder',
     dateOfBirth: '1999-03-22',
     nationality: 'England',
     club: 'Bournemouth',
@@ -7190,7 +7181,7 @@ export const players: Player[] = [
     id: 399,
     name: 'Rodrigo Gomes',
     position: 'Midfielder',
-    subPosition: 'Right Midfielder',
+    subPosition: 'Attacking Midfielder',
     dateOfBirth: '2003-07-07',
     nationality: 'Portugal',
     club: 'Wolves',
