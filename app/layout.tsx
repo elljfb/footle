@@ -67,6 +67,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2"></script>
         <script
           dangerouslySetInnerHTML={{
