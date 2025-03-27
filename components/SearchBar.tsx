@@ -45,6 +45,8 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
       if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
         onChange(suggestions[selectedIndex]);
         setShowSuggestions(false);
@@ -69,6 +71,13 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
     inputRef.current?.focus();
   };
 
+  const handleSubmit = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onSubmit();
+    setShowSuggestions(false);
+  };
+
   return (
     <div className="relative w-full">
       <div className="relative">
@@ -83,11 +92,9 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
           className="w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
         />
         <button
+          type="button"
           className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={() => {
-            onSubmit();
-            setShowSuggestions(false);
-          }}
+          onClick={handleSubmit}
           disabled={disabled}
         >
           Guess
