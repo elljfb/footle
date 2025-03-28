@@ -4,25 +4,50 @@ interface ContinentMap {
 
 const continentMapping: ContinentMap = {
   'Europe': [
-    'England', 'France', 'Germany', 'Spain', 'Italy', 'Portugal', 'Netherlands',
-    'Belgium', 'Norway', 'Croatia', 'Serbia', 'Denmark', 'Sweden', 'Switzerland',
-    'Poland', 'Austria', 'Ukraine', 'Scotland', 'Wales', 'Ireland'
+    'Albania', 'Andorra', 'Austria', 'Belarus', 'Belgium', 'Bosnia and Herzegovina', 
+    'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'Denmark', 'England', 
+    'Estonia', 'Finland', 'France', 'Germany', 'Greece', 'Hungary', 'Iceland', 
+    'Ireland', 'Italy', 'Kosovo', 'Latvia', 'Liechtenstein', 'Lithuania', 
+    'Luxembourg', 'Malta', 'Moldova', 'Monaco', 'Montenegro', 'Netherlands', 
+    'North Macedonia', 'Northern Ireland', 'Norway', 'Poland', 'Portugal', 
+    'Romania', 'Russia', 'San Marino', 'Scotland', 'Serbia', 'Slovakia', 
+    'Slovenia', 'Spain', 'Sweden', 'Switzerland', 'Türkiye', 'Ukraine', 
+    'Wales',
   ],
   'South America': [
     'Brazil', 'Argentina', 'Uruguay', 'Colombia', 'Chile', 'Paraguay',
-    'Ecuador', 'Peru', 'Venezuela', 'Bolivia'
+    'Ecuador', 'Peru', 'Venezuela', 'Bolivia', 'Suriname', 'Guyana'
   ],
   'North America': [
     'United States', 'Mexico', 'Canada', 'Costa Rica', 'Jamaica',
     'Trinidad and Tobago', 'Honduras', 'Panama'
   ],
   'Africa': [
-    'Senegal', 'Nigeria', 'Egypt', 'Morocco', 'Algeria', 'Tunisia',
-    'Cameroon', 'Ghana', 'Ivory Coast', 'Mali'
+    'Algeria', 'Angola', 'Benin', 'Botswana', 'Burkina Faso', 'Burundi', 
+    'Cameroon', 'Cape Verde', 'Central African Republic', 'Chad', 'Comoros', 
+    'Congo', 'Democratic Republic of the Congo', 'Djibouti', 'Egypt', 
+    'Equatorial Guinea', 'Eritrea', 'Ethiopia', 'Gabon', 'Gambia', 'Ghana', 
+    'Guinea', 'Guinea-Bissau', 'Ivory Coast', 'Kenya', 'Lesotho', 'Liberia', 
+    'Libya', 'Madagascar', 'Malawi', 'Mali', 'Mauritania', 'Mauritius', 
+    'Morocco', 'Mozambique', 'Namibia', 'Niger', 'Nigeria', 'Rwanda', 
+    'Senegal', 'Sierra Leone', 'Somalia', 'South Africa', 'South Sudan', 
+    'Sudan', 'Swaziland', 'Tanzania', 'Togo', 'Tunisia', 'Uganda', 
+    'Zambia', 'Zimbabwe'
   ],
   'Asia': [
-    'Japan', 'South Korea', 'Iran', 'Saudi Arabia', 'Australia',
-    'China', 'Qatar', 'UAE', 'Iraq', 'Vietnam'
+    'Afghanistan', 'Armenia', 'Azerbaijan', 'Bahrain', 'Bangladesh', 'Bhutan', 
+    'Brunei', 'Cambodia', 'China', 'Cyprus', 'Georgia', 'India', 'Indonesia', 
+    'Iran', 'Iraq', 'Israel', 'Japan', 'Jordan', 'Kazakhstan', 'Kuwait', 
+    'Kyrgyzstan', 'Laos', 'Lebanon', 'Malaysia', 'Maldives', 'Mongolia', 
+    'Myanmar', 'Nepal', 'North Korea', 'Oman', 'Pakistan', 'Palestine', 
+    'Philippines', 'Qatar', 'Saudi Arabia', 'Singapore', 'South Korea', 
+    'Sri Lanka', 'Syria', 'Taiwan', 'Tajikistan', 'Thailand', 'Timor-Leste', 'Turkmenistan', 'United Arab Emirates', 'Uzbekistan', 'Vietnam', 
+    'Yemen'
+  ],
+  'Oceania': [
+    'Australia', 'Fiji', 'Kiribati', 'Marshall Islands', 'Micronesia', 'Nauru', 
+    'New Zealand', 'Palau', 'Papua New Guinea', 'Samoa', 'Solomon Islands', 
+    'Tonga', 'Tuvalu', 'Vanuatu'
   ]
 };
 
