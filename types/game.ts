@@ -1,9 +1,9 @@
-import { Player, GuessResponse } from './player';
+import { Player, GuessResponseWithValues } from './player';
 
 export interface GameState {
   guesses: Array<{
     playerName: string;
-    result: GuessResponse;
+    result: GuessResponseWithValues;
   }>;
   currentGuess: string;
   dailyPlayer: Player | null;
