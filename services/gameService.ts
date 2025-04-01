@@ -7,7 +7,9 @@ const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 export function getDailyPlayer(): Player {
   const today = new Date();
   const daysSinceEpoch = Math.floor(today.getTime() / MILLISECONDS_IN_DAY);
-  const playerIndex = daysSinceEpoch % players.length;
+  const prime = 1327;
+  const totalPlayers = players.length;
+  const playerIndex = (daysSinceEpoch * prime) % totalPlayers;
   return players[playerIndex];
 }
 
