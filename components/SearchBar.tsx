@@ -14,7 +14,7 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const suggestionsRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLFormElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const allPlayers = getPlayerNames();
 
@@ -47,12 +47,11 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      e.stopPropagation();
       if (selectedIndex >= 0 && selectedIndex < suggestions.length) {
         onChange(suggestions[selectedIndex]);
         setShowSuggestions(false);
       } else {
-        handleSubmit(e);
+        handleSubmit();
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();
@@ -71,21 +70,27 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
     inputRef.current?.focus();
   };
 
-  const handleSubmit = (e: React.FormEvent | React.MouseEvent | React.KeyboardEvent) => {
+  const handleSubmit = () => {
+    if (!disabled) {
+      onSubmit();
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleButtonClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    onSubmit();
-    setShowSuggestions(false);
+    handleSubmit();
+  };
+
+  const handleButtonTouch = (e: React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleSubmit();
   };
 
   return (
-    <form 
-      ref={formRef}
-      onSubmit={handleSubmit}
-      className="relative w-full"
-      role="search"
-      aria-label="Player search"
-    >
+    <div className="relative w-full">
       <div className="relative">
         <input
           ref={inputRef}
@@ -96,17 +101,14 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
           disabled={disabled}
           placeholder="Type a player name..."
           className="w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
-          aria-label="Player name input"
-          aria-expanded={showSuggestions}
-          aria-controls="suggestions-list"
-          aria-activedescendant={selectedIndex >= 0 ? `suggestion-${selectedIndex}` : undefined}
         />
         <button
-          type="submit"
+          ref={buttonRef}
+          type="button"
           className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={handleSubmit}
+          onClick={handleButtonClick}
+          onTouchEnd={handleButtonTouch}
           disabled={disabled}
-          aria-label="Submit guess"
         >
           Guess
         </button>
@@ -115,27 +117,21 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
       {showSuggestions && suggestions.length > 0 && (
         <div
           ref={suggestionsRef}
-          id="suggestions-list"
           className="absolute z-10 w-full mt-1 bg-gray-800 rounded-lg shadow-lg border border-gray-700 max-h-60 overflow-auto"
-          role="listbox"
-          aria-label="Player suggestions"
         >
           {suggestions.map((suggestion, index) => (
             <div
               key={suggestion}
-              id={`suggestion-${index}`}
               className={`px-4 py-2 cursor-pointer hover:bg-gray-700 ${
                 index === selectedIndex ? 'bg-gray-700' : ''
               }`}
               onClick={() => handleSuggestionClick(suggestion)}
-              role="option"
-              aria-selected={index === selectedIndex}
             >
               {suggestion}
             </div>
           ))}
         </div>
       )}
-    </form>
+    </div>
   );
 } 
