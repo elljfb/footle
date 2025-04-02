@@ -77,15 +77,14 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
     }
   };
 
-  const handleButtonClick = (e: React.MouseEvent) => {
+  // Simplified event handler for all interactions
+  const handleButtonInteraction = (e: React.MouseEvent | React.TouchEvent) => {
+    if (disabled) return;
+    
+    // Prevent default only to avoid form submission if within a form
     e.preventDefault();
-    e.stopPropagation();
-    handleSubmit();
-  };
-
-  const handleButtonTouch = (e: React.TouchEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+    
+    // Don't stop propagation - this can cause issues on some browsers
     handleSubmit();
   };
 
@@ -106,9 +105,12 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
           ref={buttonRef}
           type="button"
           className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={handleButtonClick}
-          onTouchEnd={handleButtonTouch}
+          onClick={handleButtonInteraction}
           disabled={disabled}
+          // Add these attributes to help with touch handling
+          role="button"
+          aria-label="Submit guess"
+          tabIndex={0}
         >
           Guess
         </button>
@@ -134,4 +136,4 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
       )}
     </div>
   );
-} 
+}
