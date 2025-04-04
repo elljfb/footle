@@ -26,23 +26,32 @@ export default function Home() {
   const maxGuesses = 5;
 
   useEffect(() => {
-    // Load saved game state from localStorage
-    const savedState = localStorage.getItem(STORAGE_KEY);
-    if (savedState) {
-      const parsedState = JSON.parse(savedState);
-      // Only restore if it's from today
+    // Check if it's a new day and clear localStorage if needed
+    if (typeof window !== 'undefined') {
+      const lastPlayedDate = localStorage.getItem('footle_last_played');
       const today = new Date().toDateString();
-      if (parsedState.date === today) {
-        setGameState(parsedState.state);
-        setGameStarted(true);
-      } else {
-        // Clear old state if it's from a different day
-        localStorage.removeItem(STORAGE_KEY);
+      
+      if (lastPlayedDate !== today) {
+        // Clear all game-related data
+        localStorage.clear();
+        // Set new date
+        localStorage.setItem('footle_last_played', today);
       }
-    } else {
-      // Initialize new game
-      const player = getDailyPlayer();
-      setGameState(prev => ({ ...prev, dailyPlayer: player }));
+
+      // Load saved game state from localStorage
+      const savedState = localStorage.getItem(STORAGE_KEY);
+      if (savedState) {
+        const parsedState = JSON.parse(savedState);
+        // Only restore if it's from today
+        if (parsedState.date === today) {
+          setGameState(parsedState.state);
+          setGameStarted(true);
+        }
+      } else {
+        // Initialize new game
+        const player = getDailyPlayer();
+        setGameState(prev => ({ ...prev, dailyPlayer: player }));
+      }
     }
   }, []);
 
