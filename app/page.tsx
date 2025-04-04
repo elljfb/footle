@@ -7,7 +7,6 @@ import GuessResult from '../components/GuessResult';
 import SearchBar from '../components/SearchBar';
 import InstructionsModal from '../components/InstructionsModal';
 import { GameState } from '../types/game';
-import StatisticsModal from '../components/StatisticsModal';
 
 const STORAGE_KEY = 'footle_game_state';
 
@@ -23,60 +22,33 @@ export default function Home() {
   const [showShareConfirmation, setShowShareConfirmation] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
-  const [showStatistics, setShowStatistics] = useState(false);
 
   const maxGuesses = 5;
 
-  const calculateStats = () => {
-    if (typeof window === 'undefined') {
-      return {
-        gamesPlayed: 0,
-        winPercentage: 0,
-        currentStreak: 0,
-        maxStreak: 0,
-        guessDistribution: [0, 0, 0, 0, 0],
-      };
-    }
-
-    const savedStats = localStorage.getItem('footle_stats');
-    if (!savedStats) {
-      return {
-        gamesPlayed: 0,
-        winPercentage: 0,
-        currentStreak: 0,
-        maxStreak: 0,
-        guessDistribution: [0, 0, 0, 0, 0],
-      };
-    }
-    return JSON.parse(savedStats);
-  };
-
   useEffect(() => {
     // Load saved game state from localStorage
-    if (typeof window !== 'undefined') {
-      const savedState = localStorage.getItem(STORAGE_KEY);
-      if (savedState) {
-        const parsedState = JSON.parse(savedState);
-        // Only restore if it's from today
-        const today = new Date().toDateString();
-        if (parsedState.date === today) {
-          setGameState(parsedState.state);
-          setGameStarted(true);
-        } else {
-          // Clear old state if it's from a different day
-          localStorage.removeItem(STORAGE_KEY);
-        }
+    const savedState = localStorage.getItem(STORAGE_KEY);
+    if (savedState) {
+      const parsedState = JSON.parse(savedState);
+      // Only restore if it's from today
+      const today = new Date().toDateString();
+      if (parsedState.date === today) {
+        setGameState(parsedState.state);
+        setGameStarted(true);
       } else {
-        // Initialize new game
-        const player = getDailyPlayer();
-        setGameState(prev => ({ ...prev, dailyPlayer: player }));
+        // Clear old state if it's from a different day
+        localStorage.removeItem(STORAGE_KEY);
       }
+    } else {
+      // Initialize new game
+      const player = getDailyPlayer();
+      setGameState(prev => ({ ...prev, dailyPlayer: player }));
     }
   }, []);
 
   // Save game state to localStorage whenever it changes
   useEffect(() => {
-    if (typeof window !== 'undefined' && gameStarted) {
+    if (gameStarted) {
       const stateToSave = {
         date: new Date().toDateString(),
         state: gameState,
@@ -105,29 +77,6 @@ export default function Home() {
 
     const won = result.isCorrect;
     const gameOver = won || newGuesses.length >= maxGuesses;
-
-    // Update statistics if game is over
-    if (gameOver) {
-      const currentStats = calculateStats();
-      const lastPlayedDate = localStorage.getItem('footle_last_played');
-      const today = new Date().toDateString();
-
-      // Only update stats if this is the first game of the day
-      if (lastPlayedDate !== today) {
-        const newStats = {
-          gamesPlayed: currentStats.gamesPlayed + 1,
-          winPercentage: Math.round(((currentStats.gamesPlayed * (currentStats.winPercentage / 100) + (won ? 1 : 0)) / (currentStats.gamesPlayed + 1)) * 100),
-          currentStreak: won ? currentStats.currentStreak + 1 : 0,
-          maxStreak: won ? Math.max(currentStats.maxStreak, currentStats.currentStreak + 1) : currentStats.maxStreak,
-          guessDistribution: currentStats.guessDistribution.map((count, index) => 
-            index === newGuesses.length - 1 && won ? count + 1 : count
-          ),
-        };
-
-        localStorage.setItem('footle_stats', JSON.stringify(newStats));
-        localStorage.setItem('footle_last_played', today);
-      }
-    }
 
     setGameState(prev => ({
       ...prev,
@@ -216,22 +165,13 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
       <div className="max-w-3xl mx-auto relative">
-        <div className="absolute -right-2 -top-2 flex gap-2">
-          <button
-            onClick={() => setShowStatistics(true)}
-            className="w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
-            aria-label="View statistics"
-          >
-            📊
-          </button>
-          <button
-            onClick={() => setShowInstructions(true)}
-            className="w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
-            aria-label="How to play"
-          >
-            ℹ️
-          </button>
-        </div>
+        <button
+          onClick={() => setShowInstructions(true)}
+          className="absolute -right-2 -top-2 w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
+          aria-label="How to play"
+        >
+          ℹ️
+        </button>
 
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2">Footle</h1>
@@ -348,11 +288,6 @@ export default function Home() {
       <InstructionsModal
         isOpen={showInstructions}
         onClose={() => setShowInstructions(false)}
-      />
-      <StatisticsModal
-        isOpen={showStatistics}
-        onClose={() => setShowStatistics(false)}
-        stats={calculateStats()}
       />
     </main>
   );
