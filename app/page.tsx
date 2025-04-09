@@ -193,9 +193,9 @@ export default function Home() {
               )}
             </p>
           ) : (
-            <p className="text-gray-400 text-lg">
+            <h2 className="text-gray-400 text-lg">
               The Daily Football Player Guessing Game
-            </p>
+            </h2>
           )}
         </header>
 
