@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
   keywords: 'football, soccer, guessing game, daily game, player quiz, football quiz, football wordle, football game, football wordle game',
   authors: [{ name: 'Footle' }],
-  metadataBase: new URL('https://footle.online'),
+  metadataBase: new URL('https://footle.club'),
   openGraph: {
     title: 'Footle - The Daily Football Player Guessing Game',
     description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
     type: 'website',
-    url: 'https://footle.online',
+    url: 'https://footle.club',
     siteName: 'Footle',
     images: [
       {

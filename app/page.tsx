@@ -115,7 +115,7 @@ export default function Home() {
         ].join('');
       }),
       '',
-      'https://footle.online'
+      'https://footle.club'
     ].join('\n');
 
     return shareText;
@@ -145,11 +145,11 @@ export default function Home() {
         ].join('');
       }),
       '',
-      'https://footle.online'
+      'https://footle.club'
     ].join('\n');
 
     const encodedText = encodeURIComponent(shareText);
-    const url = encodeURIComponent('https://footle.online');
+    const url = encodeURIComponent('https://footle.club');
     
     let shareUrl = '';
     if (platform === 'twitter') {
