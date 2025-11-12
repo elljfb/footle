@@ -7,6 +7,8 @@ export type SubPosition =
   | 'Left-Back'
   | 'Defensive Midfielder'
   | 'Central Midfielder'
+  | 'Right Midfielder'
+  | 'Left Midfielder'
   | 'Attacking Midfielder'
   | 'Right Winger'
   | 'Left Winger'
