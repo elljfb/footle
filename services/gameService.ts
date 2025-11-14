@@ -4,13 +4,18 @@ import { areInSameContinent } from '../utils/continents';
 
 const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
-export function getDailyPlayer(): Player {
+// Get the daily player. Optionally pass a league to restrict selection to that league.
+export function getDailyPlayer(league?: string): Player {
   const today = new Date();
   const daysSinceEpoch = Math.floor(today.getTime() / MILLISECONDS_IN_DAY);
   const prime = 1327;
-  const totalPlayers = players.length;
+
+  const filtered = league ? players.filter(p => p.league === league) : players;
+  const pool = filtered.length > 0 ? filtered : players; // fallback to full list if no players for league
+
+  const totalPlayers = pool.length;
   const playerIndex = (daysSinceEpoch * prime) % totalPlayers;
-  return players[playerIndex];
+  return pool[playerIndex];
 }
 
 function comparePositions(guess: Position, target: Position): GuessResult {
@@ -48,8 +53,11 @@ function compareHeights(guess: number, target: number): GuessResult {
     (diff <= 5 ? 'close' : 'incorrect');
 }
 
-export function checkGuess(target: Player, guess: string): GuessResponseWithValues | null {
-  const guessedPlayer = players.find(p => p.name.toLowerCase() === guess.toLowerCase());
+export function checkGuess(target: Player, guess: string, league?: string): GuessResponseWithValues | null {
+  const filtered = league ? players.filter(p => p.league === league) : players;
+  const pool = filtered.length > 0 ? filtered : players;
+
+  const guessedPlayer = pool.find(p => p.name.toLowerCase() === guess.toLowerCase());
   if (!guessedPlayer) return null;
 
   const calculateAge = (dateOfBirth: string): number => {
@@ -92,6 +100,8 @@ export function checkGuess(target: Player, guess: string): GuessResponseWithValu
 }
 
 // Helper function to get all available player names for autocomplete
-export function getPlayerNames(): string[] {
-  return players.map(p => p.name);
-} 
+export function getPlayerNames(league?: string): string[] {
+  const filtered = league ? players.filter(p => p.league === league) : players;
+  const pool = filtered.length > 0 ? filtered : players;
+  return pool.map(p => p.name);
+}
