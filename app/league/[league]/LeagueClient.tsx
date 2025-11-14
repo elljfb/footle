@@ -188,7 +188,7 @@ export default function LeagueClient({ slug }: Props) {
         </button>
 
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">Footle{leagueName ? ` — ${leagueName}` : ''}</h1>
+          <h1 className="text-4xl font-bold mb-2">Footle</h1>
           {gameStarted ? (
             <p className="text-gray-400 text-lg">
               {!gameState.gameOver ? (
