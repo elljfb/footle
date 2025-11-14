@@ -27,6 +27,14 @@ export default function InstructionsModal({ isOpen, onClose }: InstructionsModal
               Guess the Footle in 5 tries. Each guess must be a valid football player.
             </p>
 
+            <p>
+              Footle features players from Europe's Top 5 Leagues: Premier League, LaLiga, Serie A, Ligue 1, and Bundesliga.
+            </p>
+
+            <p>
+              If you want to make it easier, you can choose a specific league from the menu. This will limit the daily Footle and your guesses to players from that league only.
+            </p>
+
             <div>
               <h3 className="font-bold mb-2">Attributes Compared:</h3>
               <ul className="list-disc list-inside space-y-1">
