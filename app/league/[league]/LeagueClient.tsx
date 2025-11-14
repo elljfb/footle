@@ -199,7 +199,7 @@ export default function LeagueClient({ slug }: Props) {
             </p>
           ) : (
             <h2 className="text-gray-400 text-lg">
-              {leagueName ? `${leagueName} only` : 'The Daily Football Player Guessing Game'}
+              {leagueName ? `The Daily ${leagueName} Player Guessing Game` : 'The Daily Football Player Guessing Game'}
             </h2>
           )}
         </header>
