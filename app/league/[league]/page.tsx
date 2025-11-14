@@ -1,16 +1,29 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Player, GuessResponseWithValues } from '../types/player';
-import { getDailyPlayer, checkGuess } from '../services/gameService';
-import GuessResult from '../components/GuessResult';
-import SearchBar from '../components/SearchBar';
-import InstructionsModal from '../components/InstructionsModal';
-import { GameState } from '../types/game';
+import { useParams } from 'next/navigation';
+import { Player, GuessResponseWithValues } from '../../../types/player';
+import { getDailyPlayer, checkGuess } from '../../../services/gameService';
+import GuessResult from '../../../components/GuessResult';
+import SearchBar from '../../../components/SearchBar';
+import InstructionsModal from '../../../components/InstructionsModal';
+import { GameState } from '../../../types/game';
 
-const STORAGE_KEY = 'footle_game_state';
+const slugToLeagueName: Record<string, string> = {
+  'premier-league': 'Premier League',
+  'laliga': 'LaLiga',
+  'serie-a': 'Serie A',
+  'ligue-1': 'Ligue 1',
+  'bundesliga': 'Bundesliga',
+};
 
-export default function Home() {
+export default function LeaguePage() {
+  const params = useParams();
+  const { league: slug } = params as { league?: string };
+  const leagueName = slug ? (slugToLeagueName[slug] ?? decodeURIComponent(slug)) : undefined;
+
+  const STORAGE_KEY = `footle_game_state_${slug ?? 'all'}`;
+
   const [gameState, setGameState] = useState<GameState>({
     guesses: [],
     currentGuess: '',
@@ -26,33 +39,27 @@ export default function Home() {
   const maxGuesses = 5;
 
   useEffect(() => {
-    // Load or initialize game state for today. Do NOT clear entire localStorage (preserve stats and other app data).
     if (typeof window !== 'undefined') {
       const today = new Date().toDateString();
 
-      // Load saved game state from localStorage
       const savedState = localStorage.getItem(STORAGE_KEY);
       if (savedState) {
         const parsedState = JSON.parse(savedState);
-        // Only restore if it's from today
         if (parsedState.date === today) {
           setGameState(parsedState.state);
           setGameStarted(true);
         } else {
-          // Remove stale state for this game only
           localStorage.removeItem(STORAGE_KEY);
-          const player = getDailyPlayer();
+          const player = getDailyPlayer(leagueName);
           setGameState(prev => ({ ...prev, dailyPlayer: player }));
         }
       } else {
-        // Initialize new game
-        const player = getDailyPlayer();
+        const player = getDailyPlayer(leagueName);
         setGameState(prev => ({ ...prev, dailyPlayer: player }));
       }
     }
-  }, []);
+  }, [slug]);
 
-  // Save game state to localStorage whenever it changes
   useEffect(() => {
     if (gameStarted) {
       const stateToSave = {
@@ -68,8 +75,8 @@ export default function Home() {
       return;
     }
 
-    const result = checkGuess(gameState.dailyPlayer, gameState.currentGuess);
-    
+    const result = checkGuess(gameState.dailyPlayer, gameState.currentGuess, leagueName);
+
     if (!result) {
       setShowError(true);
       setTimeout(() => setShowError(false), 3000);
@@ -97,7 +104,7 @@ export default function Home() {
     const today = new Date();
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
     const shareText = [
-      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/5`,
+      `Footle - ${leagueName ?? 'All'} #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/5`,
       '',
       ...gameState.guesses.map(guess => {
         return [
@@ -127,7 +134,7 @@ export default function Home() {
     const today = new Date();
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
     const shareText = [
-      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/5`,
+      `Footle - ${leagueName ?? 'All'} #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/5`,
       '',
       ...gameState.guesses.map(guess => {
         return [
@@ -180,7 +187,7 @@ export default function Home() {
         </button>
 
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">Footle</h1>
+          <h1 className="text-4xl font-bold mb-2">Footle{leagueName ? ` — ${leagueName}` : ''}</h1>
           {gameStarted ? (
             <p className="text-gray-400 text-lg">
               {!gameState.gameOver ? (
@@ -191,7 +198,7 @@ export default function Home() {
             </p>
           ) : (
             <h2 className="text-gray-400 text-lg">
-              The Daily Football Player Guessing Game
+              {leagueName ? `${leagueName} only` : 'The Daily Football Player Guessing Game'}
             </h2>
           )}
         </header>
@@ -231,6 +238,7 @@ export default function Home() {
                     onChange={(value) => setGameState(prev => ({ ...prev, currentGuess: value }))}
                     onSubmit={handleGuess}
                     disabled={gameState.gameOver}
+                    league={leagueName}
                   />
                   {showError && (
                     <div className="absolute top-full mt-2 w-full text-center text-red-500">

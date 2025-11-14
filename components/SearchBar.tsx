@@ -6,9 +6,10 @@ interface SearchBarProps {
   onChange: (value: string) => void;
   onSubmit: () => void;
   disabled?: boolean;
+  league?: string;
 }
 
-export default function SearchBar({ value, onChange, onSubmit, disabled }: SearchBarProps) {
+export default function SearchBar({ value, onChange, onSubmit, disabled, league }: SearchBarProps) {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -16,7 +17,7 @@ export default function SearchBar({ value, onChange, onSubmit, disabled }: Searc
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const allPlayers = getPlayerNames();
+  const allPlayers = getPlayerNames(league);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

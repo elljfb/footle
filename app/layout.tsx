@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Footer from "../components/Footer";
+import LeagueMenu from '../components/LeagueMenu';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -80,6 +81,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <LeagueMenu />
         {children}
         <Footer />
       </body>
