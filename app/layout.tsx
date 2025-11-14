@@ -81,9 +81,13 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <LeagueMenu />
-        {children}
-        <Footer />
+        <div className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
+          <div className="max-w-3xl mx-auto relative">
+            <LeagueMenu />
+            {children}
+          </div>
+          <Footer />
+        </div>
       </body>
     </html>
   );

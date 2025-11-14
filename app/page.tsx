@@ -169,8 +169,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
-      <div className="max-w-3xl mx-auto relative">
+    <>
+      <div className="relative">
         <button
           onClick={() => setShowInstructions(true)}
           className="absolute -right-2 -top-2 w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
@@ -295,6 +295,6 @@ export default function Home() {
         isOpen={showInstructions}
         onClose={() => setShowInstructions(false)}
       />
-    </main>
+    </>
   );
 }

@@ -12,14 +12,18 @@ const leagues = [
   { slug: 'bundesliga', name: 'Bundesliga' },
 ];
 
-export default function LeagueMenu() {
+interface LeagueMenuProps {
+  className?: string;
+}
+
+export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="fixed top-4 left-4 z-50">
+    <div className={`relative ${className}`}>
       <button
         onClick={() => setOpen(prev => !prev)}
-        className="w-10 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 rounded-full text-white"
+        className="absolute -left-2 -top-2 w-10 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 rounded-full text-white z-50"
         aria-label="Open menu"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +32,7 @@ export default function LeagueMenu() {
       </button>
 
       {open && (
-        <div className="mt-2 bg-gray-900 border border-gray-700 rounded shadow-lg w-56 p-2">
+        <div className="absolute -left-2 mt-12 bg-gray-900 border border-gray-700 rounded shadow-lg w-56 p-2 z-50">
           {leagues.map(league => (
             <Link
               key={league.slug}
