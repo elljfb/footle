@@ -39,6 +39,12 @@ export async function generateMetadata({ params }: { params: { league?: string }
   };
 }
 
+// Pre-render known league pages at build time for fast static loading and crawlers.
+export async function generateStaticParams() {
+  const slugs = Object.keys(slugToLeagueName);
+  return slugs.map((league) => ({ league }));
+}
+
 export default function Page({ params }: { params: { league?: string } }) {
   const slug = params?.league;
 
