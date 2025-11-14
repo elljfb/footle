@@ -198,7 +198,7 @@ export default function LeaguePage() {
             </p>
           ) : (
             <h2 className="text-gray-400 text-lg">
-              {leagueName ? `${leagueName} only` : 'The Daily Football Player Guessing Game'}
+              {leagueName ? `The Daily ${leagueName} Player Guessing Game` : 'The Daily Football Player Guessing Game'}
             </h2>
           )}
         </header>
@@ -208,7 +208,7 @@ export default function LeaguePage() {
             <div className="text-center space-y-6 py-8">
               <div className="space-y-4 max-w-xl mx-auto">
                 <p className="text-lg">
-                  Try to guess today's mystery football player in 5 attempts or less.
+                  Try to guess today's mystery {leagueName ? `${leagueName} ` : 'football '}player in 5 attempts or less.
                 </p>
                 <p className="text-gray-400">
                   Get feedback on position, age, nationality, club, and more with each guess.
