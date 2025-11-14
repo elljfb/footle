@@ -16,7 +16,7 @@ export default function LeagueMenu() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="absolute top-4 left-4 z-50">
+    <div className="fixed top-4 left-4 z-50">
       <button
         onClick={() => setOpen(prev => !prev)}
         className="w-10 h-10 flex items-center justify-center bg-gray-800 hover:bg-gray-700 rounded-full text-white"
