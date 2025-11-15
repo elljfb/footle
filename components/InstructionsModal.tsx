@@ -24,7 +24,7 @@ export default function InstructionsModal({ isOpen, onClose }: InstructionsModal
           
           <div className="space-y-4">
             <p>
-              Guess the Footle in 5 tries. Each guess must be a valid football player.
+              Guess the Footle in 10 tries. Each guess must be a valid football player.
             </p>
 
             <p>

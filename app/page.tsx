@@ -23,7 +23,7 @@ export default function Home() {
   const [showInstructions, setShowInstructions] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
 
-  const maxGuesses = 5;
+  const maxGuesses = 10;
 
   useEffect(() => {
     // Load or initialize game state for today. Do NOT clear entire localStorage (preserve stats and other app data).
@@ -97,7 +97,7 @@ export default function Home() {
     const today = new Date();
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
     const shareText = [
-      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/5`,
+      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/10`,
       '',
       ...gameState.guesses.map(guess => {
         return [
@@ -127,7 +127,7 @@ export default function Home() {
     const today = new Date();
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
     const shareText = [
-      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/5`,
+      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/10`,
       '',
       ...gameState.guesses.map(guess => {
         return [
@@ -141,7 +141,7 @@ export default function Home() {
           guess.result.foot === 'correct' ? '🟩' : guess.result.foot === 'close' ? '🟨' : '⬜',
         ].join('');
       }),
-      '',
+      'Follow us on X @footle_club',
       'https://footle.club'
     ].join('\n');
 
@@ -201,7 +201,7 @@ export default function Home() {
             <div className="text-center space-y-6 py-8">
               <div className="space-y-4 max-w-xl mx-auto">
                 <p className="text-lg">
-                  Try to guess today's mystery football player in 5 attempts or less.
+                  Try to guess today's mystery football player in 10 attempts or less.
                 </p>
                 <p className="text-gray-400">
                   Get feedback on position, age, nationality, club, and more with each guess.
