@@ -97,7 +97,7 @@ export default function Home() {
     const today = new Date();
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
     const shareText = [
-      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/5`,
+      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/10`,
       '',
       ...gameState.guesses.map(guess => {
         return [
@@ -127,7 +127,7 @@ export default function Home() {
     const today = new Date();
     const daysSinceEpoch = Math.floor(today.getTime() / (1000 * 60 * 60 * 24));
     const shareText = [
-      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/5`,
+      `Footle #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/10`,
       '',
       ...gameState.guesses.map(guess => {
         return [
