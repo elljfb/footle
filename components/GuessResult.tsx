@@ -24,7 +24,7 @@ const ResultRow = ({ label, value, result, direction, forceIncorrect }: { label:
 
   const directionIndicator = direction === 'higher' ? '↓' : direction === 'lower' ? '↑' : '';
   const isDirectionalField = label === 'Age' || label === 'Height';
-  const showDirection = isDirectionalField && directionIndicator;
+  const isCorrect = displayResult === 'correct';
 
   return (
     <div className={`${bgColor} p-3 rounded-lg flex justify-between items-center transition-colors duration-200`}>
@@ -33,7 +33,7 @@ const ResultRow = ({ label, value, result, direction, forceIncorrect }: { label:
         <span className="font-bold">{value}</span>
       </div>
       <span className="text-xl">
-        {showDirection ? directionIndicator : icon}
+        {isDirectionalField && !isCorrect ? directionIndicator : icon}
       </span>
     </div>
   );
@@ -55,7 +55,7 @@ export default function GuessResult({ guess, playerName, forceIncorrect }: Guess
           label="Age" 
           value={guess.values.age} 
           result={guess.age}
-          direction={guess.age === 'incorrect' ? undefined : (guess.values.age > guess.targetValues.age ? 'higher' : 'lower')}
+          direction={guess.values.age > guess.targetValues.age ? 'higher' : 'lower'}
           forceIncorrect={forceIncorrect}
         />
         <ResultRow label="Nationality" value={guess.values.nationality} result={guess.nationality} forceIncorrect={forceIncorrect} />
@@ -65,7 +65,7 @@ export default function GuessResult({ guess, playerName, forceIncorrect }: Guess
           label="Height" 
           value={`${guess.values.height}cm`} 
           result={guess.height}
-          direction={guess.height === 'incorrect' ? undefined : (guess.values.height > guess.targetValues.height ? 'higher' : 'lower')}
+          direction={guess.values.height > guess.targetValues.height ? 'higher' : 'lower'}
           forceIncorrect={forceIncorrect}
         />
         <ResultRow label="Foot" value={guess.values.foot} result={guess.foot} forceIncorrect={forceIncorrect} />
