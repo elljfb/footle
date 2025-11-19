@@ -23,6 +23,8 @@ const ResultRow = ({ label, value, result, direction, forceIncorrect }: { label:
   }[displayResult];
 
   const directionIndicator = direction === 'higher' ? '↓' : direction === 'lower' ? '↑' : '';
+  const isDirectionalField = label === 'Age' || label === 'Height';
+  const showDirection = isDirectionalField && directionIndicator;
 
   return (
     <div className={`${bgColor} p-3 rounded-lg flex justify-between items-center transition-colors duration-200`}>
@@ -30,10 +32,9 @@ const ResultRow = ({ label, value, result, direction, forceIncorrect }: { label:
         <span className="font-medium text-sm opacity-80">{label}</span>
         <span className="font-bold">{value}</span>
       </div>
-      <div className="flex items-center gap-2 text-xl">
-        {directionIndicator && <span className="text-sm">{directionIndicator}</span>}
-        <span>{icon}</span>
-      </div>
+      <span className="text-xl">
+        {showDirection ? directionIndicator : icon}
+      </span>
     </div>
   );
 };
