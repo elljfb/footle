@@ -322,13 +322,13 @@ export default function Home() {
                 </div>
               )}
 
-              {gameState.gameOver && gameState.dailyPlayer && getMysteryPlayerResult() && (
+              {gameState.gameOver && !gameState.won && gameState.dailyPlayer && getMysteryPlayerResult() && (
                 <div className="mb-8">
                   <h3 className="text-lg font-bold mb-4 text-center text-gray-300">Player Details</h3>
                   <GuessResult
                     guess={getMysteryPlayerResult()!}
                     playerName={gameState.dailyPlayer.name}
-                    forceIncorrect={!gameState.won}
+                    forceIncorrect={true}
                   />
                 </div>
               )}
