@@ -6,6 +6,7 @@ export default function Footer() {
       <Link href="https://forms.office.com/r/kiGKRpyTJM" className="hover:text-gray-700">
         Have Feedback or Suggestions?
       </Link>
+      {' | '}
       <Link href="/privacy" className="hover:text-gray-700">
         Privacy Policy
       </Link>
