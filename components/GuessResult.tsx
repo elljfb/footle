@@ -22,7 +22,7 @@ const ResultRow = ({ label, value, result, direction, forceIncorrect }: { label:
     incorrect: '✗',
   }[displayResult];
 
-  const directionIndicator = direction === 'higher' ? '↑' : direction === 'lower' ? '↓' : '';
+  const directionIndicator = direction === 'higher' ? '↓' : direction === 'lower' ? '↑' : '';
 
   return (
     <div className={`${bgColor} p-3 rounded-lg flex justify-between items-center transition-colors duration-200`}>
@@ -54,7 +54,7 @@ export default function GuessResult({ guess, playerName, forceIncorrect }: Guess
           label="Age" 
           value={guess.values.age} 
           result={guess.age}
-          direction={forceIncorrect ? undefined : (guess.age === 'close' ? (guess.values.age > guess.targetValues.age ? 'higher' : 'lower') : undefined)}
+          direction={guess.age === 'incorrect' ? undefined : (guess.values.age > guess.targetValues.age ? 'higher' : 'lower')}
           forceIncorrect={forceIncorrect}
         />
         <ResultRow label="Nationality" value={guess.values.nationality} result={guess.nationality} forceIncorrect={forceIncorrect} />
@@ -64,7 +64,7 @@ export default function GuessResult({ guess, playerName, forceIncorrect }: Guess
           label="Height" 
           value={`${guess.values.height}cm`} 
           result={guess.height}
-          direction={forceIncorrect ? undefined : (guess.height === 'close' ? (guess.values.height > guess.targetValues.height ? 'higher' : 'lower') : undefined)}
+          direction={guess.height === 'incorrect' ? undefined : (guess.values.height > guess.targetValues.height ? 'higher' : 'lower')}
           forceIncorrect={forceIncorrect}
         />
         <ResultRow label="Foot" value={guess.values.foot} result={guess.foot} forceIncorrect={forceIncorrect} />
