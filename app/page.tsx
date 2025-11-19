@@ -322,22 +322,30 @@ export default function Home() {
                 </div>
               )}
 
-              <div className="space-y-4">
-                {[...gameState.guesses].reverse().map((guess, index) => (
-                  <GuessResult
-                    key={gameState.guesses.length - 1 - index}
-                    guess={guess.result}
-                    playerName={guess.playerName}
-                  />
-                ))}
-              </div>
-
               {gameState.gameOver && gameState.dailyPlayer && getMysteryPlayerResult() && (
-                <GuessResult
-                  guess={getMysteryPlayerResult()!}
-                  playerName={gameState.dailyPlayer.name}
-                  forceIncorrect={!gameState.won}
-                />
+                <div className="mb-8">
+                  <h3 className="text-lg font-bold mb-4 text-center text-gray-300">Player Details</h3>
+                  <GuessResult
+                    guess={getMysteryPlayerResult()!}
+                    playerName={gameState.dailyPlayer.name}
+                    forceIncorrect={!gameState.won}
+                  />
+                </div>
+              )}
+
+              {gameState.guesses.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-bold mb-4 text-center text-gray-300">Your Guesses</h3>
+                  <div className="space-y-4">
+                    {[...gameState.guesses].reverse().map((guess, index) => (
+                      <GuessResult
+                        key={gameState.guesses.length - 1 - index}
+                        guess={guess.result}
+                        playerName={guess.playerName}
+                      />
+                    ))}
+                  </div>
+                </div>
               )}
             </>
           )}
