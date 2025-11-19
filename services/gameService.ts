@@ -96,6 +96,10 @@ export function checkGuess(target: Player, guess: string, league?: string): Gues
       height: guessedPlayer.height,
       foot: guessedPlayer.foot,
     },
+    targetValues: {
+      age: targetAge,
+      height: target.height,
+    },
   };
 }
 

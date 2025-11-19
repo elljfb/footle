@@ -176,6 +176,51 @@ export default function LeagueClient({ slug }: Props) {
     }
   };
 
+  const getMysteryPlayerResult = (): GuessResponseWithValues | null => {
+    if (!gameState.dailyPlayer) return null;
+
+    const calculateAge = (dateOfBirth: string): number => {
+      const today = new Date();
+      const birthDate = new Date(dateOfBirth);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age;
+    };
+
+    const playerAge = calculateAge(gameState.dailyPlayer.dateOfBirth);
+
+    return {
+      isCorrect: true,
+      position: 'correct',
+      subPosition: 'correct',
+      age: 'correct',
+      nationality: 'correct',
+      club: 'correct',
+      league: 'correct',
+      height: 'correct',
+      foot: 'correct',
+      values: {
+        position: gameState.dailyPlayer.position,
+        subPosition: gameState.dailyPlayer.subPosition,
+        age: playerAge,
+        nationality: gameState.dailyPlayer.nationality,
+        club: gameState.dailyPlayer.club,
+        league: gameState.dailyPlayer.league,
+        height: gameState.dailyPlayer.height,
+        foot: gameState.dailyPlayer.foot,
+      },
+      targetValues: {
+        age: playerAge,
+        height: gameState.dailyPlayer.height,
+      },
+    };
+  };
+
   return (
     <>
       <div className="max-w-3xl mx-auto">
@@ -250,39 +295,49 @@ export default function LeagueClient({ slug }: Props) {
               )}
 
               {gameState.gameOver && (
-                <div className="text-center p-6 bg-gray-800 rounded-lg mb-8">
-                  <h2 className="text-3xl font-bold mb-3">
-                    {gameState.won ? '🎉 Congratulations!' : '😔 Game Over'}
-                  </h2>
-                  <p className="text-xl text-gray-400 mb-4">
-                    The player was <span className="font-bold text-white">{gameState.dailyPlayer?.name}</span>
-                  </p>
-                  <div className="flex flex-col sm:flex-row justify-center gap-3">
-                    <button
-                      onClick={handleShare}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors"
-                    >
-                      Copy Results
-                    </button>
-                    <button
-                      onClick={() => handleSocialShare('twitter')}
-                      className="bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white px-6 py-2 rounded-lg transition-colors"
-                    >
-                      Share to X
-                    </button>
-                    <button
-                      onClick={() => handleSocialShare('facebook')}
-                      className="bg-[#4267B2] hover:bg-[#365899] text-white px-6 py-2 rounded-lg transition-colors"
-                    >
-                      Share to Facebook
-                    </button>
+                <div className="space-y-6">
+                  <div className="text-center p-6 bg-gray-800 rounded-lg">
+                    <h2 className="text-3xl font-bold mb-3">
+                      {gameState.won ? '🎉 Congratulations!' : '😔 Game Over'}
+                    </h2>
+                    <p className="text-xl text-gray-400 mb-6">
+                      The player was <span className="font-bold text-white">{gameState.dailyPlayer?.name}</span>
+                    </p>
+                    <div className="flex flex-col sm:flex-row justify-center gap-3">
+                      <button
+                        onClick={handleShare}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors"
+                      >
+                        Copy Results
+                      </button>
+                      <button
+                        onClick={() => handleSocialShare('twitter')}
+                        className="bg-[#1DA1F2] hover:bg-[#1a8cd8] text-white px-6 py-2 rounded-lg transition-colors"
+                      >
+                        Share to X
+                      </button>
+                      <button
+                        onClick={() => handleSocialShare('facebook')}
+                        className="bg-[#4267B2] hover:bg-[#365899] text-white px-6 py-2 rounded-lg transition-colors"
+                      >
+                        Share to Facebook
+                      </button>
+                    </div>
+                    {showShareConfirmation && (
+                      <p className="mt-2 text-green-400">Results copied to clipboard!</p>
+                    )}
+                    <p className="mt-4 text-sm text-gray-500">
+                      Come back tomorrow for a new player!
+                    </p>
                   </div>
-                  {showShareConfirmation && (
-                    <p className="mt-2 text-green-400">Results copied to clipboard!</p>
+
+                  {gameState.dailyPlayer && getMysteryPlayerResult() && (
+                    <GuessResult
+                      guess={getMysteryPlayerResult()!}
+                      playerName={gameState.dailyPlayer.name}
+                      forceIncorrect={!gameState.won}
+                    />
                   )}
-                  <p className="mt-4 text-sm text-gray-500">
-                    Come back tomorrow for a new player!
-                  </p>
                 </div>
               )}
 

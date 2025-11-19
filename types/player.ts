@@ -55,4 +55,8 @@ export interface GuessResponseWithValues extends GuessResponse {
     height: number;
     foot: Foot;
   };
+  targetValues: {
+    age: number;
+    height: number;
+  };
 } 
