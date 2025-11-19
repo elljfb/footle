@@ -176,6 +176,51 @@ export default function LeagueClient({ slug }: Props) {
     }
   };
 
+  const getMysteryPlayerResult = (): GuessResponseWithValues | null => {
+    if (!gameState.dailyPlayer) return null;
+
+    const calculateAge = (dateOfBirth: string): number => {
+      const today = new Date();
+      const birthDate = new Date(dateOfBirth);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age;
+    };
+
+    const playerAge = calculateAge(gameState.dailyPlayer.dateOfBirth);
+
+    return {
+      isCorrect: true,
+      position: 'correct',
+      subPosition: 'correct',
+      age: 'correct',
+      nationality: 'correct',
+      club: 'correct',
+      league: 'correct',
+      height: 'correct',
+      foot: 'correct',
+      values: {
+        position: gameState.dailyPlayer.position,
+        subPosition: gameState.dailyPlayer.subPosition,
+        age: playerAge,
+        nationality: gameState.dailyPlayer.nationality,
+        club: gameState.dailyPlayer.club,
+        league: gameState.dailyPlayer.league,
+        height: gameState.dailyPlayer.height,
+        foot: gameState.dailyPlayer.foot,
+      },
+      targetValues: {
+        age: playerAge,
+        height: gameState.dailyPlayer.height,
+      },
+    };
+  };
+
   return (
     <>
       <div className="max-w-3xl mx-auto">
@@ -254,7 +299,7 @@ export default function LeagueClient({ slug }: Props) {
                   <h2 className="text-3xl font-bold mb-3">
                     {gameState.won ? '🎉 Congratulations!' : '😔 Game Over'}
                   </h2>
-                  <p className="text-xl text-gray-400 mb-4">
+                  <p className="text-xl text-gray-400 mb-6">
                     The player was <span className="font-bold text-white">{gameState.dailyPlayer?.name}</span>
                   </p>
                   <div className="flex flex-col sm:flex-row justify-center gap-3">
@@ -286,15 +331,31 @@ export default function LeagueClient({ slug }: Props) {
                 </div>
               )}
 
-              <div className="space-y-4">
-                {[...gameState.guesses].reverse().map((guess, index) => (
+              {gameState.gameOver && !gameState.won && gameState.dailyPlayer && getMysteryPlayerResult() && (
+                <div className="mb-8">
+                  <h3 className="text-lg font-bold mb-4 text-center text-gray-300">Player Details</h3>
                   <GuessResult
-                    key={gameState.guesses.length - 1 - index}
-                    guess={guess.result}
-                    playerName={guess.playerName}
+                    guess={getMysteryPlayerResult()!}
+                    playerName={gameState.dailyPlayer.name}
+                    forceIncorrect={true}
                   />
-                ))}
-              </div>
+                </div>
+              )}
+
+              {gameState.guesses.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-bold mb-4 text-center text-gray-300">Your Guesses</h3>
+                  <div className="space-y-4">
+                    {[...gameState.guesses].reverse().map((guess, index) => (
+                      <GuessResult
+                        key={gameState.guesses.length - 1 - index}
+                        guess={guess.result}
+                        playerName={guess.playerName}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
             </>
           )}
         </div>

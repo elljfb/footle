@@ -26967,7 +26967,7 @@ export const players: Player[] = [
   },
   {
     id: 2248,
-    name: 'Sterling',
+    name: 'Raheem Sterling',
     position: 'Forward',
     subPosition: 'Right Winger',
     dateOfBirth: '1994-12-08',

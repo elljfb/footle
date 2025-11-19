@@ -78,7 +78,7 @@ export default function InstructionsModal({ isOpen, onClose }: InstructionsModal
             </div>
 
             <p className="text-sm text-gray-400 mt-4">
-              A new Footle will be available each day!
+              Player Data is taken from Transfermarkt.co.uk and was last updated in November 2025. Some players may be missing.
             </p>
           </div>
         </div>
