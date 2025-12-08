@@ -6,7 +6,10 @@ import { getDailyPlayer, checkGuess } from '../../../services/gameService';
 import GuessResult from '../../../components/GuessResult';
 import SearchBar from '../../../components/SearchBar';
 import InstructionsModal from '../../../components/InstructionsModal';
+import Leaderboard from '../../../components/Leaderboard';
+import StatsModal from '../../../components/StatsModal';
 import { GameState } from '../../../types/game';
+import { saveGameResult } from '../../../services/statsService';
 
 const slugToLeagueName: Record<string, string> = {
   'premier-league': 'Premier League',
@@ -31,10 +34,13 @@ export default function LeagueClient({ slug }: Props) {
     dailyPlayer: null,
     gameOver: false,
     won: false,
+    startTime: undefined,
+    endTime: undefined,
   });
   const [showError, setShowError] = useState(false);
   const [showShareConfirmation, setShowShareConfirmation] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
+  const [showStats, setShowStats] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
 
   const maxGuesses = 5;
@@ -98,7 +104,14 @@ export default function LeagueClient({ slug }: Props) {
       currentGuess: '',
       gameOver,
       won,
+      endTime: gameOver ? Date.now() : prev.endTime,
     }));
+
+    // Save stats when game ends
+    if (gameOver && gameState.startTime) {
+      const timeTaken = Math.floor((Date.now() - gameState.startTime) / 1000);
+      saveGameResult(slug ?? 'all', won, newGuesses.length, timeTaken, maxGuesses);
+    }
   };
 
   const generateShareText = () => {
@@ -223,14 +236,23 @@ export default function LeagueClient({ slug }: Props) {
 
   return (
     <>
-      <div className="max-w-3xl mx-auto">
-        <button
-          onClick={() => setShowInstructions(true)}
-          className="absolute -right-2 -top-2 w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
-          aria-label="How to play"
-        >
-          ℹ️
-        </button>
+      <div className="max-w-3xl mx-auto relative">
+        <div className="absolute top-0 right-0 flex gap-2 -mt-2 z-10">
+          <button
+            onClick={() => setShowStats(true)}
+            className="w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
+            aria-label="View statistics"
+          >
+            📊
+          </button>
+          <button
+            onClick={() => setShowInstructions(true)}
+            className="w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
+            aria-label="How to play"
+          >
+            ℹ️
+          </button>
+        </div>
 
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2">Footle</h1>
@@ -262,7 +284,10 @@ export default function LeagueClient({ slug }: Props) {
                 </p>
               </div>
               <button
-                onClick={() => setGameStarted(true)}
+                onClick={() => {
+                  setGameStarted(true);
+                  setGameState(prev => ({ ...prev, startTime: Date.now() }));
+                }}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
               >
                 Start Playing
@@ -342,6 +367,17 @@ export default function LeagueClient({ slug }: Props) {
                 </div>
               )}
 
+              {gameState.gameOver && gameState.won && gameState.startTime && gameState.endTime && (
+                <div className="mb-8">
+                  <Leaderboard
+                    gameType={slug ?? 'all'}
+                    guesses={gameState.guesses.length}
+                    time={Math.floor((gameState.endTime - gameState.startTime) / 1000)}
+                    showSubmitForm={true}
+                  />
+                </div>
+              )}
+
               {gameState.guesses.length > 0 && (
                 <div>
                   <h3 className="text-lg font-bold mb-4 text-center text-gray-300">Your Guesses</h3>
@@ -364,6 +400,14 @@ export default function LeagueClient({ slug }: Props) {
       <InstructionsModal
         isOpen={showInstructions}
         onClose={() => setShowInstructions(false)}
+      />
+
+      <StatsModal
+        isOpen={showStats}
+        onClose={() => setShowStats(false)}
+        gameType={slug ?? 'all'}
+        maxGuesses={maxGuesses}
+        gameTitle={leagueName ? `Footle - ${leagueName}` : 'Footle'}
       />
     </>
   );
