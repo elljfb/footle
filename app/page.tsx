@@ -154,7 +154,7 @@ export default function Home() {
           guess.result.foot === 'correct' ? '🟩' : guess.result.foot === 'close' ? '🟨' : '⬜',
         ].join('');
       }),
-      'Follow us on X @footle_club',
+      '',
       'https://footle.club'
     ].join('\n');
 
