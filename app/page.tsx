@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Player, GuessResponseWithValues } from '../types/player';
 import { getDailyPlayer, checkGuess } from '../services/gameService';
 import GuessResult from '../components/GuessResult';
@@ -10,6 +10,7 @@ import Leaderboard from '../components/Leaderboard';
 import StatsModal from '../components/StatsModal';
 import { GameState } from '../types/game';
 import { saveGameResult } from '../services/statsService';
+import { trackEvent } from '../lib/analytics';
 
 const STORAGE_KEY = 'footle_game_state';
 
@@ -28,8 +29,19 @@ export default function Home() {
   const [showInstructions, setShowInstructions] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const hasTrackedStartView = useRef(false);
 
   const maxGuesses = 10;
+
+  const handleStartPlaying = () => {
+    trackEvent('start_playing_click', {
+      page_location: window.location.pathname,
+      game: 'footle',
+    });
+
+    setGameStarted(true);
+    setGameState(prev => ({ ...prev, startTime: Date.now() }));
+  };
 
   useEffect(() => {
     // Load or initialize game state for today. Do NOT clear entire localStorage (preserve stats and other app data).
@@ -57,6 +69,16 @@ export default function Home() {
       }
     }
   }, []);
+
+  useEffect(() => {
+    if (!gameStarted && !hasTrackedStartView.current) {
+      trackEvent('start_playing_view', {
+        page_location: window.location.pathname,
+        game: 'footle',
+      });
+      hasTrackedStartView.current = true;
+    }
+  }, [gameStarted]);
 
   // Save game state to localStorage whenever it changes
   useEffect(() => {
@@ -276,10 +298,7 @@ export default function Home() {
                 </p>
               </div>
               <button
-                onClick={() => {
-                  setGameStarted(true);
-                  setGameState(prev => ({ ...prev, startTime: Date.now() }));
-                }}
+                onClick={handleStartPlaying}
                 className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
               >
                 Start Playing
