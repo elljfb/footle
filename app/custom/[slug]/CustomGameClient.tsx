@@ -190,6 +190,9 @@ export default function CustomGameClient({ slug }: Props) {
   }
 
   const heading = customGame.title?.trim() || 'Custom Footle Challenge';
+  const poolText = customGame.selectedLeagues && customGame.selectedLeagues.length > 0
+    ? customGame.selectedLeagues.join(', ')
+    : 'All Players';
 
   return (
     <div className="max-w-3xl mx-auto">
@@ -205,6 +208,7 @@ export default function CustomGameClient({ slug }: Props) {
 
       <header className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-2">{heading}</h1>
+        <p className="text-sm text-blue-300 mb-2">Player pool to guess from: {poolText}</p>
         {gameStarted ? (
           <p className="text-gray-400 text-lg">
             {!gameState.gameOver ? (
