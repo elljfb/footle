@@ -1,13 +1,6 @@
 import type { Metadata } from 'next';
 import LeagueClient from './LeagueClient';
-
-const slugToLeagueName: Record<string, string> = {
-  'premier-league': 'Premier League',
-  'laliga': 'LaLiga',
-  'serie-a': 'Serie A',
-  'ligue-1': 'Ligue 1',
-  'bundesliga': 'Bundesliga',
-};
+import { LEAGUE_OPTIONS, slugToLeagueName } from '../../../lib/leagues';
 
 export async function generateMetadata({ params }: { params: { league?: string } }): Promise<Metadata> {
   const slug = params?.league;
@@ -41,7 +34,7 @@ export async function generateMetadata({ params }: { params: { league?: string }
 
 // Pre-render known league pages at build time for fast static loading and crawlers.
 export async function generateStaticParams() {
-  const slugs = Object.keys(slugToLeagueName);
+  const slugs = LEAGUE_OPTIONS.map((league) => league.slug);
   return slugs.map((league) => ({ league }));
 }
 

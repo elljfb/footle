@@ -7,9 +7,23 @@ interface SearchBarProps {
   onSubmit: () => void;
   disabled?: boolean;
   league?: string;
+  playerNames?: string[];
+  submitLabel?: string;
+  placeholder?: string;
+  inputClassName?: string;
 }
 
-export default function SearchBar({ value, onChange, onSubmit, disabled, league }: SearchBarProps) {
+export default function SearchBar({
+  value,
+  onChange,
+  onSubmit,
+  disabled,
+  league,
+  playerNames,
+  submitLabel = 'Guess',
+  placeholder = 'Type a player name...',
+  inputClassName,
+}: SearchBarProps) {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -17,7 +31,7 @@ export default function SearchBar({ value, onChange, onSubmit, disabled, league 
   const suggestionsRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  const allPlayers = getPlayerNames(league);
+  const allPlayers = playerNames ?? getPlayerNames(league);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -99,8 +113,8 @@ export default function SearchBar({ value, onChange, onSubmit, disabled, league 
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           disabled={disabled}
-          placeholder="Type a player name..."
-          className="w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400"
+          placeholder={placeholder}
+          className={`w-full px-4 py-3 bg-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400 ${inputClassName ?? ''}`}
         />
         <button
           ref={buttonRef}
@@ -113,7 +127,7 @@ export default function SearchBar({ value, onChange, onSubmit, disabled, league 
           aria-label="Submit guess"
           tabIndex={0}
         >
-          Guess
+          {submitLabel}
         </button>
       </div>
 

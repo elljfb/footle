@@ -10,14 +10,7 @@ import Leaderboard from '../../../components/Leaderboard';
 import StatsModal from '../../../components/StatsModal';
 import { GameState } from '../../../types/game';
 import { saveGameResult } from '../../../services/statsService';
-
-const slugToLeagueName: Record<string, string> = {
-  'premier-league': 'Premier League',
-  'laliga': 'LaLiga',
-  'serie-a': 'Serie A',
-  'ligue-1': 'Ligue 1',
-  'bundesliga': 'Bundesliga',
-};
+import { slugToLeagueName } from '../../../lib/leagues';
 
 interface Props {
   slug?: string;

@@ -303,6 +303,14 @@ export default function Home() {
               >
                 Start Playing
               </button>
+              <a
+                href="/custom"
+                className="block max-w-xl mx-auto bg-gray-800 hover:bg-gray-700 border border-blue-500/40 rounded-lg p-4 transition-colors"
+              >
+                <p className="text-sm text-blue-300 font-semibold mb-1">New Feature</p>
+                <p className="text-white font-semibold">Create your own custom Footle challenge</p>
+                <p className="text-gray-400 text-sm mt-1">Choose leagues, pick a player, and share your link with friends.</p>
+              </a>
             </div>
           ) : (
             <>

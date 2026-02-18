@@ -3,6 +3,10 @@ import { supabase } from '../lib/supabase';
 
 const LEADERBOARD_KEY_PREFIX = 'footle_leaderboard';
 
+function isCustomGameType(gameType: string): boolean {
+  return gameType.startsWith('custom:');
+}
+
 export function getLeaderboardKey(gameType: string): string {
   return `${LEADERBOARD_KEY_PREFIX}_${gameType}`;
 }
@@ -35,18 +39,21 @@ export async function saveToLeaderboard(
   // Mark as submitted in localStorage
   if (typeof window !== 'undefined') {
     const key = `${LEADERBOARD_KEY_PREFIX}_submitted_${gameType}`;
-    localStorage.setItem(key, today);
+    const submittedValue = isCustomGameType(gameType) ? 'true' : today;
+    localStorage.setItem(key, submittedValue);
   }
 }
 
 export async function getLeaderboard(gameType: string): Promise<LeaderboardEntry[]> {
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
-  
-  const { data, error } = await supabase
+  const query = supabase
     .from('leaderboard')
     .select('*')
-    .eq('game_type', gameType)
-    .eq('date', today)
+    .eq('game_type', gameType);
+
+  const scopedQuery = isCustomGameType(gameType) ? query : query.eq('date', today);
+
+  const { data, error } = await scopedQuery
     .order('guesses', { ascending: true })
     .order('time', { ascending: true })
     .limit(100);
@@ -71,7 +78,11 @@ export function hasSubmittedToday(gameType: string): boolean {
   const key = `${LEADERBOARD_KEY_PREFIX}_submitted_${gameType}`;
   const today = new Date().toISOString().split('T')[0];
   const lastSubmitted = localStorage.getItem(key);
-  
+
+  if (isCustomGameType(gameType)) {
+    return lastSubmitted === 'true';
+  }
+
   return lastSubmitted === today;
 }
 

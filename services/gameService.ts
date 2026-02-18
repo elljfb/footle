@@ -4,6 +4,50 @@ import { areInSameContinent } from '../utils/continents';
 
 const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
+function calculateAge(dateOfBirth: string): number {
+  const today = new Date();
+  const birthDate = new Date(dateOfBirth);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+}
+
+function buildGuessResponse(target: Player, guessedPlayer: Player): GuessResponseWithValues {
+  const targetAge = calculateAge(target.dateOfBirth);
+  const guessAge = calculateAge(guessedPlayer.dateOfBirth);
+
+  return {
+    isCorrect: guessedPlayer.id === target.id,
+    position: comparePositions(guessedPlayer.position, target.position),
+    subPosition: compareSubPositions(guessedPlayer.subPosition, target.subPosition, guessedPlayer.position, target.position),
+    age: compareAges(guessAge, targetAge),
+    nationality: compareNationalities(guessedPlayer.nationality, target.nationality),
+    club: compareClubs(guessedPlayer.club, target.club, guessedPlayer.league, target.league),
+    league: compareStrings(guessedPlayer.league, target.league),
+    height: compareHeights(guessedPlayer.height, target.height),
+    foot: guessedPlayer.foot === target.foot ? 'correct' : 'incorrect',
+    values: {
+      position: guessedPlayer.position,
+      subPosition: guessedPlayer.subPosition,
+      age: guessAge,
+      nationality: guessedPlayer.nationality,
+      club: guessedPlayer.club,
+      league: guessedPlayer.league,
+      height: guessedPlayer.height,
+      foot: guessedPlayer.foot,
+    },
+    targetValues: {
+      age: targetAge,
+      height: target.height,
+    },
+  };
+}
+
 // Get the daily player. Optionally pass a league to restrict selection to that league.
 export function getDailyPlayer(league?: string): Player {
   const today = new Date();
@@ -16,6 +60,21 @@ export function getDailyPlayer(league?: string): Player {
   const totalPlayers = pool.length;
   const playerIndex = (daysSinceEpoch * prime) % totalPlayers;
   return pool[playerIndex];
+}
+
+export function getPlayersByLeague(league?: string): Player[] {
+  const filtered = league ? players.filter(p => p.league === league) : players;
+  return filtered.length > 0 ? filtered : players;
+}
+
+export function getPlayersByLeagues(leagues?: string[]): Player[] {
+  if (!leagues || leagues.length === 0) {
+    return players;
+  }
+
+  const selectedLeagues = new Set(leagues);
+  const filtered = players.filter((player) => selectedLeagues.has(player.league));
+  return filtered.length > 0 ? filtered : players;
 }
 
 function comparePositions(guess: Position, target: Position): GuessResult {
@@ -54,58 +113,21 @@ function compareHeights(guess: number, target: number): GuessResult {
 }
 
 export function checkGuess(target: Player, guess: string, league?: string): GuessResponseWithValues | null {
-  const filtered = league ? players.filter(p => p.league === league) : players;
-  const pool = filtered.length > 0 ? filtered : players;
+  const pool = getPlayersByLeague(league);
+  return checkGuessFromPool(target, guess, pool);
+}
 
+export function checkGuessFromPool(target: Player, guess: string, pool: Player[]): GuessResponseWithValues | null {
   const guessedPlayer = pool.find(p => p.name.toLowerCase() === guess.toLowerCase());
   if (!guessedPlayer) return null;
-
-  const calculateAge = (dateOfBirth: string): number => {
-    const today = new Date();
-    const birthDate = new Date(dateOfBirth);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    
-    return age;
-  };
-
-  const targetAge = calculateAge(target.dateOfBirth);
-  const guessAge = calculateAge(guessedPlayer.dateOfBirth);
-
-  return {
-    isCorrect: guessedPlayer.id === target.id,
-    position: comparePositions(guessedPlayer.position, target.position),
-    subPosition: compareSubPositions(guessedPlayer.subPosition, target.subPosition, guessedPlayer.position, target.position),
-    age: compareAges(guessAge, targetAge),
-    nationality: compareNationalities(guessedPlayer.nationality, target.nationality),
-    club: compareClubs(guessedPlayer.club, target.club, guessedPlayer.league, target.league),
-    league: compareStrings(guessedPlayer.league, target.league),
-    height: compareHeights(guessedPlayer.height, target.height),
-    foot: guessedPlayer.foot === target.foot ? 'correct' : 'incorrect',
-    values: {
-      position: guessedPlayer.position,
-      subPosition: guessedPlayer.subPosition,
-      age: guessAge,
-      nationality: guessedPlayer.nationality,
-      club: guessedPlayer.club,
-      league: guessedPlayer.league,
-      height: guessedPlayer.height,
-      foot: guessedPlayer.foot,
-    },
-    targetValues: {
-      age: targetAge,
-      height: target.height,
-    },
-  };
+  return buildGuessResponse(target, guessedPlayer);
 }
 
 // Helper function to get all available player names for autocomplete
 export function getPlayerNames(league?: string): string[] {
-  const filtered = league ? players.filter(p => p.league === league) : players;
-  const pool = filtered.length > 0 ? filtered : players;
-  return pool.map(p => p.name);
+  return getPlayersByLeague(league).map(p => p.name);
+}
+
+export function getPlayerNamesFromPool(pool: Player[]): string[] {
+  return pool.map((player) => player.name);
 }
