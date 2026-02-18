@@ -5,3 +5,4 @@ https://footle.club/league/laliga
 https://footle.club/league/bundesliga
 https://footle.club/league/serie-a
 https://footle.club/league/ligue-1
+https://footle.club/custom
