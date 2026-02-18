@@ -2,14 +2,11 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { LEAGUE_OPTIONS } from '../lib/leagues';
 
 const leagues = [
   { slug: '', name: 'All Players' },
-  { slug: 'premier-league', name: 'Premier League' },
-  { slug: 'laliga', name: 'LaLiga' },
-  { slug: 'serie-a', name: 'Serie A' },
-  { slug: 'ligue-1', name: 'Ligue 1' },
-  { slug: 'bundesliga', name: 'Bundesliga' },
+  ...LEAGUE_OPTIONS,
 ];
 
 interface LeagueMenuProps {
@@ -43,6 +40,14 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
               {league.name}
             </Link>
           ))}
+          <div className="my-1 border-t border-gray-700" />
+          <Link
+            href="/custom"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
+          >
+            Create Custom Game
+          </Link>
         </div>
       )}
     </div>

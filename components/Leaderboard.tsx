@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { LeaderboardEntry } from '../types/game';
-import { 
-  getLeaderboard, 
-  saveToLeaderboard, 
+import {
+  getLeaderboard,
+  saveToLeaderboard,
   hasSubmittedToday,
-  formatTime 
+  formatTime
 } from '../services/leaderboardService';
 
 interface Props {
@@ -18,6 +18,7 @@ interface Props {
 }
 
 export default function Leaderboard({ gameType, guesses, time, showSubmitForm, onSubmit }: Props) {
+  const isCustomGame = gameType.startsWith('custom:');
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [nickname, setNickname] = useState('');
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -47,7 +48,7 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!nickname.trim() || nickname.trim().length < 2) {
       alert('Please enter a nickname (at least 2 characters)');
       return;
@@ -66,7 +67,7 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
       setHasSubmitted(true);
       setShowForm(false);
       await loadLeaderboard();
-      
+
       if (onSubmit) {
         onSubmit();
       }
@@ -80,19 +81,17 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
 
   const getUserRank = (): number | null => {
     if (!hasSubmitted) return null;
-    
-    // Find the user's position in sorted list
+
     const sorted = [...leaderboard].sort((a, b) => {
       if (a.guesses !== b.guesses) {
         return a.guesses - b.guesses;
       }
       return a.time - b.time;
     });
-    
-    // Find most recent submission with matching stats
+
     const userEntry = sorted.find(e => e.guesses === guesses && e.time === time);
     if (!userEntry) return null;
-    
+
     return sorted.indexOf(userEntry) + 1;
   };
 
@@ -100,8 +99,8 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
 
   return (
     <div className="bg-gray-800 rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-4 text-center">🏆 Today's Leaderboard</h2>
-      
+      <h2 className="text-2xl font-bold mb-4 text-center">{isCustomGame ? 'Challenge Leaderboard' : "Today's Leaderboard"}</h2>
+
       {showSubmitForm && !hasSubmitted && (
         <div className="mb-6 p-4 bg-gray-700 rounded-lg">
           {!showForm ? (
@@ -162,7 +161,7 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
       {hasSubmitted && rank && (
         <div className="mb-4 p-3 bg-green-900 bg-opacity-30 border border-green-500 rounded-lg text-center">
           <p className="text-green-400 font-semibold">
-            Your rank: #{rank} 🎉
+            Your rank: #{rank}
           </p>
         </div>
       )}
@@ -199,23 +198,21 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
             </thead>
             <tbody>
               {leaderboard.map((entry, index) => {
-                const isCurrentUser = hasSubmitted && 
-                  entry.guesses === guesses && 
+                const isCurrentUser =
+                  hasSubmitted &&
+                  entry.guesses === guesses &&
                   entry.time === time &&
                   index === rank! - 1;
-                
+
                 return (
-                  <tr 
+                  <tr
                     key={`${entry.nickname}-${entry.timestamp}`}
                     className={`border-b border-gray-700 ${
                       isCurrentUser ? 'bg-blue-900 bg-opacity-30' : ''
                     }`}
                   >
                     <td className="py-2 px-2 text-gray-300">
-                      {index === 0 && '🥇'}
-                      {index === 1 && '🥈'}
-                      {index === 2 && '🥉'}
-                      {index > 2 && `#${index + 1}`}
+                      {index + 1}
                     </td>
                     <td className="py-2 px-2 font-semibold">
                       {entry.nickname}
@@ -234,9 +231,9 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
           </table>
         </div>
       )}
-      
+
       <p className="text-xs text-gray-500 text-center mt-4">
-        Leaderboard resets daily at midnight
+        {isCustomGame ? 'Scores are saved for this challenge link' : 'Leaderboard resets daily at midnight'}
       </p>
     </div>
   );
