@@ -81,6 +81,7 @@ export default function PrivacyPolicy() {
               <li>Supabase (for leaderboard data storage and management)</li>
               <li>Google Analytics (for website analytics)</li>
               <li>Social media sharing features</li>
+              <li>Affiliate Links where we may earn commision from purchases you make at no extra cost to you</li>
             </ul>
           </section>
 
