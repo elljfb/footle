@@ -62,6 +62,13 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           >
             Play Career Mode
           </Link>
+          <Link
+            href="/transfer-generator"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
+          >
+            Transfer Generator
+          </Link>
         </div>
       )}
     </div>

@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import LeagueClient from './LeagueClient';
 import { LEAGUE_OPTIONS, slugToLeagueName } from '../../../lib/leagues';
 
-export async function generateMetadata({ params }: { params: { league?: string } }): Promise<Metadata> {
-  const slug = params?.league;
+export async function generateMetadata({ params }: { params: Promise<{ league?: string }> }): Promise<Metadata> {
+  const { league: slug } = await params;
   const leagueName = slug ? (slugToLeagueName[slug] ?? decodeURIComponent(slug)) : undefined;
 
-  const title = leagueName ? `Footle — Guess The ${leagueName} player` : 'Footle - The Daily Football Player Guessing Game';
+  const title = leagueName ? `Footle - Guess The ${leagueName} player` : 'Footle - The Daily Football Player Guessing Game';
   const description = leagueName
     ? `Try to guess today's mystery ${leagueName} player. Get feedback on position, age, nationality, club and more.`
     : 'Test your football knowledge by guessing today\'s mystery football player. Get feedback on position, age, nationality, club, and more with each guess.';
@@ -38,8 +38,8 @@ export async function generateStaticParams() {
   return slugs.map((league) => ({ league }));
 }
 
-export default function Page({ params }: { params: { league?: string } }) {
-  const slug = params?.league;
+export default async function Page({ params }: { params: Promise<{ league?: string }> }) {
+  const { league: slug } = await params;
 
   return <LeagueClient slug={slug} />;
 }
