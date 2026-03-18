@@ -4,8 +4,12 @@ import { areInSameContinent } from '../utils/continents';
 
 const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
-function calculateAge(dateOfBirth: string): number {
-  const today = new Date();
+function getReferenceDate(referenceDate?: Date): Date {
+  return referenceDate ? new Date(referenceDate) : new Date();
+}
+
+function calculateAge(dateOfBirth: string, referenceDate?: Date): number {
+  const today = getReferenceDate(referenceDate);
   const birthDate = new Date(dateOfBirth);
   let age = today.getFullYear() - birthDate.getFullYear();
   const monthDiff = today.getMonth() - birthDate.getMonth();
@@ -17,9 +21,9 @@ function calculateAge(dateOfBirth: string): number {
   return age;
 }
 
-function buildGuessResponse(target: Player, guessedPlayer: Player): GuessResponseWithValues {
-  const targetAge = calculateAge(target.dateOfBirth);
-  const guessAge = calculateAge(guessedPlayer.dateOfBirth);
+function buildGuessResponse(target: Player, guessedPlayer: Player, referenceDate?: Date): GuessResponseWithValues {
+  const targetAge = calculateAge(target.dateOfBirth, referenceDate);
+  const guessAge = calculateAge(guessedPlayer.dateOfBirth, referenceDate);
 
   return {
     isCorrect: guessedPlayer.id === target.id,
@@ -48,18 +52,26 @@ function buildGuessResponse(target: Player, guessedPlayer: Player): GuessRespons
   };
 }
 
-// Get the daily player. Optionally pass a league to restrict selection to that league.
-export function getDailyPlayer(league?: string): Player {
-  const today = new Date();
-  const daysSinceEpoch = Math.floor(today.getTime() / MILLISECONDS_IN_DAY);
+function getPlayerForDayIndex(daysSinceEpoch: number, league?: string): Player {
   const prime = 1327;
-
   const filtered = league ? players.filter(p => p.league === league) : players;
   const pool = filtered.length > 0 ? filtered : players; // fallback to full list if no players for league
 
   const totalPlayers = pool.length;
   const playerIndex = (daysSinceEpoch * prime) % totalPlayers;
   return pool[playerIndex];
+}
+
+// Get the daily player. Optionally pass a league to restrict selection to that league.
+export function getDailyPlayer(league?: string): Player {
+  const today = new Date();
+  const daysSinceEpoch = Math.floor(today.getTime() / MILLISECONDS_IN_DAY);
+  return getPlayerForDayIndex(daysSinceEpoch, league);
+}
+
+export function getDailyPlayerByDate(date: Date, league?: string): Player {
+  const daysSinceEpoch = Math.floor(date.getTime() / MILLISECONDS_IN_DAY);
+  return getPlayerForDayIndex(daysSinceEpoch, league);
 }
 
 export function getPlayersByLeague(league?: string): Player[] {
@@ -112,15 +124,15 @@ function compareHeights(guess: number, target: number): GuessResult {
     (diff <= 5 ? 'close' : 'incorrect');
 }
 
-export function checkGuess(target: Player, guess: string, league?: string): GuessResponseWithValues | null {
+export function checkGuess(target: Player, guess: string, league?: string, referenceDate?: Date): GuessResponseWithValues | null {
   const pool = getPlayersByLeague(league);
-  return checkGuessFromPool(target, guess, pool);
+  return checkGuessFromPool(target, guess, pool, referenceDate);
 }
 
-export function checkGuessFromPool(target: Player, guess: string, pool: Player[]): GuessResponseWithValues | null {
+export function checkGuessFromPool(target: Player, guess: string, pool: Player[], referenceDate?: Date): GuessResponseWithValues | null {
   const guessedPlayer = pool.find(p => p.name.toLowerCase() === guess.toLowerCase());
   if (!guessedPlayer) return null;
-  return buildGuessResponse(target, guessedPlayer);
+  return buildGuessResponse(target, guessedPlayer, referenceDate);
 }
 
 // Helper function to get all available player names for autocomplete

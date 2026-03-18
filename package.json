@@ -1,6 +1,6 @@
 {
-  "name": "football_guess",
-  "version": "0.1.0",
+  "name": "footle",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.86.2",
-    "next": "^14.2.33",
+    "next": "^16.1.7",
     "react": "^18",
     "react-dom": "^18",
     "sharp": "^0.33.2"
