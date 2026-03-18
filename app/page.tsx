@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { Player, GuessResponseWithValues } from '../types/player';
 import { getDailyPlayer, checkGuess } from '../services/gameService';
@@ -11,6 +12,7 @@ import StatsModal from '../components/StatsModal';
 import { GameState } from '../types/game';
 import { saveGameResult } from '../services/statsService';
 import { trackEvent } from '../lib/analytics';
+import { LEAGUE_OPTIONS } from '../lib/leagues';
 
 const STORAGE_KEY = 'footle_game_state';
 
@@ -32,6 +34,38 @@ export default function Home() {
   const hasTrackedStartView = useRef(false);
 
   const maxGuesses = 10;
+  const modeCards = [
+    ...LEAGUE_OPTIONS.map((league) => ({
+      href: `/league/${league.slug}`,
+      title: league.name,
+      description: `Daily ${league.name} guess`,
+      accent: 'border-sky-500/30 text-sky-200',
+    })),
+    {
+      href: '/career',
+      title: 'Career Mode',
+      description: 'Guess the player from their club path',
+      accent: 'border-emerald-500/30 text-emerald-200',
+    },
+    {
+      href: '/archive',
+      title: 'Archive Mode',
+      description: 'Play footles from the last 30 days',
+      accent: 'border-rose-500/30 text-rose-200',
+    },
+    {
+      href: '/custom',
+      title: 'Custom Game',
+      description: 'Build your own challenge to share',
+      accent: 'border-fuchsia-500/30 text-fuchsia-200',
+    },
+    {
+      href: '/transfer-generator',
+      title: 'Transfer Generator',
+      description: 'Create fake transfer rumors to share',
+      accent: 'border-yellow-500/30 text-yellow-200',
+    },
+  ];
 
   const handleStartPlaying = () => {
     trackEvent('start_playing_click', {
@@ -303,14 +337,27 @@ export default function Home() {
               >
                 Start Playing
               </button>
-              <a
-                href="/custom"
-                className="block max-w-xl mx-auto bg-gray-800 hover:bg-gray-700 border border-blue-500/40 rounded-lg p-4 transition-colors"
-              >
-                <p className="text-sm text-blue-300 font-semibold mb-1">New Feature</p>
-                <p className="text-white font-semibold">Create your own custom Footle challenge</p>
-                <p className="text-gray-400 text-sm mt-1">Choose leagues, pick a player, and share your link with friends.</p>
-              </a>
+              <section className="max-w-4xl mx-auto text-left bg-gray-800/80 border border-gray-700 rounded-2xl p-5">
+                <div className="mb-4 text-center">
+                  <p className="text-sm uppercase tracking-[0.2em] text-blue-300">Play More Modes</p>
+                  <h3 className="text-xl font-semibold text-white mt-1">More ways to play Footle</h3>
+                  <p className="text-sm text-gray-400 mt-2">
+                    Jump into league-specific dailies, catch up in the archive, or try a different format.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                  {modeCards.map((card) => (
+                    <Link
+                      key={card.href}
+                      href={card.href}
+                      className={`rounded-xl border bg-gray-900/80 p-4 transition-all hover:bg-gray-800 hover:-translate-y-0.5 ${card.accent}`}
+                    >
+                      <p className="font-semibold text-white">{card.title}</p>
+                      <p className="text-sm text-gray-400 mt-1 leading-snug">{card.description}</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
             </div>
           ) : (
             <>
