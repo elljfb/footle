@@ -48,6 +48,13 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           >
             Create Custom Game
           </Link>
+          <Link
+            href="/archive"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
+          >
+            Play Archive Mode
+          </Link>
         </div>
       )}
     </div>
