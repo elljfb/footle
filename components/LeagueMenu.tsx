@@ -55,6 +55,13 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           >
             Play Archive Mode
           </Link>
+          <Link
+            href="/career"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
+          >
+            Play Career Mode
+          </Link>
         </div>
       )}
     </div>
