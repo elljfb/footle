@@ -19,7 +19,6 @@ function getStartYear(years: string): number {
 function cleanClubName(club: string): string {
   return club
     .replace(/^(?:->|\u2192)\s*/u, '')
-    .replace(/\s+\(loan\)$/i, '')
     .trim();
 }
 
