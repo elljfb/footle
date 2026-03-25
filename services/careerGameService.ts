@@ -1,4 +1,7 @@
-import footballCareers, { CareerSpell, PlayerCareer } from '../data/footballCareers';
+import footballCareersEasy from '../data/footballCareersEasy';
+import footballCareersMedium from '../data/footballCareersMedium';
+import footballCareersHard from '../data/footballCareersHard';
+import type { CareerDifficulty, CareerSpell, PlayerCareer } from '../types/career';
 
 const MILLISECONDS_IN_DAY = 1000 * 60 * 60 * 24;
 
@@ -10,6 +13,12 @@ interface CareerSpellWithSortData extends CareerSpell {
 export interface CareerGamePlayer extends PlayerCareer {
   clueCareer: CareerSpell[];
 }
+
+const CAREER_DATASETS: Record<CareerDifficulty, readonly PlayerCareer[]> = {
+  easy: footballCareersEasy,
+  medium: footballCareersMedium,
+  hard: footballCareersHard,
+};
 
 function getStartYear(years: string): number {
   const match = years.match(/\d{4}/);
@@ -71,26 +80,33 @@ function isPlayableCareer(player: PlayerCareer): boolean {
   return buildClueCareer(player).length >= 3;
 }
 
-const careerPlayers: CareerGamePlayer[] = footballCareers
-  .filter(isPlayableCareer)
-  .map((player) => ({
-    ...player,
-    clueCareer: buildClueCareer(player),
-  }));
+const careerPlayersByDifficulty = Object.fromEntries(
+  Object.entries(CAREER_DATASETS).map(([difficulty, players]) => [
+    difficulty,
+    players.filter(isPlayableCareer).map((player) => ({
+      ...player,
+      clueCareer: buildClueCareer(player),
+    })),
+  ])
+) as Record<CareerDifficulty, CareerGamePlayer[]>;
 
-export function getCareerPlayers(): CareerGamePlayer[] {
-  return careerPlayers;
+export function getCareerPlayers(difficulty: CareerDifficulty = 'easy'): CareerGamePlayer[] {
+  return careerPlayersByDifficulty[difficulty];
 }
 
-export function getDailyCareerPlayer(date = new Date()): CareerGamePlayer {
+export function getDailyCareerPlayer(
+  difficulty: CareerDifficulty = 'easy',
+  date = new Date()
+): CareerGamePlayer {
   const daysSinceEpoch = Math.floor(date.getTime() / MILLISECONDS_IN_DAY);
   const prime = 1327;
+  const careerPlayers = getCareerPlayers(difficulty);
   const index = (daysSinceEpoch * prime) % careerPlayers.length;
   return careerPlayers[index];
 }
 
-export function getCareerPlayerNames(): string[] {
-  return careerPlayers.map((player) => player.name);
+export function getCareerPlayerNames(difficulty: CareerDifficulty = 'easy'): string[] {
+  return getCareerPlayers(difficulty).map((player) => player.name);
 }
 
 export function checkCareerGuess(target: CareerGamePlayer, guess: string): boolean {

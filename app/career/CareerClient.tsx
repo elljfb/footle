@@ -12,6 +12,7 @@ import {
   getDailyCareerPlayer,
   getVisibleCareerClues,
 } from '../../services/careerGameService';
+import type { CareerDifficulty } from '../../types/career';
 
 interface CareerGameState {
   guesses: string[];
@@ -23,8 +24,16 @@ interface CareerGameState {
   endTime?: number;
 }
 
-const STORAGE_KEY = 'footle_career_state';
+const STORAGE_KEY_PREFIX = 'footle_career_state';
+const SELECTED_DIFFICULTY_KEY = 'footle_career_selected_difficulty';
 const MAX_GUESSES = 3;
+const DEFAULT_DIFFICULTY: CareerDifficulty = 'easy';
+const DIFFICULTIES: CareerDifficulty[] = ['easy', 'medium', 'hard'];
+const DIFFICULTY_LABELS: Record<CareerDifficulty, string> = {
+  easy: 'Easy',
+  medium: 'Medium',
+  hard: 'Hard',
+};
 
 const createEmptyState = (): CareerGameState => ({
   guesses: [],
@@ -37,49 +46,82 @@ const createEmptyState = (): CareerGameState => ({
 });
 
 export default function CareerClient() {
+  const [selectedDifficulty, setSelectedDifficulty] = useState<CareerDifficulty>(DEFAULT_DIFFICULTY);
   const [gameState, setGameState] = useState<CareerGameState>(createEmptyState);
   const [showError, setShowError] = useState(false);
   const [showShareConfirmation, setShowShareConfirmation] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
-  const playerNames = getCareerPlayerNames();
+  const playerNames = getCareerPlayerNames(selectedDifficulty);
 
-  useEffect(() => {
+  const getStorageKey = (difficulty: CareerDifficulty) => `${STORAGE_KEY_PREFIX}_${difficulty}`;
+
+  const loadStateForDifficulty = (difficulty: CareerDifficulty) => {
     const today = new Date().toDateString();
-    const savedState = localStorage.getItem(STORAGE_KEY);
+    const savedState = localStorage.getItem(getStorageKey(difficulty));
 
     if (savedState) {
       const parsedState = JSON.parse(savedState);
       if (parsedState.date === today) {
-        setGameState(parsedState.state);
-        setGameStarted(parsedState.gameStarted);
-        return;
+        return {
+          state: parsedState.state as CareerGameState,
+          gameStarted: Boolean(parsedState.gameStarted),
+        };
       }
     }
 
-    const player = getDailyCareerPlayer();
-    setGameState({
-      ...createEmptyState(),
-      dailyPlayer: player,
-    });
-    setGameStarted(false);
+    return {
+      state: {
+        ...createEmptyState(),
+        dailyPlayer: getDailyCareerPlayer(difficulty),
+      },
+      gameStarted: false,
+    };
+  };
+
+  useEffect(() => {
+    const savedDifficulty = localStorage.getItem(SELECTED_DIFFICULTY_KEY);
+    const difficulty = DIFFICULTIES.includes(savedDifficulty as CareerDifficulty)
+      ? (savedDifficulty as CareerDifficulty)
+      : DEFAULT_DIFFICULTY;
+    const { state, gameStarted } = loadStateForDifficulty(difficulty);
+
+    setSelectedDifficulty(difficulty);
+    setGameState(state);
+    setGameStarted(gameStarted);
+    setIsHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (!gameState.dailyPlayer) {
+    if (!isHydrated || !gameState.dailyPlayer) {
       return;
     }
 
+    localStorage.setItem(SELECTED_DIFFICULTY_KEY, selectedDifficulty);
     localStorage.setItem(
-      STORAGE_KEY,
+      getStorageKey(selectedDifficulty),
       JSON.stringify({
         date: new Date().toDateString(),
         gameStarted,
         state: gameState,
       })
     );
-  }, [gameStarted, gameState]);
+  }, [gameStarted, gameState, isHydrated, selectedDifficulty]);
+
+  const handleDifficultyChange = (difficulty: CareerDifficulty) => {
+    if (difficulty === selectedDifficulty) {
+      return;
+    }
+
+    const { state, gameStarted } = loadStateForDifficulty(difficulty);
+    setSelectedDifficulty(difficulty);
+    setGameState(state);
+    setGameStarted(gameStarted);
+    setShowError(false);
+    setShowShareConfirmation(false);
+  };
 
   const handleGuess = () => {
     if (!gameState.dailyPlayer || gameState.gameOver || !gameState.currentGuess.trim()) {
@@ -126,7 +168,7 @@ export default function CareerClient() {
     }).join('');
 
     return [
-      `Footle Career #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/${MAX_GUESSES}`,
+      `Footle Career (${DIFFICULTY_LABELS[selectedDifficulty]}) #${daysSinceEpoch} - ${gameState.won ? gameState.guesses.length : 'X'}/${MAX_GUESSES}`,
       '',
       resultLine,
       '',
@@ -166,6 +208,29 @@ export default function CareerClient() {
     return `${appsText} apps • ${goalsText} goals`;
   };
 
+  const renderDifficultySelector = () => (
+    <div className="mx-auto flex w-full max-w-md gap-2 rounded-xl bg-gray-900/70 p-2">
+      {DIFFICULTIES.map((difficulty) => {
+        const isActive = difficulty === selectedDifficulty;
+
+        return (
+          <button
+            key={difficulty}
+            onClick={() => handleDifficultyChange(difficulty)}
+            className={`flex-1 rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
+              isActive
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+            }`}
+            aria-pressed={isActive}
+          >
+            {DIFFICULTY_LABELS[difficulty]}
+          </button>
+        );
+      })}
+    </div>
+  );
+
   return (
     <>
       <div className="relative">
@@ -181,15 +246,18 @@ export default function CareerClient() {
 
         <header className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-2">Footle Career</h1>
-          {gameStarted ? (
-            <p className="text-gray-400 text-lg">
-              {!gameState.gameOver
-                ? `Guess ${Math.min(gameState.guesses.length + 1, MAX_GUESSES)} of ${MAX_GUESSES}`
-                : `${gameState.won ? 'Solved' : 'Game Over'} in ${gameState.guesses.length} ${gameState.guesses.length === 1 ? 'guess' : 'guesses'}`}
-            </p>
-          ) : (
-            <p className="text-gray-400 text-lg">Guess the player from their career path</p>
-          )}
+          <div className="space-y-4">
+            {gameStarted ? (
+              <p className="text-gray-400 text-lg">
+                {!gameState.gameOver
+                  ? `Guess ${Math.min(gameState.guesses.length + 1, MAX_GUESSES)} of ${MAX_GUESSES}`
+                  : `${gameState.won ? 'Solved' : 'Game Over'} in ${gameState.guesses.length} ${gameState.guesses.length === 1 ? 'guess' : 'guesses'}`}
+              </p>
+            ) : (
+              <p className="text-gray-400 text-lg">Guess the player from their career path</p>
+            )}
+            {renderDifficultySelector()}
+          </div>
         </header>
 
         <div className="space-y-6">
@@ -290,7 +358,7 @@ export default function CareerClient() {
                     </button>
                     <button
                       onClick={() => window.open('https://www.mystershirt.com/footle', '_blank', 'noopener,noreferrer')}
-                      className="bg-[#F28500] hover:bg-[##FFA500] text-white px-6 py-2 rounded-lg transition-colors"
+                      className="bg-[#F28500] hover:bg-[#FFA500] text-white px-6 py-2 rounded-lg transition-colors"
                     >
                       👕 Get a Mystery Football Shirt
                     </button>
@@ -334,7 +402,6 @@ export default function CareerClient() {
                 </section>
               )}
 
-
               {gameState.guesses.length > 0 && (
                 <section>
                   <h3 className="text-lg font-bold mb-4 text-center text-gray-300">Your Guesses</h3>
@@ -377,7 +444,7 @@ export default function CareerClient() {
         onClose={() => setShowStats(false)}
         gameType="career"
         maxGuesses={MAX_GUESSES}
-        gameTitle="Footle Career"
+        gameTitle={`Footle Career (${DIFFICULTY_LABELS[selectedDifficulty]})`}
       />
     </>
   );
