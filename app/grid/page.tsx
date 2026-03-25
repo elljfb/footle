@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import GridClient from './GridClient';
 import { getGridPuzzle, getGridPuzzleNumber } from '../../services/gridGameService';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'Football Immaculate Grid Game - Footle Grid',
   description:
