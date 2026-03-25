@@ -8,4 +8,5 @@ https://footle.club/league/ligue-1
 https://footle.club/custom
 https://footle.club/archive
 https://footle.club/career
+https://footle.club/grid
 https://footle.club/transfer-generator

@@ -63,6 +63,13 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
             Play Career Mode
           </Link>
           <Link
+            href="/grid"
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
+          >
+            Play Grid Mode
+          </Link>
+          <Link
             href="/transfer-generator"
             onClick={() => setOpen(false)}
             className="block px-3 py-2 rounded hover:bg-gray-800 text-white"

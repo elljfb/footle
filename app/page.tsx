@@ -48,6 +48,12 @@ export default function Home() {
       accent: 'border-emerald-500/30 text-emerald-200',
     },
     {
+      href: '/grid',
+      title: 'Grid Mode',
+      description: 'Fill the 3x3 club grid with crossover players',
+      accent: 'border-cyan-500/30 text-cyan-200',
+    },
+    {
       href: '/archive',
       title: 'Archive Mode',
       description: 'Play footles from the last 30 days',
