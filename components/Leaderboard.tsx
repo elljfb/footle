@@ -15,9 +15,21 @@ interface Props {
   time: number;
   showSubmitForm: boolean;
   onSubmit?: () => void;
+  scoreLabel?: string;
+  scoreLabelSingular?: string;
+  scoreLabelPlural?: string;
 }
 
-export default function Leaderboard({ gameType, guesses, time, showSubmitForm, onSubmit }: Props) {
+export default function Leaderboard({
+  gameType,
+  guesses,
+  time,
+  showSubmitForm,
+  onSubmit,
+  scoreLabel = 'Guesses',
+  scoreLabelSingular = 'guess',
+  scoreLabelPlural = 'guesses',
+}: Props) {
   const isCustomGame = gameType.startsWith('custom:');
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [nickname, setNickname] = useState('');
@@ -106,7 +118,8 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
           {!showForm ? (
             <div className="text-center">
               <p className="text-gray-300 mb-3">
-                Great job! You completed the game in <span className="font-bold text-white">{guesses}</span> {guesses === 1 ? 'guess' : 'guesses'} and <span className="font-bold text-white">{formatTime(time)}</span>
+                Great job! You completed the game in <span className="font-bold text-white">{guesses}</span>{' '}
+                {guesses === 1 ? scoreLabelSingular : scoreLabelPlural} and <span className="font-bold text-white">{formatTime(time)}</span>
               </p>
               <button
                 onClick={() => setShowForm(true)}
@@ -192,7 +205,7 @@ export default function Leaderboard({ gameType, guesses, time, showSubmitForm, o
               <tr className="border-b border-gray-700">
                 <th className="text-left py-2 px-2 text-gray-400 text-sm">Rank</th>
                 <th className="text-left py-2 px-2 text-gray-400 text-sm">Nickname</th>
-                <th className="text-center py-2 px-2 text-gray-400 text-sm">Guesses</th>
+                <th className="text-center py-2 px-2 text-gray-400 text-sm">{scoreLabel}</th>
                 <th className="text-center py-2 px-2 text-gray-400 text-sm">Time</th>
               </tr>
             </thead>
