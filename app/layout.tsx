@@ -1,10 +1,7 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import Footer from "../components/Footer";
 import LeagueMenu from '../components/LeagueMenu';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -94,7 +91,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className="font-sans">
         <div className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
           <div className="max-w-3xl mx-auto relative">
             <LeagueMenu />

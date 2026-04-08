@@ -60,6 +60,18 @@ export default function Home() {
       accent: 'border-fuchsia-500/30 text-fuchsia-200',
     },
     {
+      href: '/squadle',
+      title: 'Squadle',
+      description: 'The daily starting XI guessing game',
+      accent: 'border-cyan-500/30 text-cyan-200',
+    },
+    {
+      href: '/shortlist',
+      title: 'Shortlist',
+      description: 'Football player elimination challenge',
+      accent: 'border-emerald-500/30 text-emerald-200',
+    },
+    {
       href: '/transfer-generator',
       title: 'Transfer Generator',
       description: 'Create fake transfer rumors to share',
