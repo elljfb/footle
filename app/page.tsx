@@ -9,6 +9,7 @@ import SearchBar from '../components/SearchBar';
 import InstructionsModal from '../components/InstructionsModal';
 import Leaderboard from '../components/Leaderboard';
 import StatsModal from '../components/StatsModal';
+import AdvertiseModal from '../components/AdvertiseModal';
 import { GameState } from '../types/game';
 import { saveGameResult } from '../services/statsService';
 import { trackEvent } from '../lib/analytics';
@@ -30,6 +31,7 @@ export default function Home() {
   const [showShareConfirmation, setShowShareConfirmation] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const [showAdvertise, setShowAdvertise] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
   const hasTrackedStartView = useRef(false);
 
@@ -297,7 +299,14 @@ export default function Home() {
   return (
     <>
       <div className="relative">
-        <div className="absolute top-0 right-0 flex gap-2 -mt-2 z-10">
+        <div className="absolute top-0 right-0 flex flex-wrap justify-end gap-2 -mt-2 z-10">
+          <button
+            onClick={() => setShowAdvertise(true)}
+            className="h-10 px-4 flex items-center justify-center rounded-full bg-amber-500 hover:bg-amber-400 text-sm font-semibold text-gray-950 transition-colors"
+            aria-label="Advertise on Footle"
+          >
+            Advertise
+          </button>
           <button
             onClick={() => setShowStats(true)}
             className="w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
@@ -491,6 +500,11 @@ export default function Home() {
         gameType="all"
         maxGuesses={maxGuesses}
         gameTitle="Footle"
+      />
+
+      <AdvertiseModal
+        isOpen={showAdvertise}
+        onClose={() => setShowAdvertise(false)}
       />
     </>
   );
