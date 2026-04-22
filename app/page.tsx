@@ -297,11 +297,12 @@ export default function Home() {
   return (
     <>
       <div className="relative">
-        <div className="absolute top-0 right-0 flex gap-2 -mt-2 z-10">
+        <div className="absolute top-0 right-0 flex flex-wrap justify-end gap-2 -mt-2 z-10">
           <button
             onClick={() => setShowStats(true)}
             className="w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
             aria-label="View statistics"
+            type="button"
           >
             📊
           </button>
@@ -309,6 +310,7 @@ export default function Home() {
             onClick={() => setShowInstructions(true)}
             className="w-10 h-10 flex items-center justify-center text-2xl bg-gray-800 hover:bg-gray-700 rounded-full transition-colors"
             aria-label="How to play"
+            type="button"
           >
             ℹ️
           </button>
