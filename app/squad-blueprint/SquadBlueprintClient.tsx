@@ -70,7 +70,7 @@ function NationalityFlag({ nationality }: { nationality: string }) {
   if (!FlagIcon) {
     return (
       <div
-        className="flex h-7 w-10 items-center justify-center rounded-[0.35rem] border border-white/10 bg-white/5 text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-100/80"
+        className="flex h-5 w-7 items-center justify-center rounded-[0.35rem] border border-white/10 bg-white/5 text-[8px] font-semibold uppercase tracking-[0.14em] text-cyan-100/80 sm:h-7 sm:w-10 sm:text-[10px] sm:tracking-[0.18em]"
         title={nationality}
       >
         {nationality.slice(0, 2)}
@@ -78,7 +78,12 @@ function NationalityFlag({ nationality }: { nationality: string }) {
     );
   }
 
-  return <FlagIcon title={nationality} className="h-7 w-10 rounded-[0.35rem] shadow-md shadow-black/30" />;
+  return (
+    <FlagIcon
+      title={nationality}
+      className="h-5 w-7 rounded-[0.35rem] shadow-md shadow-black/30 sm:h-7 sm:w-10"
+    />
+  );
 }
 
 export default function SquadBlueprintClient() {
@@ -225,13 +230,17 @@ export default function SquadBlueprintClient() {
   const renderPitchSlot = (cell: FormationCell & { slot: (typeof challenge.slots)[number] | null }) => {
     if (cell.slot && revealedSlotIds.has(cell.id)) {
       return (
-        <div className="mx-auto flex h-28 w-24 flex-col items-center justify-center rounded-[1.4rem] border border-white/15 bg-black/30 p-3 text-center shadow-lg shadow-black/20 backdrop-blur-sm sm:h-32 sm:w-28">
-          <div className="text-[10px] uppercase tracking-[0.24em] text-cyan-100/80">{cell.label}</div>
-          <div className="mt-2">
+        <div className="mx-auto flex h-20 w-16 flex-col items-center justify-center rounded-[1rem] border border-white/15 bg-black/30 p-2 text-center shadow-lg shadow-black/20 backdrop-blur-sm sm:h-32 sm:w-28 sm:rounded-[1.4rem] sm:p-3">
+          <div className="text-[8px] uppercase tracking-[0.16em] text-cyan-100/80 sm:text-[10px] sm:tracking-[0.24em]">
+            {cell.label}
+          </div>
+          <div className="mt-1.5 sm:mt-2">
             <NationalityFlag nationality={cell.slot.nationality} />
           </div>
-          <div className="mt-2 text-2xl font-bold leading-none text-white">{cell.slot.age}</div>
-          <div className="mt-1 text-[11px] uppercase tracking-[0.22em] text-cyan-200">
+          <div className="mt-1.5 text-lg font-bold leading-none text-white sm:mt-2 sm:text-2xl">
+            {cell.slot.age}
+          </div>
+          <div className="mt-1 text-[9px] uppercase tracking-[0.14em] text-cyan-200 sm:text-[11px] sm:tracking-[0.22em]">
             {getSubPositionShortName(cell.slot.subPosition)}
           </div>
         </div>
@@ -240,37 +249,43 @@ export default function SquadBlueprintClient() {
 
     if (cell.slot) {
       return (
-        <div className="mx-auto flex h-28 w-24 flex-col items-center justify-center rounded-[1.4rem] border border-dashed border-cyan-200/25 bg-black/20 p-3 text-center shadow-lg shadow-black/10 backdrop-blur-sm sm:h-32 sm:w-28">
-          <div className="text-[10px] uppercase tracking-[0.24em] text-cyan-100/60">{cell.label}</div>
-          <div className="mt-3 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-lg font-semibold text-cyan-100/80">
+        <div className="mx-auto flex h-20 w-16 flex-col items-center justify-center rounded-[1rem] border border-dashed border-cyan-200/25 bg-black/20 p-2 text-center shadow-lg shadow-black/10 backdrop-blur-sm sm:h-32 sm:w-28 sm:rounded-[1.4rem] sm:p-3">
+          <div className="text-[8px] uppercase tracking-[0.16em] text-cyan-100/60 sm:text-[10px] sm:tracking-[0.24em]">
+            {cell.label}
+          </div>
+          <div className="mt-2 flex h-7 w-7 items-center justify-center rounded-full border border-white/10 bg-white/5 text-base font-semibold text-cyan-100/80 sm:mt-3 sm:h-10 sm:w-10 sm:text-lg">
             ?
           </div>
-          <div className="mt-2 text-[10px] uppercase tracking-[0.22em] text-cyan-200/70">Hidden clue</div>
+          <div className="mt-1.5 text-[8px] uppercase tracking-[0.12em] text-cyan-200/70 sm:mt-2 sm:text-[10px] sm:tracking-[0.22em]">
+            Hidden clue
+          </div>
         </div>
       );
     }
 
     return (
-      <div className="mx-auto flex h-24 w-20 flex-col items-center justify-center rounded-[1.4rem] border border-dashed border-white/10 bg-white/5 p-3 text-center sm:h-28 sm:w-24">
-        <div className="text-[10px] uppercase tracking-[0.24em] text-gray-500">{cell.label}</div>
-        <div className="mt-2 h-8 w-8 rounded-full border border-white/10 bg-white/5" />
+      <div className="mx-auto flex h-16 w-14 flex-col items-center justify-center rounded-[1rem] border border-dashed border-white/10 bg-white/5 p-2 text-center sm:h-28 sm:w-24 sm:rounded-[1.4rem] sm:p-3">
+        <div className="text-[8px] uppercase tracking-[0.16em] text-gray-500 sm:text-[10px] sm:tracking-[0.24em]">
+          {cell.label}
+        </div>
+        <div className="mt-1.5 h-6 w-6 rounded-full border border-white/10 bg-white/5 sm:mt-2 sm:h-8 sm:w-8" />
       </div>
     );
   };
 
   const renderFormationBoard = () => (
-    <div className="relative overflow-hidden rounded-[2rem] border border-emerald-500/20 bg-[radial-gradient(circle_at_top,_rgba(52,211,153,0.22),_transparent_36%),linear-gradient(180deg,rgba(7,89,55,0.95),rgba(3,7,18,0.96))] p-4 shadow-2xl shadow-emerald-950/30 sm:p-6">
-      <div className="absolute inset-4 rounded-[1.7rem] border border-white/10 sm:inset-6" />
-      <div className="absolute left-1/2 top-6 bottom-6 w-px -translate-x-1/2 bg-white/10" />
-      <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 sm:h-28 sm:w-28" />
-      <div className="absolute inset-x-[18%] top-6 h-12 rounded-b-[1.5rem] border-x border-b border-white/10 sm:inset-x-[24%]" />
-      <div className="absolute inset-x-[18%] bottom-6 h-12 rounded-t-[1.5rem] border-x border-t border-white/10 sm:inset-x-[24%]" />
-      <div className="relative flex min-h-[33rem] flex-col justify-between gap-5 py-4 sm:min-h-[38rem] sm:py-6">
+    <div className="relative overflow-hidden rounded-[1.5rem] border border-emerald-500/20 bg-[radial-gradient(circle_at_top,_rgba(52,211,153,0.22),_transparent_36%),linear-gradient(180deg,rgba(7,89,55,0.95),rgba(3,7,18,0.96))] p-2 shadow-2xl shadow-emerald-950/30 sm:rounded-[2rem] sm:p-6">
+      <div className="absolute inset-2 rounded-[1.2rem] border border-white/10 sm:inset-6 sm:rounded-[1.7rem]" />
+      <div className="absolute left-1/2 top-3 bottom-3 w-px -translate-x-1/2 bg-white/10 sm:top-6 sm:bottom-6" />
+      <div className="absolute left-1/2 top-1/2 h-16 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 sm:h-28 sm:w-28" />
+      <div className="absolute inset-x-[16%] top-3 h-9 rounded-b-[1rem] border-x border-b border-white/10 sm:inset-x-[24%] sm:top-6 sm:h-12 sm:rounded-b-[1.5rem]" />
+      <div className="absolute inset-x-[16%] bottom-3 h-9 rounded-t-[1rem] border-x border-t border-white/10 sm:inset-x-[24%] sm:bottom-6 sm:h-12 sm:rounded-t-[1.5rem]" />
+      <div className="relative flex min-h-[24rem] flex-col justify-between gap-3 py-3 sm:min-h-[38rem] sm:gap-5 sm:py-6">
         {formationRows.map((row, rowIndex) => (
           <div
             key={`row-${rowIndex}`}
             className={`flex items-center justify-center ${
-              row.length === 4 ? 'gap-3 sm:gap-5' : row.length === 3 ? 'gap-4 sm:gap-8' : 'gap-0'
+              row.length === 4 ? 'gap-1.5 sm:gap-5' : row.length === 3 ? 'gap-2 sm:gap-8' : 'gap-0'
             }`}
           >
             {row.map((cell) => (
