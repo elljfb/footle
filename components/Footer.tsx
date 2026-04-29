@@ -10,6 +10,10 @@ export default function Footer() {
   return (
     <>
       <footer className="py-4 text-center text-sm text-gray-500">
+        <Link href="/about" className="hover:text-gray-700">
+          About
+        </Link>
+        {' | '}
         <button
           onClick={() => setShowAdvertise(true)}
           className="transition-colors hover:text-gray-700"
