@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import CustomGameClient from './CustomGameClient';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slugLabel = params.slug.replace(/-/g, ' ');
+  const { slug } = await params;
+  const slugLabel = slug.replace(/-/g, ' ');
   const title = `Footle Custom - ${slugLabel}`;
   const description = 'Play a shared custom Footle challenge.';
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: `https://footle.club/custom/${params.slug}`,
+      url: `https://footle.club/custom/${slug}`,
       siteName: 'Footle',
       images: [{ url: '/og-image.png' }],
     },
@@ -29,7 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function CustomGamePage({ params }: Props) {
-  return <CustomGameClient slug={params.slug} />;
+export default async function CustomGamePage({ params }: Props) {
+  const { slug } = await params;
+
+  return <CustomGameClient slug={slug} />;
 }
 
