@@ -16,6 +16,7 @@ type Phase = 'intro' | 'memorize' | 'choose' | 'feedback' | 'complete';
 const ROUND_COUNT = 5;
 const REMEMBER_SECONDS = 5;
 const BEST_SCORE_KEY = 'footle_recall_best_score';
+const LEADERBOARD_SCORE_MULTIPLIER = 10;
 
 function PlayerStatCard({ player }: { player: Player }) {
   const rows = [
@@ -93,12 +94,20 @@ function ResultStrip({ guesses }: { guesses: MemoryGuess[] }) {
                 : 'border-gray-700 bg-gray-800 text-gray-500'
             }`}
           >
-            {guess ? guess.score : index + 1}
+            {guess ? formatScore(guess.score) : index + 1}
           </div>
         );
       })}
     </div>
   );
+}
+
+function roundToOneDecimal(value: number): number {
+  return Math.round(value * 10) / 10;
+}
+
+function formatScore(score: number): string {
+  return score.toFixed(1);
 }
 
 export default function MemoryClient() {
@@ -115,9 +124,10 @@ export default function MemoryClient() {
   const currentRound = rounds[roundIndex];
   const latestGuess = guesses[guesses.length - 1];
   const totalScore = useMemo(
-    () => guesses.reduce((sum, guess) => sum + guess.score, 0),
+    () => roundToOneDecimal(guesses.reduce((sum, guess) => sum + guess.score, 0)),
     [guesses]
   );
+  const leaderboardScore = Math.round(totalScore * LEADERBOARD_SCORE_MULTIPLIER);
 
   useEffect(() => {
     const savedBest = localStorage.getItem(BEST_SCORE_KEY);
@@ -205,12 +215,10 @@ export default function MemoryClient() {
   };
 
   const generateShareText = () => {
-    const scores = guesses.map((guess) => guess.score).join(' ');
-
     return [
-      `Footle Recall - ${totalScore}/50`,
+      `Footle Recall - ${formatScore(totalScore)}/50`,
       '',
-      `Rounds: ${scores}`,
+      `Rounds: ${guesses.map((guess) => formatScore(guess.score)).join(' ')}`,
       '',
       'https://footle.club/recall',
     ].join('\n');
@@ -283,7 +291,7 @@ export default function MemoryClient() {
               </div>
               <div className="col-span-3 rounded-lg bg-gray-900/70 p-4">
                 <div className="text-sm uppercase tracking-[0.2em] text-gray-500">Your best</div>
-                <div className="mt-2 text-2xl font-bold text-white">{bestScore ?? '-'}/50</div>
+                <div className="mt-2 text-2xl font-bold text-white">{bestScore === null ? '-' : formatScore(bestScore)}/50</div>
               </div>
             </div>
           </div>
@@ -305,7 +313,7 @@ export default function MemoryClient() {
           <div className="grid grid-cols-3 gap-2 rounded-lg bg-gray-800/70 p-2 text-center sm:gap-4 sm:p-4">
             <div>
               <div className="text-[10px] uppercase tracking-[0.16em] text-gray-500 sm:text-xs">Score</div>
-              <div className="mt-1 text-lg font-bold text-white sm:text-2xl">{totalScore}/50</div>
+              <div className="mt-1 text-lg font-bold text-white sm:text-2xl">{formatScore(totalScore)}/50</div>
             </div>
             <div>
               <div className="text-[10px] uppercase tracking-[0.16em] text-gray-500 sm:text-xs">Phase</div>
@@ -333,7 +341,7 @@ export default function MemoryClient() {
           {phase === 'feedback' && latestGuess && (
             <section className="rounded-lg bg-gray-800 p-4 text-center sm:p-6">
               <h2 className="text-2xl font-bold text-white sm:text-3xl">
-                {latestGuess.score === 10 ? 'Correct' : `${latestGuess.score}/10`}
+                {latestGuess.score === 10 ? 'Correct' : `${formatScore(latestGuess.score)}/10`}
               </h2>
               <p className="mt-2 text-sm text-gray-300 sm:mt-3 sm:text-base">
                 The player was <span className="font-semibold text-white">{latestGuess.target.name}</span>.
@@ -387,7 +395,7 @@ export default function MemoryClient() {
       {phase === 'complete' && startTime && endTime && (
         <section className="space-y-6">
           <div className="rounded-lg bg-gray-800 p-6 text-center">
-            <h2 className="text-4xl font-bold text-white">{totalScore}/50</h2>
+            <h2 className="text-4xl font-bold text-white">{formatScore(totalScore)}/50</h2>
             <p className="mt-3 text-gray-300">
               Finished in {Math.max(1, Math.floor((endTime - startTime) / 1000))} seconds.
               {bestScore === totalScore ? ' New personal best.' : ''}
@@ -424,7 +432,7 @@ export default function MemoryClient() {
           <Leaderboard
             key={`${startTime}-${endTime}`}
             gameType="recall"
-            guesses={totalScore}
+            guesses={leaderboardScore}
             time={Math.max(1, Math.floor((endTime - startTime) / 1000))}
             showSubmitForm={true}
             scoreLabel="Score"
@@ -435,6 +443,8 @@ export default function MemoryClient() {
             leaderboardTitle="Recall Leaderboard"
             leaderboardFooter="All-time Recall scores. Higher scores rank first; time breaks ties."
             allowMultipleSubmissions={true}
+            scoreDisplayDivisor={LEADERBOARD_SCORE_MULTIPLIER}
+            scorePrecision={1}
           />
 
           <section>
@@ -448,7 +458,7 @@ export default function MemoryClient() {
                       <div className="font-semibold text-white">{guess.target.name}</div>
                     </div>
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-white">{guess.score}/10</div>
+                      <div className="text-2xl font-bold text-white">{formatScore(guess.score)}/10</div>
                       <div className="text-sm text-gray-400">picked {guess.selected.name}</div>
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 import { players } from '../data/players';
 import { Player } from '../types/player';
+import { areInSameContinent } from '../utils/continents';
 
 export interface MemoryRound {
   id: string;
@@ -133,8 +134,23 @@ export function scoreMemoryGuess(target: Player, selected: Player): number {
     return 10;
   }
 
-  const distance = getPlayerSimilarityDistance(target, selected);
-  return Math.max(1, Math.min(9, Math.round(9 - distance * 1.8)));
+  const targetAge = calculateAge(target.dateOfBirth);
+  const selectedAge = calculateAge(selected.dateOfBirth);
+  const ageDiff = Math.abs(targetAge - selectedAge);
+  const heightDiff = Math.abs(target.height - selected.height);
+  const samePosition = target.position === selected.position;
+
+  const score =
+    getCategoricalScore(target.position, selected.position, 1.4) +
+    getSubPositionScore(target, selected, 1.4) +
+    getRangeScore(ageDiff, 1.5, 8) +
+    getNationalityScore(target, selected, 1.2) +
+    getCategoricalScore(target.league, selected.league, 1.3) +
+    getRangeScore(heightDiff, 1.2, 15) +
+    getFootScore(target, selected, 1);
+
+  const wrongAnswerCap = samePosition ? 9.8 : 8.6;
+  return roundToOneDecimal(Math.max(0, Math.min(wrongAnswerCap, score)));
 }
 
 export function createMemoryGame(roundCount = ROUND_COUNT): MemoryRound[] {
@@ -170,4 +186,52 @@ export function createMemoryGame(roundCount = ROUND_COUNT): MemoryRound[] {
 
 export function getPlayerAge(player: Player): number {
   return calculateAge(player.dateOfBirth);
+}
+
+function getCategoricalScore<T>(target: T, selected: T, weight: number): number {
+  return target === selected ? weight : 0;
+}
+
+function getSubPositionScore(target: Player, selected: Player, weight: number): number {
+  if (target.subPosition === selected.subPosition) {
+    return weight;
+  }
+
+  if (target.position === selected.position) {
+    return weight * 0.35;
+  }
+
+  return 0;
+}
+
+function getRangeScore(diff: number, weight: number, maxUsefulDiff: number): number {
+  if (diff === 0) {
+    return weight;
+  }
+
+  if (diff >= maxUsefulDiff) {
+    return 0;
+  }
+
+  return weight * Math.pow(1 - diff / maxUsefulDiff, 1.2);
+}
+
+function getNationalityScore(target: Player, selected: Player, weight: number): number {
+  if (target.nationality === selected.nationality) {
+    return weight;
+  }
+
+  return areInSameContinent(target.nationality, selected.nationality) ? weight * 0.35 : 0;
+}
+
+function getFootScore(target: Player, selected: Player, weight: number): number {
+  if (target.foot === selected.foot) {
+    return weight;
+  }
+
+  return target.foot === 'Both' || selected.foot === 'Both' ? weight * 0.45 : 0;
+}
+
+function roundToOneDecimal(value: number): number {
+  return Math.round(value * 10) / 10;
 }

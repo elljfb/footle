@@ -25,6 +25,8 @@ interface Props {
   leaderboardTitle?: string;
   leaderboardFooter?: string;
   allowMultipleSubmissions?: boolean;
+  scoreDisplayDivisor?: number;
+  scorePrecision?: number;
 }
 
 export default function Leaderboard({
@@ -41,6 +43,8 @@ export default function Leaderboard({
   leaderboardTitle,
   leaderboardFooter,
   allowMultipleSubmissions = false,
+  scoreDisplayDivisor = 1,
+  scorePrecision = 0,
 }: Props) {
   const isCustomGame = gameType.startsWith('custom:');
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
@@ -125,6 +129,10 @@ export default function Leaderboard({
   };
 
   const rank = getUserRank();
+  const formatScoreValue = (value: number) => {
+    const displayValue = value / scoreDisplayDivisor;
+    return scorePrecision > 0 ? displayValue.toFixed(scorePrecision) : String(displayValue);
+  };
 
   return (
     <div className="bg-gray-800 rounded-lg p-6">
@@ -137,7 +145,7 @@ export default function Leaderboard({
           {!showForm ? (
             <div className="text-center">
               <p className="text-gray-300 mb-3">
-                Great job! You completed the game in <span className="font-bold text-white">{guesses}</span>{' '}
+                Great job! You completed the game in <span className="font-bold text-white">{formatScoreValue(guesses)}</span>{' '}
                 {guesses === 1 ? scoreLabelSingular : scoreLabelPlural} and <span className="font-bold text-white">{formatTime(time)}</span>
               </p>
               <button
@@ -251,7 +259,7 @@ export default function Leaderboard({
                       {isCurrentUser && ' (You)'}
                     </td>
                     <td className="py-2 px-2 text-center text-gray-300">
-                      {entry.guesses}
+                      {formatScoreValue(entry.guesses)}
                     </td>
                     <td className="py-2 px-2 text-center text-gray-300">
                       {formatTime(entry.time)}

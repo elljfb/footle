@@ -45,8 +45,9 @@ export default function RecallPage() {
         <div className="space-y-3">
           <h2 className="text-2xl font-bold text-white">How Scoring Works</h2>
           <p>
-            A correct answer scores 10 points. Wrong answers still earn points based on how similar that player is to the
-            target, with five rounds making a maximum score of 50.
+            A correct answer scores 10 points. Wrong answers earn decimal points from the visible stat matches:
+            position, role, age, nationality, league, height, and foot all contribute, with age and height fading by distance.
+            Five rounds make a maximum score of 50.
           </p>
         </div>
       </section>
