@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import FilterHuntClient from '../filter-hunt/FilterHuntClient';
 
 export const metadata: Metadata = {
-  title: 'Shortlist: Football Player Elimination Challenge',
+  title: 'Shortlist - Football Player Elimination Challenge',
   description:
     'Play Shortlist, the football player elimination challenge where you clear a 20-player board using league, age, position, nationality, and other clues.',
   alternates: {
     canonical: '/shortlist',
   },
   openGraph: {
-    title: 'Shortlist: Football Player Elimination Challenge',
+    title: 'Shortlist - Football Player Elimination Challenge',
     description: 'A fast football player elimination game where every instruction helps narrow the shortlist.',
     url: 'https://footle.club/shortlist',
     siteName: 'Footle',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Shortlist: Football Player Elimination Challenge',
+    title: 'Shortlist - Football Player Elimination Challenge',
     description: 'Follow the football filters, eliminate the board, and leave just one player standing.',
     images: ['/og-image.png'],
   },

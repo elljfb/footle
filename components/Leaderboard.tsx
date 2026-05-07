@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { LeaderboardEntry } from '../types/game';
 import {
+  LeaderboardScope,
+  LeaderboardSort,
   getLeaderboard,
   saveToLeaderboard,
   hasSubmittedToday,
@@ -18,6 +20,13 @@ interface Props {
   scoreLabel?: string;
   scoreLabelSingular?: string;
   scoreLabelPlural?: string;
+  scoreSort?: LeaderboardSort;
+  leaderboardScope?: LeaderboardScope;
+  leaderboardTitle?: string;
+  leaderboardFooter?: string;
+  allowMultipleSubmissions?: boolean;
+  scoreDisplayDivisor?: number;
+  scorePrecision?: number;
 }
 
 export default function Leaderboard({
@@ -29,6 +38,13 @@ export default function Leaderboard({
   scoreLabel = 'Guesses',
   scoreLabelSingular = 'guess',
   scoreLabelPlural = 'guesses',
+  scoreSort = 'asc',
+  leaderboardScope,
+  leaderboardTitle,
+  leaderboardFooter,
+  allowMultipleSubmissions = false,
+  scoreDisplayDivisor = 1,
+  scorePrecision = 0,
 }: Props) {
   const isCustomGame = gameType.startsWith('custom:');
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
@@ -41,14 +57,17 @@ export default function Leaderboard({
 
   useEffect(() => {
     loadLeaderboard();
-    setHasSubmitted(hasSubmittedToday(gameType));
-  }, [gameType]);
+    setHasSubmitted(allowMultipleSubmissions ? false : hasSubmittedToday(gameType));
+  }, [allowMultipleSubmissions, gameType, leaderboardScope, scoreSort]);
 
   const loadLeaderboard = async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await getLeaderboard(gameType);
+      const data = await getLeaderboard(gameType, {
+        scope: leaderboardScope,
+        sort: scoreSort,
+      });
       setLeaderboard(data);
     } catch (err) {
       console.error('Error loading leaderboard:', err);
@@ -75,7 +94,9 @@ export default function Leaderboard({
     setError(null);
 
     try {
-      await saveToLeaderboard(gameType, nickname.trim(), guesses, time);
+      await saveToLeaderboard(gameType, nickname.trim(), guesses, time, {
+        markSubmitted: !allowMultipleSubmissions,
+      });
       setHasSubmitted(true);
       setShowForm(false);
       await loadLeaderboard();
@@ -96,7 +117,7 @@ export default function Leaderboard({
 
     const sorted = [...leaderboard].sort((a, b) => {
       if (a.guesses !== b.guesses) {
-        return a.guesses - b.guesses;
+        return scoreSort === 'desc' ? b.guesses - a.guesses : a.guesses - b.guesses;
       }
       return a.time - b.time;
     });
@@ -108,17 +129,23 @@ export default function Leaderboard({
   };
 
   const rank = getUserRank();
+  const formatScoreValue = (value: number) => {
+    const displayValue = value / scoreDisplayDivisor;
+    return scorePrecision > 0 ? displayValue.toFixed(scorePrecision) : String(displayValue);
+  };
 
   return (
     <div className="bg-gray-800 rounded-lg p-6">
-      <h2 className="text-2xl font-bold mb-4 text-center">{isCustomGame ? 'Challenge Leaderboard' : "Today's Leaderboard"}</h2>
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        {leaderboardTitle ?? (isCustomGame ? 'Challenge Leaderboard' : "Today's Leaderboard")}
+      </h2>
 
       {showSubmitForm && !hasSubmitted && (
         <div className="mb-6 p-4 bg-gray-700 rounded-lg">
           {!showForm ? (
             <div className="text-center">
               <p className="text-gray-300 mb-3">
-                Great job! You completed the game in <span className="font-bold text-white">{guesses}</span>{' '}
+                Great job! You completed the game in <span className="font-bold text-white">{formatScoreValue(guesses)}</span>{' '}
                 {guesses === 1 ? scoreLabelSingular : scoreLabelPlural} and <span className="font-bold text-white">{formatTime(time)}</span>
               </p>
               <button
@@ -232,7 +259,7 @@ export default function Leaderboard({
                       {isCurrentUser && ' (You)'}
                     </td>
                     <td className="py-2 px-2 text-center text-gray-300">
-                      {entry.guesses}
+                      {formatScoreValue(entry.guesses)}
                     </td>
                     <td className="py-2 px-2 text-center text-gray-300">
                       {formatTime(entry.time)}
@@ -246,7 +273,7 @@ export default function Leaderboard({
       )}
 
       <p className="text-xs text-gray-500 text-center mt-4">
-        {isCustomGame ? 'Scores are saved for this challenge link' : 'Leaderboard resets daily at midnight'}
+        {leaderboardFooter ?? (isCustomGame ? 'Scores are saved for this challenge link' : 'Leaderboard resets daily at midnight')}
       </p>
     </div>
   );

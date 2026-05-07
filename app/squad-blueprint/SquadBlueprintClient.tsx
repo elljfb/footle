@@ -303,7 +303,7 @@ export default function SquadBlueprintClient() {
     <div className="space-y-8">
       <header className="text-center space-y-3">
         <p className="text-sm uppercase tracking-[0.28em] text-cyan-300">New mode</p>
-        <h1 className="text-4xl md:text-5xl font-bold">Squadle: The Daily Starting XI Guessing Game</h1>
+        <h1 className="text-4xl md:text-5xl font-bold">Squadle - The Daily Starting XI Guessing Game</h1>
         <p className="mx-auto max-w-2xl text-gray-300">
           Work out the club from a stripped-back starting XI. Only a few clue cards are revealed.
         </p>

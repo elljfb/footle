@@ -72,6 +72,12 @@ export default function Home() {
       accent: 'border-emerald-500/30 text-emerald-200',
     },
     {
+      href: '/recall',
+      title: 'Recall',
+      description: 'Memorise stats, then pick the player',
+      accent: 'border-indigo-500/30 text-indigo-200',
+    },
+    {
       href: '/transfer-generator',
       title: 'Transfer Generator',
       description: 'Create fake transfer rumors to share',

@@ -56,6 +56,13 @@ const gameModes = [
     accent: 'border-rose-500/30 text-rose-200',
   },
   {
+    href: '/recall',
+    title: 'Recall',
+    description:
+      'Memorise a footballer profile for five seconds, then choose from ten similar players.',
+    accent: 'border-indigo-500/30 text-indigo-200',
+  },
+  {
     href: '/archive',
     title: 'Archive',
     description:

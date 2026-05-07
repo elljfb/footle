@@ -171,7 +171,7 @@ export default function FilterHuntClient() {
     <div className="space-y-8">
       <header className="text-center space-y-3">
         <p className="text-sm uppercase tracking-[0.28em] text-emerald-300">New mode</p>
-        <h1 className="text-4xl md:text-5xl font-bold">Shortlist: Football Player Elimination Challenge</h1>
+        <h1 className="text-4xl md:text-5xl font-bold">Shortlist - Football Player Elimination Challenge</h1>
         <p className="mx-auto max-w-2xl text-gray-300">
           A fast elimination puzzle. Read each instruction, click the players who match it, and narrow the board to one survivor.
         </p>
