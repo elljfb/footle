@@ -66,6 +66,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2"></script>
+        <script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" async></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `

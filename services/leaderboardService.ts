@@ -3,6 +3,15 @@ import { supabase } from '../lib/supabase';
 
 const LEADERBOARD_KEY_PREFIX = 'footle_leaderboard';
 
+export type LeaderboardScope = 'daily' | 'allTime';
+export type LeaderboardSort = 'asc' | 'desc';
+
+interface LeaderboardOptions {
+  scope?: LeaderboardScope;
+  sort?: LeaderboardSort;
+  markSubmitted?: boolean;
+}
+
 function isCustomGameType(gameType: string): boolean {
   return gameType.startsWith('custom:');
 }
@@ -15,7 +24,8 @@ export async function saveToLeaderboard(
   gameType: string,
   nickname: string,
   guesses: number,
-  time: number
+  time: number,
+  options: LeaderboardOptions = {}
 ): Promise<void> {
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
   
@@ -36,25 +46,29 @@ export async function saveToLeaderboard(
     throw error;
   }
 
-  // Mark as submitted in localStorage
-  if (typeof window !== 'undefined') {
+  // Mark as submitted in localStorage unless the caller allows multiple entries.
+  if (typeof window !== 'undefined' && options.markSubmitted !== false) {
     const key = `${LEADERBOARD_KEY_PREFIX}_submitted_${gameType}`;
     const submittedValue = isCustomGameType(gameType) ? 'true' : today;
     localStorage.setItem(key, submittedValue);
   }
 }
 
-export async function getLeaderboard(gameType: string): Promise<LeaderboardEntry[]> {
+export async function getLeaderboard(
+  gameType: string,
+  options: LeaderboardOptions = {}
+): Promise<LeaderboardEntry[]> {
   const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
   const query = supabase
     .from('leaderboard')
     .select('*')
     .eq('game_type', gameType);
 
-  const scopedQuery = isCustomGameType(gameType) ? query : query.eq('date', today);
+  const scope = options.scope ?? (isCustomGameType(gameType) ? 'allTime' : 'daily');
+  const scopedQuery = scope === 'allTime' ? query : query.eq('date', today);
 
   const { data, error } = await scopedQuery
-    .order('guesses', { ascending: true })
+    .order('guesses', { ascending: options.sort !== 'desc' })
     .order('time', { ascending: true })
     .limit(100);
 

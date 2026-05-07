@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import SquadBlueprintClient from '../squad-blueprint/SquadBlueprintClient';
 
 export const metadata: Metadata = {
-  title: 'Squadle: The Daily Starting XI Guessing Game',
+  title: 'Squadle - The Daily Starting XI Guessing Game',
   description:
     'Play Squadle, the daily starting XI guessing game where you identify the football club from flags, ages, positions, and lineup clues.',
   alternates: {
     canonical: '/squadle',
   },
   openGraph: {
-    title: 'Squadle: The Daily Starting XI Guessing Game',
+    title: 'Squadle - The Daily Starting XI Guessing Game',
     description: 'A daily football club guessing game built around a clue-based starting XI layout.',
     url: 'https://footle.club/squadle',
     siteName: 'Footle',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Squadle: The Daily Starting XI Guessing Game',
+    title: 'Squadle - The Daily Starting XI Guessing Game',
     description: 'Guess the football club from a clue-based starting XI with flags, ages, and positions.',
     images: ['/og-image.png'],
   },
