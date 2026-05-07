@@ -29,21 +29,21 @@ function PlayerStatCard({ player }: { player: Player }) {
   ];
 
   return (
-    <section className="rounded-lg bg-gray-800 p-5 shadow-lg">
-      <div className="mb-4 flex items-center justify-between gap-3">
+    <section className="rounded-lg bg-gray-800 p-3 shadow-lg sm:p-5">
+      <div className="mb-3 flex items-center justify-between gap-3 sm:mb-4">
         <div>
-          <div className="text-xs uppercase tracking-[0.2em] text-blue-300">Remember this profile</div>
-          <h2 className="mt-1 text-2xl font-bold text-white">Mystery Player</h2>
+          <div className="text-[10px] uppercase tracking-[0.18em] text-blue-300 sm:text-xs">Remember this profile</div>
+          <h2 className="mt-1 text-xl font-bold text-white sm:text-2xl">Mystery Player</h2>
         </div>
-        <div className="rounded-lg bg-gray-900 px-3 py-2 text-sm font-semibold text-gray-300">
+        <div className="rounded-lg bg-gray-900 px-3 py-1.5 text-sm font-semibold text-gray-300 sm:py-2">
           Live
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+      <div className="grid grid-cols-2 gap-2 sm:gap-3">
         {rows.map((row) => (
-          <div key={row.label} className="rounded-lg bg-gray-700 p-3">
-            <div className="text-sm font-medium text-gray-300">{row.label}</div>
-            <div className="mt-1 font-bold text-white">{row.value}</div>
+          <div key={row.label} className="rounded-lg bg-gray-700 p-2 sm:p-3">
+            <div className="text-[11px] font-medium text-gray-300 sm:text-sm">{row.label}</div>
+            <div className="mt-0.5 break-words text-sm font-bold leading-tight text-white sm:mt-1 sm:text-base">{row.value}</div>
           </div>
         ))}
       </div>
@@ -53,22 +53,22 @@ function PlayerStatCard({ player }: { player: Player }) {
 
 function PlayerOptionStats({ player }: { player: Player }) {
   const stats = [
-    { label: 'Position', value: player.position },
+    { label: 'Pos', value: player.position },
     { label: 'Role', value: player.subPosition },
     { label: 'Age', value: getPlayerAge(player) },
-    { label: 'Nationality', value: player.nationality },
-    { label: 'League', value: player.league },
-    { label: 'Height', value: `${player.height}cm` },
+    { label: 'Nat', value: player.nationality },
+    { label: 'Lge', value: player.league },
+    { label: 'Hgt', value: `${player.height}cm` },
     { label: 'Foot', value: player.foot },
   ];
 
   return (
-    <div className="mt-3 grid grid-cols-2 gap-2 text-xs sm:grid-cols-3">
+    <div className="mt-2 flex flex-wrap gap-1.5 text-[11px] leading-tight">
       {stats.map((stat) => (
-        <div key={stat.label} className="rounded bg-gray-900/60 px-2 py-1.5">
-          <div className="text-[10px] uppercase tracking-[0.12em] text-gray-500">{stat.label}</div>
-          <div className="mt-0.5 font-semibold leading-tight text-gray-200">{stat.value}</div>
-        </div>
+        <span key={stat.label} className="max-w-full rounded bg-gray-900/60 px-1.5 py-1 text-gray-200">
+          <span className="text-gray-500">{stat.label}: </span>
+          <span className="font-semibold">{stat.value}</span>
+        </span>
       ))}
     </div>
   );
@@ -83,7 +83,7 @@ function ResultStrip({ guesses }: { guesses: MemoryGuess[] }) {
         return (
           <div
             key={index}
-            className={`flex h-10 w-10 items-center justify-center rounded-lg border text-sm font-bold ${
+            className={`flex h-8 w-8 items-center justify-center rounded-lg border text-xs font-bold sm:h-10 sm:w-10 sm:text-sm ${
               guess
                 ? guess.score === 10
                   ? 'border-green-400 bg-green-500/20 text-green-200'
@@ -123,6 +123,14 @@ export default function MemoryClient() {
     const savedBest = localStorage.getItem(BEST_SCORE_KEY);
     setBestScore(savedBest ? Number(savedBest) : null);
   }, []);
+
+  useEffect(() => {
+    if (phase === 'intro') {
+      return;
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [phase, roundIndex]);
 
   useEffect(() => {
     if (phase !== 'memorize') {
@@ -285,29 +293,29 @@ export default function MemoryClient() {
   }
 
   return (
-    <main className="space-y-6">
-      <header className="space-y-4 text-center">
-        <p className="text-sm uppercase tracking-[0.24em] text-blue-300">Footle Recall</p>
-        <h1 className="text-4xl font-bold text-white">Round {Math.min(roundIndex + 1, ROUND_COUNT)} of {ROUND_COUNT}</h1>
+    <main className="space-y-3 sm:space-y-6">
+      <header className="space-y-2 text-center sm:space-y-4">
+        <p className="text-xs uppercase tracking-[0.24em] text-blue-300 sm:text-sm">Footle Recall</p>
+        <h1 className="text-2xl font-bold text-white sm:text-4xl">Round {Math.min(roundIndex + 1, ROUND_COUNT)} of {ROUND_COUNT}</h1>
         <ResultStrip guesses={guesses} />
       </header>
 
       {currentRound && phase !== 'complete' && (
         <>
-          <div className="grid gap-4 rounded-lg bg-gray-800/70 p-4 text-center sm:grid-cols-3">
+          <div className="grid grid-cols-3 gap-2 rounded-lg bg-gray-800/70 p-2 text-center sm:gap-4 sm:p-4">
             <div>
-              <div className="text-xs uppercase tracking-[0.2em] text-gray-500">Score</div>
-              <div className="mt-1 text-2xl font-bold text-white">{totalScore}/50</div>
+              <div className="text-[10px] uppercase tracking-[0.16em] text-gray-500 sm:text-xs">Score</div>
+              <div className="mt-1 text-lg font-bold text-white sm:text-2xl">{totalScore}/50</div>
             </div>
             <div>
-              <div className="text-xs uppercase tracking-[0.2em] text-gray-500">Phase</div>
-              <div className="mt-1 text-2xl font-bold text-white">
+              <div className="text-[10px] uppercase tracking-[0.16em] text-gray-500 sm:text-xs">Phase</div>
+              <div className="mt-1 text-lg font-bold text-white sm:text-2xl">
                 {phase === 'memorize' ? 'Memorise' : phase === 'choose' ? 'Choose' : 'Result'}
               </div>
             </div>
             <div>
-              <div className="text-xs uppercase tracking-[0.2em] text-gray-500">Timer</div>
-              <div className="mt-1 text-2xl font-bold text-white">
+              <div className="text-[10px] uppercase tracking-[0.16em] text-gray-500 sm:text-xs">Timer</div>
+              <div className="mt-1 text-lg font-bold text-white sm:text-2xl">
                 {phase === 'memorize' ? `${countdown}s` : '-'}
               </div>
             </div>
@@ -316,19 +324,37 @@ export default function MemoryClient() {
           {phase === 'memorize' && (
             <>
               <PlayerStatCard player={currentRound.target} />
-              <p className="text-center text-gray-400">
+              <p className="text-center text-sm text-gray-400 sm:text-base">
                 Study the profile. The screen will switch to the answers when the timer hits zero.
               </p>
             </>
           )}
 
+          {phase === 'feedback' && latestGuess && (
+            <section className="rounded-lg bg-gray-800 p-4 text-center sm:p-6">
+              <h2 className="text-2xl font-bold text-white sm:text-3xl">
+                {latestGuess.score === 10 ? 'Correct' : `${latestGuess.score}/10`}
+              </h2>
+              <p className="mt-2 text-sm text-gray-300 sm:mt-3 sm:text-base">
+                The player was <span className="font-semibold text-white">{latestGuess.target.name}</span>.
+                {' '}You picked <span className="font-semibold text-white">{latestGuess.selected.name}</span>.
+              </p>
+              <button
+                onClick={handleNextRound}
+                className="mt-4 rounded-lg bg-blue-500 px-6 py-2 font-semibold text-white transition-colors hover:bg-blue-600 sm:mt-5"
+              >
+                {roundIndex >= rounds.length - 1 ? 'See final score' : 'Next round'}
+              </button>
+            </section>
+          )}
+
           {(phase === 'choose' || phase === 'feedback') && (
-            <section className="space-y-4">
+            <section className="space-y-3 sm:space-y-4">
               <div className="text-center">
-                <h2 className="text-xl font-semibold text-white">Who matched that profile?</h2>
-                <p className="mt-1 text-sm text-gray-400">Match the remembered stats to the closest card.</p>
+                <h2 className="text-lg font-semibold text-white sm:text-xl">Who matched that profile?</h2>
+                <p className="mt-1 text-xs text-gray-400 sm:text-sm">Match the remembered stats to the closest card.</p>
               </div>
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 {currentRound.options.map((player) => {
                   const isCorrect = player.id === currentRound.target.id;
                   const isSelected = latestGuess?.selected.id === player.id;
@@ -338,7 +364,7 @@ export default function MemoryClient() {
                       key={player.id}
                       onClick={() => handleSelectPlayer(player)}
                       disabled={phase !== 'choose'}
-                      className={`rounded-lg border p-4 text-left transition ${
+                      className={`rounded-lg border p-2 text-left transition sm:p-4 ${
                         phase === 'feedback' && isCorrect
                           ? 'border-green-400 bg-green-500/20 text-green-100'
                           : phase === 'feedback' && isSelected
@@ -346,7 +372,7 @@ export default function MemoryClient() {
                             : 'border-gray-700 bg-gray-800 text-white hover:border-blue-400 hover:bg-gray-700 disabled:hover:border-gray-700 disabled:hover:bg-gray-800'
                       }`}
                     >
-                      <div className="font-semibold">{player.name}</div>
+                      <div className="text-sm font-semibold leading-tight sm:text-base">{player.name}</div>
                       <PlayerOptionStats player={player} />
                     </button>
                   );
@@ -355,23 +381,6 @@ export default function MemoryClient() {
             </section>
           )}
 
-          {phase === 'feedback' && latestGuess && (
-            <section className="rounded-lg bg-gray-800 p-6 text-center">
-              <h2 className="text-3xl font-bold text-white">
-                {latestGuess.score === 10 ? 'Correct' : `${latestGuess.score}/10`}
-              </h2>
-              <p className="mt-3 text-gray-300">
-                The player was <span className="font-semibold text-white">{latestGuess.target.name}</span>.
-                {' '}You picked <span className="font-semibold text-white">{latestGuess.selected.name}</span>.
-              </p>
-              <button
-                onClick={handleNextRound}
-                className="mt-5 rounded-lg bg-blue-500 px-6 py-2 font-semibold text-white transition-colors hover:bg-blue-600"
-              >
-                {roundIndex >= rounds.length - 1 ? 'See final score' : 'Next round'}
-              </button>
-            </section>
-          )}
         </>
       )}
 
