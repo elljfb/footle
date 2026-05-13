@@ -162,6 +162,12 @@ export default function AboutPage() {
           >
             View Archive
           </Link>
+          <Link
+            href="https://buymeacoffee.com/footle"
+            className="rounded-lg bg-gray-700 px-5 py-3 font-semibold text-white transition-colors hover:bg-gray-600"
+          >
+            Buy us a Coffee ☕
+          </Link>
         </div>
       </section>
     </main>

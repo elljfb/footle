@@ -340,10 +340,10 @@ export default function LeagueClient({ slug }: Props) {
                       Share to Facebook
                     </button>
                     <button
-                      onClick={() => window.open('https://www.mystershirt.com/footle', '_blank', 'noopener,noreferrer')}
+                      onClick={() => window.open('https://buymeacoffee.com/footle', '_blank', 'noopener,noreferrer')}
                       className="bg-[#F28500] hover:bg-[##FFA500] text-white px-6 py-2 rounded-lg transition-colors"
                     >
-                      👕 Get a Mystery Football Shirt
+                      Buy us a Coffee ☕
                     </button>
                   </div>
                   {showShareConfirmation && (

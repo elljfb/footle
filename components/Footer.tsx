@@ -14,13 +14,9 @@ export default function Footer() {
           About
         </Link>
         {' | '}
-        <button
-          onClick={() => setShowAdvertise(true)}
-          className="transition-colors hover:text-gray-700"
-          type="button"
-        >
-          Advertise
-        </button>
+        <Link href="https://buymeacoffee.com/footle" className="hover:text-gray-700">
+          Buy us a Coffee ☕
+        </Link>
         {' | '}
         <Link href="/privacy" className="hover:text-gray-700">
           Privacy Policy
