@@ -370,6 +370,7 @@ export default function Home() {
                     <Link
                       key={card.href}
                       href={card.href}
+                      prefetch={false}
                       className={`rounded-xl border bg-gray-900/80 p-4 transition-all hover:bg-gray-800 hover:-translate-y-0.5 ${card.accent}`}
                     >
                       <p className="font-semibold text-white">{card.title}</p>

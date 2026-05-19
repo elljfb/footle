@@ -104,12 +104,14 @@ export default function TransferGeneratorClient() {
         <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/"
+            prefetch={false}
             className="rounded-xl bg-white px-6 py-3 font-semibold text-gray-900 transition-colors hover:bg-gray-200"
           >
             Play Now
           </Link>
           <Link
             href="/career"
+            prefetch={false}
             className="rounded-xl bg-gray-700 px-6 py-3 font-semibold text-white transition-colors hover:bg-gray-600"
           >
             Try Career Mode

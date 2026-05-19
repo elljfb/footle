@@ -121,6 +121,7 @@ export default function AboutPage() {
             <Link
               key={mode.href}
               href={mode.href}
+              prefetch={false}
               className={`rounded-xl border bg-gray-950/50 p-4 transition-all hover:-translate-y-0.5 hover:bg-gray-800 ${mode.accent}`}
             >
               <h3 className="font-semibold text-white">{mode.title}</h3>
@@ -152,12 +153,14 @@ export default function AboutPage() {
         <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
           <Link
             href="/"
+            prefetch={false}
             className="rounded-lg bg-blue-500 px-5 py-3 font-semibold text-white transition-colors hover:bg-blue-600"
           >
             Play Footle
           </Link>
           <Link
             href="/archive"
+            prefetch={false}
             className="rounded-lg bg-gray-800 px-5 py-3 font-semibold text-white transition-colors hover:bg-gray-700"
           >
             View Archive

@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <>
       <footer className="py-4 text-center text-sm text-gray-500">
-        <Link href="/about" className="hover:text-gray-700">
+        <Link href="/about" prefetch={false} className="hover:text-gray-700">
           About
         </Link>
         {' | '}
@@ -18,7 +18,7 @@ export default function Footer() {
           Buy us a Coffee ☕
         </Link>
         {' | '}
-        <Link href="/privacy" className="hover:text-gray-700">
+        <Link href="/privacy" prefetch={false} className="hover:text-gray-700">
           Privacy Policy
         </Link>
       </footer>

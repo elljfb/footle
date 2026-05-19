@@ -34,6 +34,7 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
             <Link
               key={league.slug}
               href={league.slug ? `/league/${league.slug}` : '/'}
+              prefetch={false}
               onClick={() => setOpen(false)}
               className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
             >
@@ -43,6 +44,7 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           <div className="my-1 border-t border-gray-700" />
           <Link
             href="/custom"
+            prefetch={false}
             onClick={() => setOpen(false)}
             className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
           >
@@ -50,6 +52,7 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           </Link>
           <Link
             href="/archive"
+            prefetch={false}
             onClick={() => setOpen(false)}
             className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
           >
@@ -57,6 +60,7 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           </Link>
           <Link
             href="/career"
+            prefetch={false}
             onClick={() => setOpen(false)}
             className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
           >
@@ -64,6 +68,7 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           </Link>
           <Link
             href="/squadle"
+            prefetch={false}
             onClick={() => setOpen(false)}
             className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
           >
@@ -71,6 +76,7 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           </Link>
           <Link
             href="/shortlist"
+            prefetch={false}
             onClick={() => setOpen(false)}
             className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
           >
@@ -78,6 +84,7 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           </Link>
           <Link
             href="/recall"
+            prefetch={false}
             onClick={() => setOpen(false)}
             className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
           >
@@ -85,6 +92,7 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
           </Link>
           <Link
             href="/transfer-generator"
+            prefetch={false}
             onClick={() => setOpen(false)}
             className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
           >
