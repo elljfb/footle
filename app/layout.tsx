@@ -65,6 +65,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script
+          data-grow-initializer=""
+          dangerouslySetInnerHTML={{
+            __html: `!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTo1NWQxYzk0ZS04YjEyLTQzMDctYTNhMC01NTZjNzA0YzllMDI=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();`,
+          }}
+        />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2"></script>
         <script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" async></script>
         <script
