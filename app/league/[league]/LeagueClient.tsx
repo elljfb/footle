@@ -339,12 +339,6 @@ export default function LeagueClient({ slug }: Props) {
                     >
                       Share to Facebook
                     </button>
-                    <button
-                      onClick={() => window.open('https://buymeacoffee.com/footle', '_blank', 'noopener,noreferrer')}
-                      className="bg-[#F28500] hover:bg-[##FFA500] text-white px-6 py-2 rounded-lg transition-colors"
-                    >
-                      Buy us a Coffee ☕
-                    </button>
                   </div>
                   {showShareConfirmation && (
                     <p className="mt-2 text-green-400">Results copied to clipboard!</p>
