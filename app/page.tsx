@@ -48,6 +48,12 @@ export default function Home() {
       accent: 'border-emerald-500/30 text-emerald-200',
     },
     {
+      href: '/eight-zero',
+      title: '8-0',
+      description: 'Draft a World Cup XI and chase perfection',
+      accent: 'border-emerald-500/30 text-emerald-200',
+    },
+    {
       href: '/archive',
       title: 'Archive Mode',
       description: 'Play footles from the last 30 days',
@@ -64,12 +70,6 @@ export default function Home() {
       title: 'Squadle',
       description: 'The daily starting XI guessing game',
       accent: 'border-cyan-500/30 text-cyan-200',
-    },
-    {
-      href: '/eight-zero',
-      title: '8-0',
-      description: 'Draft a World Cup XI and chase perfection',
-      accent: 'border-emerald-500/30 text-emerald-200',
     },
     {
       href: '/shortlist',
