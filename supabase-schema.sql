@@ -57,6 +57,38 @@ CREATE POLICY "Anyone can insert custom games"
   FOR INSERT
   WITH CHECK (true);
 
+-- Create shared World Cup result pages for 8-0
+CREATE TABLE IF NOT EXISTS eight_zero_shares (
+  id BIGSERIAL PRIMARY KEY,
+  slug TEXT NOT NULL UNIQUE,
+  share_text TEXT NOT NULL,
+  team_overall INTEGER NOT NULL,
+  finish INTEGER NOT NULL,
+  medal TEXT,
+  eliminated_at TEXT,
+  record JSONB NOT NULL,
+  result JSONB NOT NULL,
+  picks JSONB NOT NULL,
+  top_scorer TEXT,
+  top_scorer_goals INTEGER,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_eight_zero_shares_slug ON eight_zero_shares(slug);
+CREATE INDEX IF NOT EXISTS idx_eight_zero_shares_created_at ON eight_zero_shares(created_at);
+
+ALTER TABLE eight_zero_shares ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can view 8-0 share pages"
+  ON eight_zero_shares
+  FOR SELECT
+  USING (true);
+
+CREATE POLICY "Anyone can insert 8-0 shares"
+  ON eight_zero_shares
+  FOR INSERT
+  WITH CHECK (true);
+
 -- Optional: Create a function to clean up old leaderboard entries (run daily)
 -- This keeps only the last 30 days of data
 CREATE OR REPLACE FUNCTION clean_old_leaderboard_entries()

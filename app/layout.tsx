@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import Footer from "../components/Footer";
 import LeagueMenu from '../components/LeagueMenu';
@@ -64,41 +65,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <script
-          data-grow-initializer=""
-          dangerouslySetInnerHTML={{
-            __html: `!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTo1NWQxYzk0ZS04YjEyLTQzMDctYTNhMC01NTZjNzA0YzllMDI=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();`,
-          }}
-        />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2"></script>
-        <script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" async></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-QVKN2HSME2');
-              
-              // Register service worker for PWA
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js').then(
-                    function(registration) {
-                      console.log('ServiceWorker registration successful');
-                    },
-                    function(err) {
-                      console.log('ServiceWorker registration failed: ', err);
-                    }
-                  );
-                });
-              }
-            `,
-          }}
-        />
-      </head>
       <body className="font-sans">
+        <Script id="grow-initializer" strategy="afterInteractive">
+          {`!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTo1NWQxYzk0ZS04YjEyLTQzMDctYTNhMC01NTZjNzA0YzllMDI=");document.head.appendChild(e);})();`}
+        </Script>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2" strategy="afterInteractive" />
+        <Script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" strategy="afterInteractive" />
+        <Script id="analytics-and-service-worker" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-QVKN2HSME2');
+
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(
+                  function(registration) {
+                    console.log('ServiceWorker registration successful');
+                  },
+                  function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                  }
+                );
+              });
+            }
+          `}
+        </Script>
         <div className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
           <div className="max-w-3xl mx-auto relative">
             <LeagueMenu />

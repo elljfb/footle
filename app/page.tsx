@@ -66,6 +66,12 @@ export default function Home() {
       accent: 'border-cyan-500/30 text-cyan-200',
     },
     {
+      href: '/eight-zero',
+      title: '8-0',
+      description: 'Draft a World Cup XI and chase perfection',
+      accent: 'border-emerald-500/30 text-emerald-200',
+    },
+    {
       href: '/shortlist',
       title: 'Shortlist',
       description: 'Football player elimination challenge',
