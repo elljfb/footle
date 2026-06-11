@@ -306,7 +306,6 @@ export default function EightZeroClient() {
   const [currentDraw, setCurrentDraw] = useState<DraftDraw | null>(null);
   const [selectedPlayerName, setSelectedPlayerName] = useState<string | null>(null);
   const [result, setResult] = useState<TournamentResult | null>(null);
-  const [copied, setCopied] = useState(false);
   const [shareSaving, setShareSaving] = useState(false);
   const [shareError, setShareError] = useState<string | null>(null);
   const slotSelectRef = useRef<HTMLDivElement | null>(null);
@@ -340,7 +339,6 @@ export default function EightZeroClient() {
     setPicks(nextPicks);
     setResult(null);
     setSelectedPlayerName(null);
-    setCopied(false);
     setCurrentDraw(null);
     setRollingCountry(selectedCountry);
     setRollingYear(decadeStart);
@@ -398,7 +396,6 @@ export default function EightZeroClient() {
     setCurrentDraw(null);
     setSelectedPlayerName(null);
     setResult(null);
-    setCopied(false);
   };
 
   const getBestPlayer = () => {
@@ -480,16 +477,6 @@ export default function EightZeroClient() {
       setShareError('Unable to save your World Cup share right now. Please try again.');
     } finally {
       setShareSaving(false);
-    }
-  };
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(generateShareText());
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    } catch (error) {
-      console.error('Failed to copy 8-0 result:', error);
     }
   };
 
@@ -843,7 +830,8 @@ export default function EightZeroClient() {
               </p>
               <p>
                 Player ratings are based on each national team&apos;s historical World Cup performance, while current
-                players are rated from team strength implied by 2026 World Cup betting odds.
+                players are rated from team strength implied by 2026 World Cup betting odds. If a player appears in
+                multiple World Cup squads, 8-0 uses their highest-rated version when you draft them.
               </p>
 
               <div>
@@ -1194,17 +1182,7 @@ export default function EightZeroClient() {
             <p className="mt-2 text-gray-300">
               Record {result.record.wins}-{result.record.draws}-{result.record.losses} with a {result.teamOverall} overall XI.
             </p>
-            <p className="mt-3 text-gray-400">
-              {generateShareText().split('\n')[0]}
-            </p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">
-              <button
-                type="button"
-                onClick={handleCopy}
-                className="rounded-lg bg-blue-500 px-5 py-2 font-semibold text-white transition-colors hover:bg-blue-600"
-              >
-                Copy Result
-              </button>
               <button
                 type="button"
                 onClick={handleShareYourWorldCup}
@@ -1222,7 +1200,6 @@ export default function EightZeroClient() {
               </button>
             </div>
             {shareError && <p className="mt-3 text-sm text-red-400">{shareError}</p>}
-            {copied && <p className="mt-3 text-sm text-emerald-400">Result copied to clipboard.</p>}
           </section>
 
           <section className="rounded-lg bg-gray-800 p-4 md:p-5">
@@ -1238,18 +1215,18 @@ export default function EightZeroClient() {
               {result.matches.map((match) => (
                 <div
                   key={`${match.stage}-${match.opponent}`}
-                  className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-gray-700 bg-gray-900/70 px-4 py-3"
+                  className="grid grid-cols-[minmax(0,1fr)_4.5rem] items-center gap-3 rounded-lg border border-gray-700 bg-gray-900/70 px-4 py-3"
                 >
-                  <div>
+                  <div className="min-w-0">
                     <div className="font-semibold text-white">{match.stage}</div>
                     <div className="text-sm text-gray-400">vs {match.opponent} ({match.opponentOvr})</div>
                     {match.userScorers.length > 0 && (
-                      <div className="mt-1 text-xs text-gray-500">
+                      <div className="mt-1 truncate text-xs text-gray-500">
                         Goals: {match.userScorers.join(', ')}
                       </div>
                     )}
                   </div>
-                  <div className="text-right">
+                  <div className="justify-self-end text-right">
                     <div className={`text-xl font-bold ${match.outcome === 'W' ? 'text-emerald-300' : match.outcome === 'D' ? 'text-amber-300' : 'text-red-300'}`}>
                       {getMatchLabel(match)}
                     </div>
