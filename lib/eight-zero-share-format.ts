@@ -28,6 +28,11 @@ export function getEightZeroOutcomeTitle(share: EightZeroShareRow): string {
   return `Finished ${getOrdinal(share.finish)}`;
 }
 
+export function getEightZeroMetadataTitle(share: EightZeroShareRow): string {
+  const record = `${share.record.wins}-${share.record.draws}-${share.record.losses}`;
+  return `A ${record} World Cup run - 8-0`;
+}
+
 export function formatEightZeroMatchScore(match: SimulatedMatch): string {
   const score = `${match.goalsFor}-${match.goalsAgainst}`;
   if (match.penaltyOutcome) {

@@ -1285,6 +1285,15 @@ export default function EightZeroClient() {
           </section>
         </div>
       )}
+
+      <div className="border-t border-gray-800 pt-6 text-center">
+        <a
+          href="mailto:dailyguessthefootballer@gmail.com?subject=8-0%20feedback&body=Hi%2C%20I%20had%20some%20feedback%20on%208-0%3A%0A%0A"
+          className="inline-flex items-center justify-center rounded-full border border-gray-700 bg-gray-900 px-5 py-3 text-sm font-semibold text-gray-200 transition-colors hover:border-emerald-400 hover:text-emerald-200"
+        >
+          Any issues or feedback?
+        </a>
+      </div>
     </div>
   );
 }
