@@ -27,6 +27,7 @@ import {
   buildTournamentResult,
   TournamentResult,
 } from '../../lib/eight-zero';
+import { getEightZeroPenaltyLabel, getEightZeroResultSummary } from '../../lib/eight-zero-share-format';
 import { createWorldCupShare } from '../../services/eightZeroShareService';
 
 const positionLabels: Record<EightZeroPosition, string> = {
@@ -442,17 +443,14 @@ export default function EightZeroClient() {
     if (!result) return '';
 
     const bestPlayer = getBestPlayer();
-    const record = `${result.record.wins}-${result.record.draws}-${result.record.losses}`;
-    const outcomeText = result.wonWorldCup
-      ? 'won the World Cup'
-      : result.medal
-      ? `earned a ${result.medal.toLowerCase()} medal`
-      : result.eliminatedAt
-      ? `was knocked out at ${result.eliminatedAt}`
-      : `finished ${result.finish}`;
-    const bestPlayerText = bestPlayer ? ` ${bestPlayer.name} scored ${bestPlayer.goals} ⚽.` : '';
+    const summary = getEightZeroResultSummary({
+      result,
+      teamOverall: result.teamOverall,
+      topScorer: bestPlayer?.name ?? null,
+      topScorerGoals: bestPlayer?.goals ?? 0,
+    });
 
-    return `My ${result.teamOverall}-rated World Cup XI ${outcomeText} with a ${record} record.${bestPlayerText} Can you build better on 8-0?\n\nPlay: https://footle.club/eight-zero`;
+    return `${summary} Can you build better on 8-0?\n\nPlay: https://footle.club/eight-zero`;
   };
 
   const handleShareYourWorldCup = async () => {
@@ -1146,8 +1144,15 @@ export default function EightZeroClient() {
                             <div className="text-sm font-semibold text-white">{match.stage}</div>
                             <div className="text-xs text-gray-400">vs {match.opponent}</div>
                           </div>
-                          <div className={`text-lg font-black ${match.displayStatus === 'final' ? getMatchTone(match) : 'text-cyan-200'}`}>
-                            {match.goalsFor}-{match.goalsAgainst}
+                          <div className="shrink-0 text-right">
+                            <div className={`text-lg font-black ${match.displayStatus === 'final' ? getMatchTone(match) : 'text-cyan-200'}`}>
+                              {match.goalsFor}-{match.goalsAgainst}
+                            </div>
+                            {match.displayStatus === 'final' && getEightZeroPenaltyLabel(match) && (
+                              <div className={match.penaltyOutcome === 'W' ? 'text-xs font-semibold text-emerald-300' : 'text-xs font-semibold text-red-300'}>
+                                {getEightZeroPenaltyLabel(match)}
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className="mt-1 text-xs text-gray-400">
@@ -1228,8 +1233,13 @@ export default function EightZeroClient() {
                   </div>
                   <div className="justify-self-end text-right">
                     <div className={`text-xl font-bold ${match.outcome === 'W' ? 'text-emerald-300' : match.outcome === 'D' ? 'text-amber-300' : 'text-red-300'}`}>
-                      {getMatchLabel(match)}
+                      {match.goalsFor}-{match.goalsAgainst}
                     </div>
+                    {getEightZeroPenaltyLabel(match) && (
+                      <div className={match.penaltyOutcome === 'W' ? 'text-xs font-semibold text-emerald-300' : 'text-xs font-semibold text-red-300'}>
+                        {getEightZeroPenaltyLabel(match)}
+                      </div>
+                    )}
                     <div className="text-xs text-gray-400">{match.outcome}</div>
                   </div>
                 </div>

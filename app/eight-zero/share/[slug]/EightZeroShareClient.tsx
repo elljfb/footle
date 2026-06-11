@@ -3,7 +3,11 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { getWorldCupShareBySlug, EightZeroShareRow } from '../../../../services/eightZeroShareService';
-import { getEightZeroDisplaySummary, getEightZeroOutcomeTitle } from '../../../../lib/eight-zero-share-format';
+import {
+  getEightZeroDisplaySummary,
+  getEightZeroOutcomeTitle,
+  getEightZeroPenaltyLabel,
+} from '../../../../lib/eight-zero-share-format';
 
 interface Props {
   slug: string;
@@ -91,7 +95,7 @@ export default function EightZeroShareClient({ slug }: Props) {
   };
 
   const whatsappText = share
-    ? `${share.share_text}
+    ? `${getEightZeroDisplaySummary(share)} Can you build better on 8-0?
 
 Check it out: ${shareLink}`
     : `Check out this 8-0 World Cup challenge: ${shareLink}`;
@@ -209,8 +213,15 @@ Check it out: ${shareLink}`
                   <div>
                     <div className="font-semibold text-white">{match.stage} vs {match.opponent}</div>
                   </div>
-                  <div className={`text-lg font-bold ${match.outcome === 'W' ? 'text-emerald-300' : match.outcome === 'D' ? 'text-amber-300' : 'text-red-300'}`}>
-                    {match.goalsFor}-{match.goalsAgainst}
+                  <div className="shrink-0 text-right">
+                    <div className={`text-lg font-bold ${match.outcome === 'W' ? 'text-emerald-300' : match.outcome === 'D' ? 'text-amber-300' : 'text-red-300'}`}>
+                      {match.goalsFor}-{match.goalsAgainst}
+                    </div>
+                    {getEightZeroPenaltyLabel(match) && (
+                      <div className={match.penaltyOutcome === 'W' ? 'mt-1 text-xs font-semibold text-emerald-300' : 'mt-1 text-xs font-semibold text-red-300'}>
+                        {getEightZeroPenaltyLabel(match)}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className="mt-2 flex flex-wrap gap-2 text-xs text-gray-400">
