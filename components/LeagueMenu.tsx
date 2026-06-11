@@ -75,6 +75,14 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
             Squadle
           </Link>
           <Link
+            href="/eight-zero"
+            prefetch={false}
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
+          >
+            8-0
+          </Link>
+          <Link
             href="/shortlist"
             prefetch={false}
             onClick={() => setOpen(false)}

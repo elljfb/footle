@@ -1,0 +1,76 @@
+{
+  "tiers": [
+    {
+      "minOVR": 87,
+      "maxOVR": 90,
+      "teams": [
+        { "country": "Spain", "ovr": 90 },
+        { "country": "France", "ovr": 89 },
+        { "country": "England", "ovr": 89 },
+        { "country": "Portugal", "ovr": 88 },
+        { "country": "Argentina", "ovr": 88 },
+        { "country": "Brazil", "ovr": 87 },
+        { "country": "Germany", "ovr": 87 }
+      ]
+    },
+    {
+      "minOVR": 82,
+      "maxOVR": 85,
+      "teams": [
+        { "country": "Netherlands", "ovr": 85 },
+        { "country": "Norway", "ovr": 84 },
+        { "country": "Belgium", "ovr": 84 },
+        { "country": "Colombia", "ovr": 83 },
+        { "country": "Morocco", "ovr": 83 },
+        { "country": "United States", "ovr": 82 },
+        { "country": "Switzerland", "ovr": 82 },
+        { "country": "Uruguay", "ovr": 82 },
+        { "country": "Japan", "ovr": 82 }
+      ]
+    },
+    {
+      "minOVR": 76,
+      "maxOVR": 80,
+      "teams": [
+        { "country": "Mexico", "ovr": 80 },
+        { "country": "Ecuador", "ovr": 80 },
+        { "country": "Turkey", "ovr": 79 },
+        { "country": "Croatia", "ovr": 79 },
+        { "country": "Senegal", "ovr": 79 },
+        { "country": "Sweden", "ovr": 78 },
+        { "country": "Austria", "ovr": 78 },
+        { "country": "Canada", "ovr": 78 },
+        { "country": "Scotland", "ovr": 77 },
+        { "country": "Ivory Coast", "ovr": 77 },
+        { "country": "Czechia", "ovr": 76 },
+        { "country": "Paraguay", "ovr": 76 },
+        { "country": "Egypt", "ovr": 76 },
+        { "country": "Ghana", "ovr": 76 }
+      ]
+    },
+    {
+      "minOVR": 68,
+      "maxOVR": 75,
+      "teams": [
+        { "country": "Algeria", "ovr": 75 },
+        { "country": "South Korea", "ovr": 75 },
+        { "country": "Bosnia and Herzegovina", "ovr": 74 },
+        { "country": "Tunisia", "ovr": 74 },
+        { "country": "Australia", "ovr": 73 },
+        { "country": "Iran", "ovr": 73 },
+        { "country": "Congo DR", "ovr": 72 },
+        { "country": "Saudi Arabia", "ovr": 71 },
+        { "country": "South Africa", "ovr": 71 },
+        { "country": "Panama", "ovr": 70 },
+        { "country": "Cape Verde", "ovr": 70 },
+        { "country": "Qatar", "ovr": 69 },
+        { "country": "Uzbekistan", "ovr": 69 },
+        { "country": "New Zealand", "ovr": 69 },
+        { "country": "Iraq", "ovr": 68 },
+        { "country": "Jordan", "ovr": 68 },
+        { "country": "Curacao", "ovr": 68 },
+        { "country": "Haiti", "ovr": 68 }
+      ]
+    }
+  ]
+}
