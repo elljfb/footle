@@ -56,6 +56,9 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+  other: {
+    monetag: 'be34bdab00798a205a4e3c2ef1642969',
+  },
 };
 
 export default function RootLayout({
@@ -66,9 +69,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
-        <Script id="grow-initializer" strategy="afterInteractive">
-          {`!(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTo1NWQxYzk0ZS04YjEyLTQzMDctYTNhMC01NTZjNzA0YzllMDI=");document.head.appendChild(e);})();`}
-        </Script>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2" strategy="afterInteractive" />
         <Script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" strategy="afterInteractive" />
         <Script id="analytics-and-service-worker" strategy="afterInteractive">
