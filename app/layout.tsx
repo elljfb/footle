@@ -56,6 +56,9 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
+  other: {
+    monetag: 'be34bdab00798a205a4e3c2ef1642969',
+  },
 };
 
 export default function RootLayout({
@@ -68,14 +71,17 @@ export default function RootLayout({
       <body className="font-sans">
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2" strategy="afterInteractive" />
         <Script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" strategy="afterInteractive" />
-        <Script id="monetag-loader" strategy="afterInteractive">
-          {`(function(s){s.dataset.zone='11233212',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
-        </Script>
         <Script
           id="monetag-loader"
-          src="https://nap5k.com/tag.min.js"
-          data-zone="11233212"
           strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(s){
+                s.dataset.zone='11233212',
+                s.src='https://nap5k.com/tag.min.js'
+              })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
+            `,
+          }}
         />
         <Script id="analytics-and-service-worker" strategy="afterInteractive">
           {`
