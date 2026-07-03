@@ -56,9 +56,6 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
-  other: {
-    monetag: 'be34bdab00798a205a4e3c2ef1642969',
-  },
 };
 
 export default function RootLayout({
@@ -74,6 +71,12 @@ export default function RootLayout({
         <Script id="monetag-loader" strategy="afterInteractive">
           {`(function(s){s.dataset.zone='11233212',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
         </Script>
+        <Script
+          id="monetag-loader"
+          src="https://nap5k.com/tag.min.js"
+          data-zone="11233212"
+          strategy="afterInteractive"
+        />
         <Script id="analytics-and-service-worker" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
