@@ -438,6 +438,12 @@ export default function Home() {
                     >
                       Share to Facebook
                     </button>
+                    <button
+                      onClick={() => window.open('https://omg10.com/4/11233195', '_blank')}
+                      className="bg-[#4267B2] hover:bg-[#365899] text-white px-6 py-2 rounded-lg transition-colors"
+                    >
+                      Sponsored Football Offers
+                    </button>
                   </div>
                   {showShareConfirmation && (
                     <p className="mt-2 text-green-400">Results copied to clipboard!</p>
