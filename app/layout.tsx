@@ -72,7 +72,7 @@ export default function RootLayout({
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2" strategy="afterInteractive" />
         <Script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" strategy="afterInteractive" />
         <Script id="monetag-loader" strategy="afterInteractive">
-          {`(function(s){s.dataset.zone='11233212',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))}`}
+          {`(function(s){s.dataset.zone='11233212',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`}
         </Script>
         <Script id="analytics-and-service-worker" strategy="afterInteractive">
           {`
