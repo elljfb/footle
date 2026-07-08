@@ -56,9 +56,6 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
-  other: {
-    monetag: 'be34bdab00798a205a4e3c2ef1642969',
-  },
 };
 
 export default function RootLayout({

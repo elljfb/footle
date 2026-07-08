@@ -14,10 +14,6 @@ export default function Footer() {
           About
         </Link>
         {' | '}
-        <Link href="https://omg10.com/4/11233195" className="hover:text-gray-700">
-          Sponsored football offers
-        </Link>
-        {' | '}
         <Link href="/privacy" prefetch={false} className="hover:text-gray-700">
           Privacy Policy
         </Link>
