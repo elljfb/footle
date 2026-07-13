@@ -66,6 +66,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
+        <Script src="https://cdn.apitiny.net/scripts/v2.0/main.js" data-site-id="6a54bd92ccbb498d7565666d" data-test-mode="false" strategy="afterInteractive" />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2" strategy="afterInteractive" />
         <Script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" strategy="afterInteractive" />
         <Script id="analytics-and-service-worker" strategy="afterInteractive">
