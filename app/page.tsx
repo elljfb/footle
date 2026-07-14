@@ -357,13 +357,14 @@ export default function Home() {
                   Green for exact matches, orange for close ones!
                 </p>
               </div>
-              <button
-                onClick={handleStartPlaying}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
-              >
-                Start Playing
-              </button>
-              <div ta-ad-container="" className="mt-6" />
+              <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <button
+                  onClick={handleStartPlaying}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
+                >
+                  Start Playing
+                </button>
+              </div>
               <section className="max-w-4xl mx-auto text-left bg-gray-800/80 border border-gray-700 rounded-2xl p-5">
                 <div className="mb-4 text-center">
                   <p className="text-sm uppercase tracking-[0.2em] text-blue-300">Play More Modes</p>

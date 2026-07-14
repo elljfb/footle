@@ -9,7 +9,6 @@ export default function Footer() {
 
   return (
     <>
-      <div ta-ad-container="" className="mt-8 mb-4" />
       <footer className="py-4 text-center text-sm text-gray-500">
         <Link href="/about" prefetch={false} className="hover:text-gray-700">
           About
