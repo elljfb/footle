@@ -363,6 +363,7 @@ export default function Home() {
               >
                 Start Playing
               </button>
+              <div ta-ad-container="" className="mt-6" />
               <section className="max-w-4xl mx-auto text-left bg-gray-800/80 border border-gray-700 rounded-2xl p-5">
                 <div className="mb-4 text-center">
                   <p className="text-sm uppercase tracking-[0.2em] text-blue-300">Play More Modes</p>
