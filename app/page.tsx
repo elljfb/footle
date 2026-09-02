@@ -42,6 +42,12 @@ export default function Home() {
       accent: 'border-sky-500/30 text-sky-200',
     })),
     {
+      href: '/grid',
+      title: 'Football Grid',
+      description: 'Fill a 3x3 club, league, and nation grid',
+      accent: 'border-blue-500/30 text-blue-200',
+    },
+    {
       href: '/career',
       title: 'Career Mode',
       description: 'Guess the player from their club path',
@@ -70,12 +76,6 @@ export default function Home() {
       title: 'Squadle',
       description: 'The daily starting XI guessing game',
       accent: 'border-cyan-500/30 text-cyan-200',
-    },
-    {
-      href: '/shortlist',
-      title: 'Shortlist',
-      description: 'Football player elimination challenge',
-      accent: 'border-emerald-500/30 text-emerald-200',
     },
     {
       href: '/recall',
