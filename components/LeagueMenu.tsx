@@ -83,6 +83,14 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
             8-0
           </Link>
           <Link
+            href="/grid"
+            prefetch={false}
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
+          >
+            Football Grid
+          </Link>
+          <Link
             href="/recall"
             prefetch={false}
             onClick={() => setOpen(false)}
