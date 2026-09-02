@@ -29871,7 +29871,7 @@ export const players: Player[] = [
   },
   {
     id: 2490,
-    name: 'Tomori',
+    name: 'Fikayo Tomori',
     position: 'Defender',
     subPosition: 'Centre-Back',
     dateOfBirth: '1997-12-19',
