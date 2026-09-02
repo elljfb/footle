@@ -35,6 +35,13 @@ const gameModes = [
     accent: 'border-blue-500/30 text-blue-200',
   },
   {
+    href: '/grid',
+    title: 'Football Grid',
+    description:
+      'Complete a daily 3x3 grid by matching players to club, league, and nationality clues.',
+    accent: 'border-blue-500/30 text-blue-200',
+  },
+  {
     href: '/career',
     title: 'Career Mode',
     description:
@@ -47,13 +54,6 @@ const gameModes = [
     description:
       'Read a starting XI blueprint and identify the club from the shape of the squad.',
     accent: 'border-cyan-500/30 text-cyan-200',
-  },
-  {
-    href: '/shortlist',
-    title: 'Shortlist',
-    description:
-      'Clear a 20-player board by following football filters until one player remains.',
-    accent: 'border-rose-500/30 text-rose-200',
   },
   {
     href: '/recall',
