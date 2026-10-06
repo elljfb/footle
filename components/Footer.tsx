@@ -10,21 +10,8 @@ export default function Footer() {
 
   return (
     <>
-      <Script
-        src="https://cdn.tinysnippet.net/scripts/v2.0/manager.js"
-        strategy="afterInteractive"
-      />
+      <div ta-ad-container=""></div>
       <footer className="py-4 text-center text-sm text-gray-500">
-        <iframe
-          width="100%"
-          height={100}
-          frameBorder={0}
-          className="ta-widget"
-          data-min-height="100"
-          id="widget6a54db0b60578d41d1e5237f-seed1504"
-          title="Advertisement"
-          src="https://app.tinyadz.com/widgets/6a54db0b60578d41d1e5237f?seed=1504&previewMode=false&showInPopup=false&theme=light"
-        />
         <Link href="/about" prefetch={false} className="hover:text-gray-700">
           About
         </Link>
