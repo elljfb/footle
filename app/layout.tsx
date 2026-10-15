@@ -65,24 +65,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <script
-          data-cfasync="false"
-          src="https://cmp.gatekeeperconsent.com/min.js"
-        />
-        <script
-          data-cfasync="false"
-          src="https://the.gatekeeperconsent.com/cmp.min.js"
-        />
-        <script async src="//www.ezojs.com/ezoic/sa.min.js" />
-        <script>
-          {`
-            window.ezstandalone = window.ezstandalone || {};
-            ezstandalone.cmd = ezstandalone.cmd || [];
-          `}
-        </script>
-        <script src="//ezoicanalytics.com/analytics.js" />
-      </head>
       <body className="font-sans">
         <Script src="https://cdn.apitiny.net/scripts/v2.0/main.js" data-site-id="6a54bd92ccbb498d7565666d" data-test-mode="false" strategy="afterInteractive"/>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2" strategy="afterInteractive" />
