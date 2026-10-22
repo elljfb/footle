@@ -46,12 +46,7 @@ export default function Footer() {
               <li><Link href="/about" className="transition-colors hover:text-[#03E690]">About Footle</Link></li>
               <li><Link href="/privacy" className="transition-colors hover:text-[#03E690]">Privacy policy</Link></li>
               <li><Link href="/terms" className="transition-colors hover:text-[#03E690]">Terms of service</Link></li>
-              <li>
-                <button type="button" onClick={() => setShowAdvertise(true)} className="transition-colors hover:text-[#03E690]">
-                  Advertise with us
-                </button>
-              </li>
-              <li><a href="mailto:dailyguessthefootballer@gmail.com" className="transition-colors hover:text-[#03E690]">Contact</a></li>
+              <li><Link href="/contact" className="transition-colors hover:text-[#03E690]">Contact us</Link></li>
             </ul>
           </div>
         </div>
