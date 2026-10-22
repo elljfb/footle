@@ -13,16 +13,16 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: 'Footle — Daily Football Games, Quizzes & Player Puzzles',
+    default: 'Footle — The Daily Football Player Guessing Game',
     template: '%s | Footle',
   },
-  description: 'Play free daily football games and quizzes. Guess mystery players, test your Premier League knowledge, solve football grids, and explore more Footle challenges.',
+  description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
   keywords: 'football, soccer, guessing game, daily game, player quiz, football quiz, football wordle, football game, football wordle game',
   authors: [{ name: 'Footle' }],
   metadataBase: new URL('https://footle.club'),
   openGraph: {
-    title: 'Footle — Daily Football Games, Quizzes & Player Puzzles',
-    description: 'Play free daily football games and quizzes. Guess mystery players, test your Premier League knowledge, solve football grids, and explore more Footle challenges.',
+    title: 'Footle — The Daily Football Player Guessing Game',
+    description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
     type: 'website',
     url: 'https://footle.club',
     siteName: 'Footle',
@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Footle — Daily Football Games, Quizzes & Player Puzzles',
-    description: 'Play free daily football games and quizzes. Guess mystery players, test your Premier League knowledge, solve football grids, and explore more Footle challenges.',
+    title: 'Footle — The Daily Football Player Guessing Game',
+    description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
     images: ['/opengraph-image'],
   },
   icons: {
