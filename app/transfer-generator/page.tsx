@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import TransferGeneratorClient from './TransferGeneratorClient';
+import GamePageContent from '../../components/GamePageContent';
 
 export const metadata: Metadata = {
   title: 'Fake Football Transfer Maker - Random Transfer Generator',
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.png',
+        url: '/transfer-generator/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Footle fake football transfer maker',
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     title: 'Fake Football Transfer Maker | Random Transfer Generator',
     description:
       'Create fake football transfer rumors and random transfer news to share in seconds.',
-    images: ['/og-image.png'],
+    images: ['/transfer-generator/opengraph-image'],
   },
 };
 
@@ -105,6 +106,13 @@ export default function TransferGeneratorPage() {
           </p>
         </div>
       </section>
+      <GamePageContent
+        faqs={[
+          { question: 'Are the transfer rumours real?', answer: 'No. The generator creates fictional, random transfer rumours for entertainment and sharing.' },
+          { question: 'Can I make another transfer rumour?', answer: 'Yes. Use the generate button to create a new combination of player, club, fee and rumour wording.' },
+          { question: 'Can I share the generated result?', answer: 'Yes. Copy the result or use the available social sharing buttons to share it with friends.' },
+        ]}
+      />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import SquadBlueprintClient from '../squad-blueprint/SquadBlueprintClient';
+import GamePageContent from '../../components/GamePageContent';
 
 export const metadata: Metadata = {
   title: 'Squadle - The Daily Starting XI Guessing Game',
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
     description: 'A daily football club guessing game built around a clue-based starting XI layout.',
     url: 'https://footle.club/squadle',
     siteName: 'Footle',
-    images: [{ url: '/og-image.png' }],
+    images: [{ url: '/squadle/opengraph-image' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Squadle - The Daily Starting XI Guessing Game',
     description: 'Guess the football club from a clue-based starting XI with flags, ages, and positions.',
-    images: ['/og-image.png'],
+    images: ['/squadle/opengraph-image'],
   },
 };
 
@@ -59,6 +60,13 @@ export default function SquadlePage() {
           </p>
         </div>
       </section>
+      <GamePageContent
+        faqs={[
+          { question: 'What do I have to guess in Squadle?', answer: 'Identify the football club represented by the starting XI blueprint.' },
+          { question: 'What clues does the Squadle board show?', answer: 'The lineup uses formation and selected player details such as nationality, age and position to help you recognise the club.' },
+          { question: 'How should I approach a Squadle puzzle?', answer: 'Look at the formation first, then combine the revealed player clues. Several roles and nationalities together can be more useful than one clue on its own.' },
+        ]}
+      />
     </>
   );
 }

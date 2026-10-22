@@ -12,9 +12,11 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.86.2",
     "country-flag-icons": "^1.6.15",
+    "gray-matter": "^4.0.3",
     "next": "^16.1.7",
     "react": "^18",
     "react-dom": "^18",
+    "react-markdown": "^10.1.0",
     "sharp": "^0.33.2"
   },
   "devDependencies": {
