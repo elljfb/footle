@@ -5,7 +5,7 @@ description: "This is the story of 1. FSV Mainz 05, a club with a vibrant soul, 
 publishedAt: "2025-12-02"
 author: "Footle Editorial Team"
 category: "Feature"
-featuredImage: "/articles/mainz.jpeg"
+image: "/articles/mainz.jpeg"
 ---
 
 In the world of German football, where dynasties like Bayern Munich measure success in stacks of plates, there exists a different kind of story. It is a tale not of conquest, but of relentless pursuit; not of glory, but of unwavering hope. This is the story of 1. FSV Mainz 05, a club with a vibrant soul, a unique identity, and, after **120 years**, a trophy cabinet still waiting for its first major professional honour.
