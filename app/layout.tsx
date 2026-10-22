@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import './globals.css';
 import Footer from "../components/Footer";
-import LeagueMenu from '../components/LeagueMenu';
+import SiteHeader from '../components/SiteHeader';
+import PopularGamesSidebar from '../components/PopularGamesSidebar';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -11,31 +12,34 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Footle - The Daily Football Player Guessing Game',
-  description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
+  title: {
+    default: 'Footle — Daily Football Games, Quizzes & Player Puzzles',
+    template: '%s | Footle',
+  },
+  description: 'Play free daily football games and quizzes. Guess mystery players, test your Premier League knowledge, solve football grids, and explore more Footle challenges.',
   keywords: 'football, soccer, guessing game, daily game, player quiz, football quiz, football wordle, football game, football wordle game',
   authors: [{ name: 'Footle' }],
   metadataBase: new URL('https://footle.club'),
   openGraph: {
-    title: 'Footle - The Daily Football Player Guessing Game',
-    description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
+    title: 'Footle — Daily Football Games, Quizzes & Player Puzzles',
+    description: 'Play free daily football games and quizzes. Guess mystery players, test your Premier League knowledge, solve football grids, and explore more Footle challenges.',
     type: 'website',
     url: 'https://footle.club',
     siteName: 'Footle',
     images: [
       {
-        url: '/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Footle - The Daily Football Player Guessing Game',
+        alt: 'Footle — The daily football player guessing game',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Footle - The Daily Football Player Guessing Game',
-    description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
-    images: ['/og-image.png'],
+    title: 'Footle — Daily Football Games, Quizzes & Player Puzzles',
+    description: 'Play free daily football games and quizzes. Guess mystery players, test your Premier League knowledge, solve football grids, and explore more Footle challenges.',
+    images: ['/opengraph-image'],
   },
   icons: {
     icon: [
@@ -66,6 +70,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6766680365418435"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <Script src="https://cdn.apitiny.net/scripts/v2.0/main.js" data-site-id="6a54bd92ccbb498d7565666d" data-test-mode="false" strategy="afterInteractive"/>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-QVKN2HSME2" strategy="afterInteractive" />
         <Script src="https://analytics.ahrefs.com/analytics.js" data-key="GWe1ck+IGWGAt1z4pak/og" strategy="afterInteractive" />
@@ -90,10 +99,15 @@ export default function RootLayout({
             }
           `}
         </Script>
-        <div className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
-          <div className="max-w-3xl mx-auto relative">
-            <LeagueMenu />
-            {children}
+        <div className="min-h-screen bg-gray-900 text-white">
+          <SiteHeader />
+          <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
+            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
+              <div className="min-w-0">{children}</div>
+              <div className="lg:pt-2">
+                <PopularGamesSidebar />
+              </div>
+            </div>
           </div>
           <Footer />
         </div>

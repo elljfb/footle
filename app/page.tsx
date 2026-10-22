@@ -9,6 +9,7 @@ import SearchBar from '../components/SearchBar';
 import InstructionsModal from '../components/InstructionsModal';
 import Leaderboard from '../components/Leaderboard';
 import StatsModal from '../components/StatsModal';
+import GamePageContent from '../components/GamePageContent';
 import { GameState } from '../types/game';
 import { saveGameResult } from '../services/statsService';
 import { trackEvent } from '../lib/analytics';
@@ -329,7 +330,7 @@ export default function Home() {
         </div>
 
         <header className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">Footle</h1>
+          <h1 className="mb-2 text-4xl font-bold text-[#03E690]">Footle</h1>
           {gameStarted ? (
             <p className="text-gray-400 text-lg">
               {!gameState.gameOver ? (
@@ -367,7 +368,7 @@ export default function Home() {
               </div>
               <section className="max-w-4xl mx-auto text-left bg-gray-800/80 border border-gray-700 rounded-2xl p-5">
                 <div className="mb-4 text-center">
-                  <p className="text-sm uppercase tracking-[0.2em] text-blue-300">Play More Modes</p>
+                  <p className="text-sm uppercase tracking-[0.2em] text-[#03E690]">Play More Modes</p>
                   <h3 className="text-xl font-semibold text-white mt-1">More ways to play Footle</h3>
                   <p className="text-sm text-gray-400 mt-2">
                     Jump into league-specific dailies, catch up in the archive, or try a different format.
@@ -502,6 +503,34 @@ export default function Home() {
         gameType="all"
         maxGuesses={maxGuesses}
         gameTitle="Footle"
+      />
+      <GamePageContent
+        title="A daily football player guessing game"
+        introduction={[
+          'Footle is a free daily football quiz where you use player knowledge and a series of clues to identify a mystery footballer. Each guess compares details such as position, age, nationality, club, league, height and preferred foot, so even a wrong answer can help you work out who to try next.',
+          'The puzzle is designed for a short daily play, whether you follow every team in Europe or simply enjoy testing your football memory. Start with the clues you trust most, look for patterns in the feedback and use each turn to narrow down the possibilities.',
+        ]}
+        sections={[
+          {
+            heading: 'How to get more from each clue',
+            paragraphs: [
+              'An exact match confirms that an attribute is shared with the mystery player. A close result points to a related answer, such as a nearby age or another club in the same league. Compare several categories together rather than relying on a single clue; a position combined with a league and nationality can quickly reduce the number of likely players.',
+              'Footle also has league-specific daily games, including Premier League Guess, as well as career, grid, squad and memory challenges. Your chosen format can suit whatever part of football you follow most closely.',
+            ],
+          },
+          {
+            heading: 'Explore more football games',
+            paragraphs: [
+              'When you have solved today’s puzzle, visit the archive to revisit recent dailies or switch to a different kind of challenge. Football Grid is about finding players who fit two categories, while Career Mode asks you to recognise a player from their club history.',
+            ],
+          },
+        ]}
+        faqs={[
+          { question: 'How many guesses do I get in Footle?', answer: 'You have up to 10 guesses to identify the daily mystery footballer. The game shows how each guess compares with the answer.' },
+          { question: 'When does the daily Footle puzzle change?', answer: 'Footle provides a new daily puzzle each day. Your progress for the current puzzle is saved in your browser so you can come back and continue.' },
+          { question: 'What do the clue colours mean?', answer: 'Green indicates an exact match for a player attribute, orange indicates a close or related match, and grey indicates that the attribute does not match.' },
+          { question: 'Can I play other football quizzes on Footle?', answer: 'Yes. Footle includes league-specific puzzles, Football Grid, Career Mode, Squadle, Recall, the 8-0 World Cup draft, an archive and custom challenges.' },
+        ]}
       />
     </>
   );

@@ -82,7 +82,21 @@ export default function PrivacyPolicy() {
               <li>Google Analytics (for website analytics)</li>
               <li>Social media sharing features</li>
               <li>Affiliate Links where we may earn commision from purchases you make at no extra cost to you</li>
+              <li>
+                If advertising is introduced, third-party advertising providers may use cookies or similar technologies to
+                deliver and measure ads in accordance with their own privacy policies.
+              </li>
             </ul>
+          </section>
+
+          <section>
+            <h2 className="text-xl font-semibold mb-4">Cookies and Advertising</h2>
+            <p>
+              Footle may use cookies or similar technologies for essential site functions, analytics, and (if enabled) advertising.
+              You can control cookies through your browser settings. If third-party ads are shown, the provider may use information
+              about visits to this and other websites to provide relevant advertising. Please consult the provider&apos;s privacy
+              choices for more information and controls.
+            </p>
           </section>
 
           <section>

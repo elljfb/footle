@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface InstructionsModalProps {
   isOpen: boolean;
@@ -6,17 +7,45 @@ interface InstructionsModalProps {
 }
 
 export default function InstructionsModal({ isOpen, onClose }: InstructionsModalProps) {
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  if (!mounted || !isOpen) return null;
+
+  return createPortal(
+    <div
+      className="pointer-events-auto fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="instructions-modal-title"
+        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-lg border border-gray-700 bg-gray-800 shadow-2xl"
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold">How to Play</h2>
+            <h2 id="instructions-modal-title" className="text-2xl font-bold">How to Play</h2>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-white transition-colors"
+              aria-label="Close instructions"
+              type="button"
             >
               ✕
             </button>
@@ -83,6 +112,7 @@ export default function InstructionsModal({ isOpen, onClose }: InstructionsModal
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
-} 
+}

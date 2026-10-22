@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="74" y1="36" x2="1080" y2="772" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="1" stop-color="#071411"/>
+    </linearGradient>
+    <linearGradient id="ball" x1="443" y1="223" x2="744" y2="552" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#03E690"/>
+      <stop offset="1" stop-color="#00A968"/>
+    </linearGradient>
+    <pattern id="lines" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" stroke="#fff" stroke-opacity=".035"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" rx="36" fill="url(#bg)"/>
+  <rect width="1200" height="800" rx="36" fill="url(#lines)"/>
+  <circle cx="594" cy="396" r="277" fill="#03E690" fill-opacity=".05"/>
+  <circle cx="594" cy="396" r="222" stroke="#03E690" stroke-opacity=".18" stroke-width="2"/>
+  <circle cx="594" cy="396" r="171" stroke="#03E690" stroke-opacity=".1" stroke-width="2"/>
+  <g transform="translate(431 232)">
+    <circle cx="163" cy="163" r="158" fill="url(#ball)" stroke="#9FFFD6" stroke-width="5"/>
+    <path d="m163 101 58 42-22 68h-72l-22-68 58-42Z" fill="#101B20" stroke="#D6FFED" stroke-width="5" stroke-linejoin="round"/>
+    <path d="m163 101 1-49m57 91 48-16m-70 84 22 48m-94-48-22 48m0-116-48 16" stroke="#D6FFED" stroke-width="5" stroke-linecap="round"/>
+    <path d="m102 143-37-24 10-49 48-18 40 0m81 91 35 29-11 48-42 19m-127-19-43 13-31-34 5-48" stroke="#D6FFED" stroke-width="5" stroke-linejoin="round"/>
+  </g>
+  <g font-family="Arial, sans-serif">
+    <rect x="86" y="147" width="235" height="84" rx="18" fill="#1F2937" stroke="#03E690" stroke-opacity=".55" stroke-width="2"/>
+    <circle cx="121" cy="189" r="9" fill="#03E690"/>
+    <text x="146" y="184" fill="#F9FAFB" font-size="20" font-weight="700">PLAYER CLUE</text>
+    <text x="146" y="210" fill="#9CA3AF" font-size="17">Premier League</text>
+    <rect x="847" y="195" width="264" height="84" rx="18" fill="#1F2937" stroke="#03E690" stroke-opacity=".4" stroke-width="2"/>
+    <circle cx="883" cy="237" r="9" fill="#03E690"/>
+    <text x="908" y="232" fill="#F9FAFB" font-size="20" font-weight="700">NATIONALITY</text>
+    <text x="908" y="258" fill="#9CA3AF" font-size="17">Narrow the options</text>
+    <rect x="112" y="570" width="250" height="84" rx="18" fill="#1F2937" stroke="#03E690" stroke-opacity=".4" stroke-width="2"/>
+    <circle cx="148" cy="612" r="9" fill="#03E690"/>
+    <text x="173" y="607" fill="#F9FAFB" font-size="20" font-weight="700">POSITION</text>
+    <text x="173" y="633" fill="#9CA3AF" font-size="17">Read every hint</text>
+    <rect x="842" y="541" width="270" height="84" rx="18" fill="#1F2937" stroke="#03E690" stroke-opacity=".4" stroke-width="2"/>
+    <circle cx="878" cy="583" r="9" fill="#03E690"/>
+    <text x="903" y="578" fill="#F9FAFB" font-size="20" font-weight="700">MAKE YOUR GUESS</text>
+    <text x="903" y="604" fill="#9CA3AF" font-size="17">Use football knowledge</text>
+    <text x="600" y="723" fill="#03E690" font-size="19" font-weight="700" letter-spacing="6" text-anchor="middle">THE FOOTBALL GUESSING GAME GUIDE</text>
+  </g>
+</svg>
