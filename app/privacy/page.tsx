@@ -13,15 +13,15 @@ export default function PrivacyPolicy() {
           </section>
 
           <section>
-            <h2 className="text-xl font-semibold mb-4">Information We Collect</h2>
+            <h2 className="text-xl font-semibold mb-4">Information and Usage Data</h2>
             <p>
-              We collect minimal information to provide you with the best possible experience:
+              The information involved depends on how you use Footle:
             </p>
             <ul className="list-disc pl-6 mt-2 space-y-2">
-              <li>Game statistics (number of guesses, win/loss records, streaks)</li>
-              <li>Leaderboard submissions (nickname, scores, and completion times)</li>
-              <li>Browser information (for technical purposes)</li>
-              <li>IP address (for analytics and security)</li>
+              <li>Game progress and personal statistics are saved in your browser and are not submitted to our database.</li>
+              <li>If you choose to submit a leaderboard score, your nickname, score details and game type are stored and shown publicly.</li>
+              <li>If you create or share a game result, the details needed to show that shared page are stored in our database.</li>
+              <li>Analytics and advertising providers may receive technical and usage information, such as your IP address, browser or device details, pages visited and interactions.</li>
             </ul>
           </section>
 
@@ -47,7 +47,7 @@ export default function PrivacyPolicy() {
             
             <h3 className="text-lg font-semibold mb-2">Local Storage (Private)</h3>
             <p>
-              Your personal game data is stored locally in your browser using localStorage. This data never leaves your device and includes:
+              Game progress and personal statistics are stored in your browser using localStorage. They are not sent to Footle’s database, but clearing your browser storage will remove them. This locally stored data includes:
             </p>
             <ul className="list-disc pl-6 mt-2 mb-4 space-y-2">
               <li>Your game history and daily results</li>
@@ -68,7 +68,10 @@ export default function PrivacyPolicy() {
               <li>Game type (main game or specific league)</li>
             </ul>
             <p className="mt-2 text-sm text-gray-400">
-              Note: Leaderboard data is public and visible to all players. Leaderboard entries older than 30 days may be automatically deleted.
+              Leaderboard entries are public and visible to other visitors. Contact us if you want to request removal of an entry.
+            </p>
+            <p className="mt-3">
+              If you create a custom game or choose to share an 8-0 result, the information needed to display that shared page is stored in our database and can be viewed by anyone with its link.
             </p>
           </section>
 
@@ -79,23 +82,18 @@ export default function PrivacyPolicy() {
             </p>
             <ul className="list-disc pl-6 mt-2 space-y-2">
               <li>Supabase (for leaderboard data storage and management)</li>
-              <li>Google Analytics (for website analytics)</li>
-              <li>Social media sharing features</li>
-              <li>Affiliate Links where we may earn commision from purchases you make at no extra cost to you</li>
-              <li>
-                If advertising is introduced, third-party advertising providers may use cookies or similar technologies to
-                deliver and measure ads in accordance with their own privacy policies.
-              </li>
+              <li>Google Analytics and Ahrefs Analytics (for website usage measurement)</li>
+              <li>Google AdSense and other advertising technology loaded on the site (to display and measure advertising)</li>
             </ul>
+            <p>
+              These providers may receive technical information such as your IP address, browser and device details, pages visited, and interactions with the site. Their collection and use of information are governed by their own privacy notices and settings.
+            </p>
           </section>
 
           <section>
             <h2 className="text-xl font-semibold mb-4">Cookies and Advertising</h2>
             <p>
-              Footle may use cookies or similar technologies for essential site functions, analytics, and (if enabled) advertising.
-              You can control cookies through your browser settings. If third-party ads are shown, the provider may use information
-              about visits to this and other websites to provide relevant advertising. Please consult the provider&apos;s privacy
-              choices for more information and controls.
+              Footle loads Google AdSense and advertising technology that may display ads on the site. Google and other providers may use cookies or similar technologies to serve, personalize where permitted, and measure ads, including by using information about visits to this and other websites. You can manage cookies in your browser and review Google&apos;s advertising settings. Blocking cookies may affect some site features. For details about how an advertising provider uses information, consult that provider&apos;s privacy notice and controls.
             </p>
           </section>
 
@@ -110,7 +108,6 @@ export default function PrivacyPolicy() {
               <li>Choose whether to submit scores to the public leaderboard</li>
               <li>Submit to the leaderboard with any nickname you choose</li>
               <li>Request deletion of your leaderboard entries by contacting us</li>
-              <li>Opt-out of analytics</li>
             </ul>
           </section>
 

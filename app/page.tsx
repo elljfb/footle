@@ -507,28 +507,39 @@ export default function Home() {
       <GamePageContent
         title="A daily football player guessing game"
         introduction={[
-          'Footle is a free daily football quiz where you use player knowledge and a series of clues to identify a mystery footballer. Each guess compares details such as position, age, nationality, club, league, height and preferred foot, so even a wrong answer can help you work out who to try next.',
-          'The puzzle is designed for a short daily play, whether you follow every team in Europe or simply enjoy testing your football memory. Start with the clues you trust most, look for patterns in the feedback and use each turn to narrow down the possibilities.',
+          'Footle is a free daily football player guessing game. You have ten attempts to identify the mystery player, choosing each guess from the game’s player list. After every valid guess, the result compares eight details: position, sub-position, age, nationality, club, league, height and preferred foot.',
+          'The clues are designed to make each attempt useful, even when the name is wrong. Treat confirmed matches as anchors, use close matches to build a shortlist, and pay attention to the age and height arrows before committing to your next guess.',
         ]}
         sections={[
           {
-            heading: 'How to get more from each clue',
+            heading: 'How to interpret each Footle clue',
             paragraphs: [
-              'An exact match confirms that an attribute is shared with the mystery player. A close result points to a related answer, such as a nearby age or another club in the same league. Compare several categories together rather than relying on a single clue; a position combined with a league and nationality can quickly reduce the number of likely players.',
-              'Footle also has league-specific daily games, including Premier League Guess, as well as career, grid, squad and memory challenges. Your chosen format can suit whatever part of football you follow most closely.',
+              'Green means the attribute is an exact match; grey means it is not. Orange is reserved for specific near matches: an age within three years, a height within five centimetres, a nationality from the same continent, another club in the same league, or a different sub-position within the same broad position. Position, league and preferred foot must match exactly.',
+              'For age and height, the arrow adds direction: it shows whether the mystery player is older or younger, or taller or shorter, than your guess. Use that direction alongside the displayed value instead of treating an orange result as an exact answer.',
+              'Compare clues together. If a guess confirms the league and broad position but points to a different club in that league, keep those confirmed details and test a different candidate. A nationality from the same continent is a useful lead, but it does not confirm the player’s country.',
             ],
           },
           {
-            heading: 'Explore more football games',
+            heading: 'A practical way to narrow down the answer',
             paragraphs: [
-              'When you have solved today’s puzzle, visit the archive to revisit recent dailies or switch to a different kind of challenge. Football Grid is about finding players who fit two categories, while Career Mode asks you to recognise a player from their club history.',
+              'Start with a player you can identify confidently in the searchable list, then read the whole result before making another guess. Note the exact matches first, then use each orange result to set a boundary: a maximum three-year age difference, a maximum five-centimetre height difference, or a shared continent or league.',
+              'Choose a next guess that tests more than one open question. For example, if you have narrowed the answer to a league and broad position, pick a player from that league whose nationality or age can help distinguish between the remaining possibilities. Avoid repeating a guess that would only confirm information you already know.',
+              'The player list is based on players from Europe’s five major leagues. It is a maintained dataset rather than a live roster, so a player or recent transfer may not always appear. If a name is not accepted, search for another listed player from the same competition.',
+            ],
+          },
+          {
+            heading: 'Choose another kind of football challenge',
+            paragraphs: [
+              'Footle also offers league-specific daily games, including Premier League Guess, alongside Football Grid, Career Mode, Squadle, Recall and the 8-0 World Cup draft. Each format tests a different kind of football knowledge: player attributes, club history, line-ups, memory or squad building.',
+              'When you have finished today’s puzzle, the archive lets you revisit recent daily games. You can also browse all the games or read practical guides to player clues and football quiz strategy.',
             ],
           },
         ]}
         faqs={[
           { question: 'How many guesses do I get in Footle?', answer: 'You have up to 10 guesses to identify the daily mystery footballer. The game shows how each guess compares with the answer.' },
           { question: 'When does the daily Footle puzzle change?', answer: 'Footle provides a new daily puzzle each day. Your progress for the current puzzle is saved in your browser so you can come back and continue.' },
-          { question: 'What do the clue colours mean?', answer: 'Green indicates an exact match for a player attribute, orange indicates a close or related match, and grey indicates that the attribute does not match.' },
+          { question: 'What do the clue colours and arrows mean?', answer: 'Green is an exact match and grey is not a match. Orange means a specific near match: age within three years, height within five centimetres, nationality on the same continent, a different club in the same league, or a different sub-position in the same broad position. The age and height arrows show whether the mystery player is older or younger, or taller or shorter, than your guess.' },
+          { question: 'Why can’t I find a player to guess?', answer: 'Guesses must match a name in Footle’s player list. The list covers players from Europe’s five major leagues but is not a live roster, so some players or recent transfers may not be included.' },
           { question: 'Can I play other football quizzes on Footle?', answer: 'Yes. Footle includes league-specific puzzles, Football Grid, Career Mode, Squadle, Recall, the 8-0 World Cup draft, an archive and custom challenges.' },
         ]}
       />
