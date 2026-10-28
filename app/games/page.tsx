@@ -12,6 +12,7 @@ const games = [
   { href: '/league/premier-league', title: 'Premier League Guess', label: 'League daily', description: 'Put your Premier League player knowledge to the test in a league-focused daily puzzle.' },
   { href: '/grid', title: 'Football Grid', label: 'Daily grid', description: 'Fill each square in a 3 × 3 football grid with players who fit the row and column clues.' },
   { href: '/career', title: 'Career Mode', label: 'Career path quiz', description: 'Identify a footballer from the clubs, appearances and goals in their career history.' },
+  { href: '/player-of-the-season', title: 'Player of the Season', label: 'Season simulator', description: 'Build a footballer, choose a club and simulate whether they become the Premier League standout.' },
   { href: '/eight-zero', title: '8-0', label: 'World Cup draft', description: 'Draft a World Cup starting XI and see how far your team can go in the tournament.' },
   { href: '/squadle', title: 'Squadle', label: 'Starting XI quiz', description: 'Use a squad blueprint to work out which club the starting eleven represents.' },
   { href: '/recall', title: 'Footle Recall', label: 'Memory challenge', description: 'Study a footballer profile, then rely on your memory to choose the right player.' },

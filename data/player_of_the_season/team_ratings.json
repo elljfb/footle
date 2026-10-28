@@ -1,0 +1,581 @@
+{
+  "metadata": {
+    "name": "Premier League Team Simulation Data",
+    "season": "2026/27",
+    "schema_version": "1.0.0",
+    "language": "en-GB",
+    "rating_scale": "0-100",
+    "data_status": "Prototype balancing data",
+    "important_note": "The club list is based on the Premier League's announced 2026/27 membership. Team and positional ratings, formations, tactical styles, squad depth and competition-for-places values are illustrative game-design estimates, not official ratings or verified analysis of final squads. Tune these values through playtesting.",
+    "design_principle": "Team quality affects match outcomes and chance creation. Positional strength and squad depth affect competition for minutes. Player attributes, role fit, age, form, fitness and match events should also influence selection and performance."
+  },
+  "rating_definitions": {
+    "overall": "Overall squad quality",
+    "position_strengths": "Estimated strength of the club's options in each broad position group",
+    "squad_depth": "Depth and quality of substitutes and rotation options, 1-5",
+    "competition_for_places": "Qualitative estimate of how difficult it is for a new player to earn minutes",
+    "simulation_modifiers": "Derived helper ratings for match simulation; can be recalculated from position_strengths"
+  },
+  "teams": [
+    {
+      "id": "ars",
+      "name": "Arsenal",
+      "short_name": "ARS",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 88,
+      "preferred_formation": "4-3-3",
+      "tactical_style": "Possession-oriented wide attack",
+      "position_strengths": {
+        "goalkeeper": 86,
+        "centre_back": 89,
+        "full_back_wing_back": 87,
+        "defensive_midfielder": 88,
+        "central_midfielder": 88,
+        "attacking_midfielder": 87,
+        "winger": 87,
+        "striker": 86
+      },
+      "squad_depth": 4,
+      "competition_for_places": "High",
+      "simulation_modifiers": {
+        "chance_creation": 87,
+        "defensive_stability": 88,
+        "attacking_threat": 87,
+        "rotation_quality": 94
+      }
+    },
+    {
+      "id": "avl",
+      "name": "Aston Villa",
+      "short_name": "AVL",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 82,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 81,
+        "centre_back": 82,
+        "full_back_wing_back": 81,
+        "defensive_midfielder": 82,
+        "central_midfielder": 82,
+        "attacking_midfielder": 81,
+        "winger": 82,
+        "striker": 80
+      },
+      "squad_depth": 4,
+      "competition_for_places": "High",
+      "simulation_modifiers": {
+        "chance_creation": 82,
+        "defensive_stability": 82,
+        "attacking_threat": 81,
+        "rotation_quality": 88
+      }
+    },
+    {
+      "id": "bou",
+      "name": "AFC Bournemouth",
+      "short_name": "BOU",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 78,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 76,
+        "centre_back": 77,
+        "full_back_wing_back": 78,
+        "defensive_midfielder": 78,
+        "central_midfielder": 78,
+        "attacking_midfielder": 77,
+        "winger": 79,
+        "striker": 77
+      },
+      "squad_depth": 3,
+      "competition_for_places": "Medium",
+      "simulation_modifiers": {
+        "chance_creation": 78,
+        "defensive_stability": 77,
+        "attacking_threat": 78,
+        "rotation_quality": 82
+      }
+    },
+    {
+      "id": "bre",
+      "name": "Brentford",
+      "short_name": "BRE",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 78,
+      "preferred_formation": "4-3-3",
+      "tactical_style": "Possession-oriented wide attack",
+      "position_strengths": {
+        "goalkeeper": 77,
+        "centre_back": 77,
+        "full_back_wing_back": 78,
+        "defensive_midfielder": 78,
+        "central_midfielder": 78,
+        "attacking_midfielder": 77,
+        "winger": 78,
+        "striker": 77
+      },
+      "squad_depth": 3,
+      "competition_for_places": "Medium",
+      "simulation_modifiers": {
+        "chance_creation": 78,
+        "defensive_stability": 77,
+        "attacking_threat": 77,
+        "rotation_quality": 82
+      }
+    },
+    {
+      "id": "bha",
+      "name": "Brighton & Hove Albion",
+      "short_name": "BHA",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 80,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 79,
+        "centre_back": 78,
+        "full_back_wing_back": 81,
+        "defensive_midfielder": 80,
+        "central_midfielder": 80,
+        "attacking_midfielder": 79,
+        "winger": 80,
+        "striker": 78
+      },
+      "squad_depth": 3,
+      "competition_for_places": "Medium",
+      "simulation_modifiers": {
+        "chance_creation": 80,
+        "defensive_stability": 79,
+        "attacking_threat": 79,
+        "rotation_quality": 84
+      }
+    },
+    {
+      "id": "che",
+      "name": "Chelsea",
+      "short_name": "CHE",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 85,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 83,
+        "centre_back": 85,
+        "full_back_wing_back": 86,
+        "defensive_midfielder": 86,
+        "central_midfielder": 86,
+        "attacking_midfielder": 85,
+        "winger": 86,
+        "striker": 84
+      },
+      "squad_depth": 4,
+      "competition_for_places": "High",
+      "simulation_modifiers": {
+        "chance_creation": 86,
+        "defensive_stability": 85,
+        "attacking_threat": 85,
+        "rotation_quality": 91
+      }
+    },
+    {
+      "id": "cov",
+      "name": "Coventry City",
+      "short_name": "COV",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 72,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 71,
+        "centre_back": 71,
+        "full_back_wing_back": 72,
+        "defensive_midfielder": 72,
+        "central_midfielder": 72,
+        "attacking_midfielder": 71,
+        "winger": 72,
+        "striker": 71
+      },
+      "squad_depth": 2,
+      "competition_for_places": "Low",
+      "simulation_modifiers": {
+        "chance_creation": 72,
+        "defensive_stability": 71,
+        "attacking_threat": 71,
+        "rotation_quality": 74
+      }
+    },
+    {
+      "id": "cry",
+      "name": "Crystal Palace",
+      "short_name": "CRY",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 79,
+      "preferred_formation": "3-4-2-1",
+      "tactical_style": "Three centre-backs and attacking wing-backs",
+      "position_strengths": {
+        "goalkeeper": 79,
+        "centre_back": 78,
+        "full_back_wing_back": 79,
+        "defensive_midfielder": 78,
+        "central_midfielder": 78,
+        "attacking_midfielder": 78,
+        "winger": 80,
+        "striker": 77
+      },
+      "squad_depth": 3,
+      "competition_for_places": "Medium",
+      "simulation_modifiers": {
+        "chance_creation": 79,
+        "defensive_stability": 78,
+        "attacking_threat": 78,
+        "rotation_quality": 83
+      }
+    },
+    {
+      "id": "eve",
+      "name": "Everton",
+      "short_name": "EVE",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 77,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 78,
+        "centre_back": 77,
+        "full_back_wing_back": 76,
+        "defensive_midfielder": 76,
+        "central_midfielder": 76,
+        "attacking_midfielder": 74,
+        "winger": 77,
+        "striker": 76
+      },
+      "squad_depth": 3,
+      "competition_for_places": "Medium",
+      "simulation_modifiers": {
+        "chance_creation": 76,
+        "defensive_stability": 77,
+        "attacking_threat": 76,
+        "rotation_quality": 81
+      }
+    },
+    {
+      "id": "ful",
+      "name": "Fulham",
+      "short_name": "FUL",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 78,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 77,
+        "centre_back": 77,
+        "full_back_wing_back": 77,
+        "defensive_midfielder": 78,
+        "central_midfielder": 78,
+        "attacking_midfielder": 77,
+        "winger": 78,
+        "striker": 77
+      },
+      "squad_depth": 3,
+      "competition_for_places": "Medium",
+      "simulation_modifiers": {
+        "chance_creation": 78,
+        "defensive_stability": 77,
+        "attacking_threat": 77,
+        "rotation_quality": 82
+      }
+    },
+    {
+      "id": "hul",
+      "name": "Hull City",
+      "short_name": "HUL",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 71,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 70,
+        "centre_back": 70,
+        "full_back_wing_back": 71,
+        "defensive_midfielder": 71,
+        "central_midfielder": 71,
+        "attacking_midfielder": 70,
+        "winger": 71,
+        "striker": 70
+      },
+      "squad_depth": 2,
+      "competition_for_places": "Low",
+      "simulation_modifiers": {
+        "chance_creation": 71,
+        "defensive_stability": 70,
+        "attacking_threat": 70,
+        "rotation_quality": 73
+      }
+    },
+    {
+      "id": "ips",
+      "name": "Ipswich Town",
+      "short_name": "IPS",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 73,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 72,
+        "centre_back": 72,
+        "full_back_wing_back": 73,
+        "defensive_midfielder": 73,
+        "central_midfielder": 73,
+        "attacking_midfielder": 72,
+        "winger": 73,
+        "striker": 72
+      },
+      "squad_depth": 2,
+      "competition_for_places": "Low",
+      "simulation_modifiers": {
+        "chance_creation": 73,
+        "defensive_stability": 72,
+        "attacking_threat": 72,
+        "rotation_quality": 75
+      }
+    },
+    {
+      "id": "lee",
+      "name": "Leeds United",
+      "short_name": "LEE",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 76,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 75,
+        "centre_back": 75,
+        "full_back_wing_back": 76,
+        "defensive_midfielder": 76,
+        "central_midfielder": 76,
+        "attacking_midfielder": 74,
+        "winger": 77,
+        "striker": 75
+      },
+      "squad_depth": 3,
+      "competition_for_places": "Medium",
+      "simulation_modifiers": {
+        "chance_creation": 76,
+        "defensive_stability": 75,
+        "attacking_threat": 75,
+        "rotation_quality": 80
+      }
+    },
+    {
+      "id": "liv",
+      "name": "Liverpool",
+      "short_name": "LIV",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 87,
+      "preferred_formation": "4-3-3",
+      "tactical_style": "Possession-oriented wide attack",
+      "position_strengths": {
+        "goalkeeper": 85,
+        "centre_back": 87,
+        "full_back_wing_back": 87,
+        "defensive_midfielder": 88,
+        "central_midfielder": 88,
+        "attacking_midfielder": 86,
+        "winger": 88,
+        "striker": 87
+      },
+      "squad_depth": 4,
+      "competition_for_places": "High",
+      "simulation_modifiers": {
+        "chance_creation": 87,
+        "defensive_stability": 87,
+        "attacking_threat": 87,
+        "rotation_quality": 93
+      }
+    },
+    {
+      "id": "mci",
+      "name": "Manchester City",
+      "short_name": "MCI",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 89,
+      "preferred_formation": "4-3-3",
+      "tactical_style": "Possession-oriented wide attack",
+      "position_strengths": {
+        "goalkeeper": 87,
+        "centre_back": 89,
+        "full_back_wing_back": 88,
+        "defensive_midfielder": 91,
+        "central_midfielder": 91,
+        "attacking_midfielder": 89,
+        "winger": 89,
+        "striker": 88
+      },
+      "squad_depth": 4,
+      "competition_for_places": "Very high",
+      "simulation_modifiers": {
+        "chance_creation": 90,
+        "defensive_stability": 89,
+        "attacking_threat": 89,
+        "rotation_quality": 95
+      }
+    },
+    {
+      "id": "mun",
+      "name": "Manchester United",
+      "short_name": "MUN",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 83,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 82,
+        "centre_back": 83,
+        "full_back_wing_back": 82,
+        "defensive_midfielder": 83,
+        "central_midfielder": 83,
+        "attacking_midfielder": 82,
+        "winger": 84,
+        "striker": 82
+      },
+      "squad_depth": 4,
+      "competition_for_places": "High",
+      "simulation_modifiers": {
+        "chance_creation": 83,
+        "defensive_stability": 83,
+        "attacking_threat": 83,
+        "rotation_quality": 89
+      }
+    },
+    {
+      "id": "new",
+      "name": "Newcastle United",
+      "short_name": "NEW",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 82,
+      "preferred_formation": "4-3-3",
+      "tactical_style": "Possession-oriented wide attack",
+      "position_strengths": {
+        "goalkeeper": 81,
+        "centre_back": 82,
+        "full_back_wing_back": 81,
+        "defensive_midfielder": 82,
+        "central_midfielder": 82,
+        "attacking_midfielder": 80,
+        "winger": 83,
+        "striker": 82
+      },
+      "squad_depth": 4,
+      "competition_for_places": "High",
+      "simulation_modifiers": {
+        "chance_creation": 82,
+        "defensive_stability": 82,
+        "attacking_threat": 82,
+        "rotation_quality": 88
+      }
+    },
+    {
+      "id": "nfo",
+      "name": "Nottingham Forest",
+      "short_name": "NFO",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 78,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 78,
+        "centre_back": 78,
+        "full_back_wing_back": 77,
+        "defensive_midfielder": 77,
+        "central_midfielder": 77,
+        "attacking_midfielder": 75,
+        "winger": 79,
+        "striker": 77
+      },
+      "squad_depth": 3,
+      "competition_for_places": "Medium",
+      "simulation_modifiers": {
+        "chance_creation": 77,
+        "defensive_stability": 78,
+        "attacking_threat": 77,
+        "rotation_quality": 82
+      }
+    },
+    {
+      "id": "sun",
+      "name": "Sunderland",
+      "short_name": "SUN",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 74,
+      "preferred_formation": "4-2-3-1",
+      "tactical_style": "Balanced shape with a central attacking midfielder",
+      "position_strengths": {
+        "goalkeeper": 73,
+        "centre_back": 73,
+        "full_back_wing_back": 74,
+        "defensive_midfielder": 74,
+        "central_midfielder": 74,
+        "attacking_midfielder": 73,
+        "winger": 74,
+        "striker": 73
+      },
+      "squad_depth": 2,
+      "competition_for_places": "Low",
+      "simulation_modifiers": {
+        "chance_creation": 74,
+        "defensive_stability": 73,
+        "attacking_threat": 73,
+        "rotation_quality": 76
+      }
+    },
+    {
+      "id": "tot",
+      "name": "Tottenham Hotspur",
+      "short_name": "TOT",
+      "league": "Premier League",
+      "season": "2026/27",
+      "overall": 82,
+      "preferred_formation": "4-3-3",
+      "tactical_style": "Possession-oriented wide attack",
+      "position_strengths": {
+        "goalkeeper": 80,
+        "centre_back": 81,
+        "full_back_wing_back": 82,
+        "defensive_midfielder": 82,
+        "central_midfielder": 82,
+        "attacking_midfielder": 81,
+        "winger": 83,
+        "striker": 81
+      },
+      "squad_depth": 4,
+      "competition_for_places": "High",
+      "simulation_modifiers": {
+        "chance_creation": 82,
+        "defensive_stability": 81,
+        "attacking_threat": 82,
+        "rotation_quality": 88
+      }
+    }
+  ]
+}

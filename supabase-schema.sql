@@ -89,6 +89,33 @@ CREATE POLICY "Anyone can insert 8-0 shares"
   FOR INSERT
   WITH CHECK (true);
 
+-- Create shareable Player of the Season result pages
+CREATE TABLE IF NOT EXISTS player_of_the_season_shares (
+  id BIGSERIAL PRIMARY KEY,
+  slug TEXT NOT NULL UNIQUE,
+  share_text TEXT NOT NULL,
+  player_build JSONB NOT NULL,
+  season JSONB NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_player_of_the_season_shares_slug
+  ON player_of_the_season_shares(slug);
+CREATE INDEX IF NOT EXISTS idx_player_of_the_season_shares_created_at
+  ON player_of_the_season_shares(created_at);
+
+ALTER TABLE player_of_the_season_shares ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Anyone can view Player of the Season shares"
+  ON player_of_the_season_shares
+  FOR SELECT
+  USING (true);
+
+CREATE POLICY "Anyone can insert Player of the Season shares"
+  ON player_of_the_season_shares
+  FOR INSERT
+  WITH CHECK (true);
+
 -- Optional: Create a function to clean up old leaderboard entries (run daily)
 -- This keeps only the last 30 days of data
 CREATE OR REPLACE FUNCTION clean_old_leaderboard_entries()

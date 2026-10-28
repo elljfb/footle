@@ -49,6 +49,13 @@ const gameModes = [
     accent: 'border-emerald-500/30 text-emerald-200',
   },
   {
+    href: '/player-of-the-season',
+    title: 'Player of the Season',
+    description:
+      'Create your footballer, choose a club, and see how a full Premier League season pans out.',
+    accent: 'border-emerald-500/30 text-emerald-200',
+  },
+  {
     href: '/squadle',
     title: 'Squadle',
     description:
