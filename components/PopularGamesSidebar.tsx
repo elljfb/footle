@@ -5,6 +5,7 @@ const popularGames = [
   { href: '/league/premier-league', title: 'Premier League Guess', description: 'A Premier League daily', icon: '🏆' },
   { href: '/grid', title: 'Football Grid', description: 'Complete the 3 × 3 grid', icon: '▦' },
   { href: '/eight-zero', title: '8-0', description: 'Draft a World Cup XI', icon: '🌍' },
+  { href: '/player-of-the-season', title: 'Player of the Season', description: 'Build a player and simulate a season', icon: '🏃‍♂️' },
   { href: '/career', title: 'Career Mode', description: 'Follow a player’s career', icon: '👟' },
 ];
 

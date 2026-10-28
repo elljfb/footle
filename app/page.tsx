@@ -55,6 +55,12 @@ export default function Home() {
       accent: 'border-emerald-500/30 text-emerald-200',
     },
     {
+      href: '/player-of-the-season',
+      title: 'Player of the Season',
+      description: 'Build your footballer and simulate a season',
+      accent: 'border-emerald-500/30 text-emerald-200',
+    },
+    {
       href: '/eight-zero',
       title: '8-0',
       description: 'Draft a World Cup XI and chase perfection',
