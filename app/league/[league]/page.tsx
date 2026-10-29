@@ -7,7 +7,7 @@ export async function generateMetadata({ params }: { params: Promise<{ league?: 
   const { league: slug } = await params;
   const leagueName = slug ? (slugToLeagueName[slug] ?? decodeURIComponent(slug)) : undefined;
 
-  const title = leagueName ? `Footle - Guess The ${leagueName} player` : 'Footle - The Daily Football Player Guessing Game';
+  const title = leagueName ? `Guess The ${leagueName} player` : 'Footle - The Daily Football Player Guessing Game';
   const description = leagueName
     ? `Try to guess today's mystery ${leagueName} player. Get feedback on position, age, nationality, club and more.`
     : 'Test your football knowledge by guessing today\'s mystery football player. Get feedback on position, age, nationality, club, and more with each guess.';
