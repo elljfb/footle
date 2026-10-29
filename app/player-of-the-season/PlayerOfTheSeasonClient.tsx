@@ -73,12 +73,12 @@ function FixtureResult({ result, playerName, clubId }: { result: PlayerMatchResu
 
   return (
     <article className={`season-result-enter rounded-2xl border p-5 sm:p-6 ${outcomeClasses}`}>
-      <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6">
-        <p className="text-right text-lg font-bold text-white sm:text-2xl">{result.home.name}</p>
-        <p className={`rounded-xl px-4 py-3 text-3xl font-black tabular-nums ${scoreClasses}`}>
+      <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 sm:gap-6">
+        <p className="min-w-0 break-words text-right text-base font-bold text-white sm:text-2xl">{result.home.name}</p>
+        <p className={`whitespace-nowrap rounded-xl px-2 py-2 text-2xl font-black tabular-nums sm:px-4 sm:py-3 sm:text-3xl ${scoreClasses}`}>
           {result.homeGoals} - {result.awayGoals}
         </p>
-        <p className="text-lg font-bold text-white sm:text-2xl">{result.away.name}</p>
+        <p className="min-w-0 break-words text-base font-bold text-white sm:text-2xl">{result.away.name}</p>
       </div>
       <div className="mt-5 border-t border-gray-800 pt-4">
         {result.playerPlayed ? (
