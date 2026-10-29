@@ -69,7 +69,7 @@ export async function GET(
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: 176, height: 128, marginLeft: 26, border: '2px solid rgba(3, 230, 144, 0.7)', borderRadius: 24, background: 'rgba(3, 230, 144, 0.12)' }}>
                 <div style={{ display: 'flex', color: '#86efac', fontSize: 15, fontWeight: 900, letterSpacing: 3 }}>POSITION</div>
-                <div style={{ display: 'flex', marginTop: 8, color: '#ffffff', fontSize: 30, fontWeight: 900 }}>{getPlayerPositionLabel(player.position)}</div>
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%', marginTop: 8, color: '#ffffff', fontSize: 17, fontWeight: 900, whiteSpace: 'nowrap' }}>{getPlayerPositionLabel(player.position)}</div>
               </div>
             </div>
             {additionalAwards.length > 0 && (
