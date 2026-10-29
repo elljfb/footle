@@ -29,6 +29,25 @@ function sumAttributes(attributes: AttributeSet): number {
   return ATTRIBUTE_LABELS.reduce((sum, key) => sum + attributes[key], 0);
 }
 
+type PlayerMeasurement = 'age' | 'height' | 'weight';
+
+const PLAYER_MEASUREMENT_RANGES: Record<PlayerMeasurement, { min: number; max: number }> = {
+  age: { min: 16, max: 40 },
+  height: { min: 150, max: 205 },
+  weight: { min: 50, max: 110 },
+};
+
+function getMeasurementError(value: string, measurement: PlayerMeasurement): string {
+  const { min, max } = PLAYER_MEASUREMENT_RANGES[measurement];
+  const parsedValue = Number(value);
+
+  if (!value.trim() || !Number.isInteger(parsedValue) || parsedValue < min || parsedValue > max) {
+    return `Enter a whole number from ${min} to ${max}.`;
+  }
+
+  return '';
+}
+
 function getOrdinal(position: number): string {
   if (position % 100 >= 11 && position % 100 <= 13) return `${position}th`;
   switch (position % 10) {
@@ -82,6 +101,14 @@ function FixtureResult({ result, playerName, clubId }: { result: PlayerMatchResu
 export default function PlayerOfTheSeasonClient() {
   const router = useRouter();
   const [build, setBuild] = useState<PlayerBuild>(() => getDefaultBuild());
+  const [measurementInputs, setMeasurementInputs] = useState(() => {
+    const defaults = getDefaultBuild();
+    return {
+      age: String(defaults.age),
+      height: String(defaults.height),
+      weight: String(defaults.weight),
+    };
+  });
   const [season, setSeason] = useState<PlayerSeasonSummary | null>(null);
   const [roundIndex, setRoundIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -91,6 +118,12 @@ export default function PlayerOfTheSeasonClient() {
 
   const totalAttributes = useMemo(() => sumAttributes(build.attributes), [build.attributes]);
   const remainingPoints = MAX_ATTRIBUTE_POINTS - totalAttributes;
+  const measurementErrors = {
+    age: getMeasurementError(measurementInputs.age, 'age'),
+    height: getMeasurementError(measurementInputs.height, 'height'),
+    weight: getMeasurementError(measurementInputs.weight, 'weight'),
+  };
+  const measurementsAreValid = Object.values(measurementErrors).every((error) => !error);
 
   const updateBuild = (changes: Partial<PlayerBuild>) => {
     setBuild((current) => ({ ...current, ...changes }));
@@ -122,7 +155,15 @@ export default function PlayerOfTheSeasonClient() {
   };
 
   const startSeason = () => {
-    const playerBuild = { ...build, name: build.name.trim() || 'Player' };
+    if (!measurementsAreValid) return;
+
+    const playerBuild = {
+      ...build,
+      age: Number(measurementInputs.age),
+      height: Number(measurementInputs.height),
+      weight: Number(measurementInputs.weight),
+      name: build.name.trim() || 'Player',
+    };
     setBuild(playerBuild);
     setSeason(simulatePlayerOfTheSeason(playerBuild, Date.now() + Math.floor(Math.random() * 1_000_000_000)));
     setRoundIndex(0);
@@ -226,13 +267,17 @@ export default function PlayerOfTheSeasonClient() {
             <label className="space-y-2 text-sm text-gray-300">
               <span>Age</span>
               <input
-                type="number"
-                min={16}
-                max={40}
-                value={build.age}
-                onChange={(event) => updateBuild({ age: Math.min(40, Math.max(16, Number(event.target.value) || 16)) })}
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                value={measurementInputs.age}
+                aria-invalid={Boolean(measurementErrors.age)}
+                aria-describedby={measurementErrors.age ? 'age-range age-error' : 'age-range'}
+                onChange={(event) => setMeasurementInputs((current) => ({ ...current, age: event.target.value }))}
                 className="w-full rounded-xl border border-gray-700 bg-gray-950 px-3 py-2.5 text-white outline-none transition focus:border-[#03E690]"
               />
+              <span id="age-range" className="block text-xs text-gray-400">Range: 16-40 years.</span>
+              {measurementErrors.age && <span id="age-error" className="block text-xs text-red-300" role="alert">{measurementErrors.age}</span>}
             </label>
 
             <label className="space-y-2 text-sm text-gray-300">
@@ -249,25 +294,33 @@ export default function PlayerOfTheSeasonClient() {
             <label className="space-y-2 text-sm text-gray-300">
               <span>Height (cm)</span>
               <input
-                type="number"
-                min={150}
-                max={205}
-                value={build.height}
-                onChange={(event) => updateBuild({ height: Math.min(205, Math.max(150, Number(event.target.value) || 180)) })}
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                value={measurementInputs.height}
+                aria-invalid={Boolean(measurementErrors.height)}
+                aria-describedby={measurementErrors.height ? 'height-range height-error' : 'height-range'}
+                onChange={(event) => setMeasurementInputs((current) => ({ ...current, height: event.target.value }))}
                 className="w-full rounded-xl border border-gray-700 bg-gray-950 px-3 py-2.5 text-white outline-none transition focus:border-[#03E690]"
               />
+              <span id="height-range" className="block text-xs text-gray-400">Range: 150-205 cm.</span>
+              {measurementErrors.height && <span id="height-error" className="block text-xs text-red-300" role="alert">{measurementErrors.height}</span>}
             </label>
 
             <label className="space-y-2 text-sm text-gray-300">
               <span>Weight (kg)</span>
               <input
-                type="number"
-                min={50}
-                max={110}
-                value={build.weight}
-                onChange={(event) => updateBuild({ weight: Math.min(110, Math.max(50, Number(event.target.value) || 70)) })}
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                value={measurementInputs.weight}
+                aria-invalid={Boolean(measurementErrors.weight)}
+                aria-describedby={measurementErrors.weight ? 'weight-range weight-error' : 'weight-range'}
+                onChange={(event) => setMeasurementInputs((current) => ({ ...current, weight: event.target.value }))}
                 className="w-full rounded-xl border border-gray-700 bg-gray-950 px-3 py-2.5 text-white outline-none transition focus:border-[#03E690]"
               />
+              <span id="weight-range" className="block text-xs text-gray-400">Range: 50-110 kg.</span>
+              {measurementErrors.weight && <span id="weight-error" className="block text-xs text-red-300" role="alert">{measurementErrors.weight}</span>}
             </label>
 
             <label className="space-y-2 text-sm text-gray-300 md:col-span-2">
@@ -331,7 +384,7 @@ export default function PlayerOfTheSeasonClient() {
           <button
             type="button"
             onClick={startSeason}
-            disabled={totalAttributes > MAX_ATTRIBUTE_POINTS}
+            disabled={totalAttributes > MAX_ATTRIBUTE_POINTS || !measurementsAreValid}
             className="mt-6 w-full rounded-xl bg-[#03E690] px-5 py-4 text-lg font-black text-gray-950 transition hover:bg-emerald-300 disabled:cursor-not-allowed disabled:opacity-50"
           >
             Simulate the season
