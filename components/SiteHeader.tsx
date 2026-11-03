@@ -17,7 +17,7 @@ export default function SiteHeader() {
   return (
     <header className="border-b border-gray-800 bg-gray-950/80">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 sm:px-6">
-        <Link href="/" aria-label="Footle home" className="shrink-0">
+        <Link href="/" prefetch={false} aria-label="Footle home" className="shrink-0">
           <Image
             src="/footle-logo-main.png"
             alt="Footle"
@@ -33,6 +33,7 @@ export default function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={false}
               className="rounded-lg px-4 py-2 text-sm font-medium text-gray-300 transition-colors hover:bg-gray-800 hover:text-[#03E690]"
             >
               {item.label}
@@ -40,6 +41,7 @@ export default function SiteHeader() {
           ))}
           <Link
             href="/"
+            prefetch={false}
             className="ml-2 rounded-lg bg-[#03E690] px-4 py-2 text-sm font-bold text-gray-950 transition-colors hover:bg-emerald-300"
           >
             Play today
@@ -71,6 +73,7 @@ export default function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={false}
                 onClick={() => setMenuOpen(false)}
                 className="rounded-lg px-3 py-3 text-sm font-medium text-gray-200 hover:bg-gray-800 hover:text-[#03E690]"
               >

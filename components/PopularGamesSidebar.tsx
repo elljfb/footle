@@ -34,7 +34,7 @@ export default function PopularGamesSidebar() {
           </Link>
         ))}
       </div>
-      <Link href="/games" className="inline-flex text-sm font-semibold text-[#03E690] hover:text-emerald-300">
+      <Link href="/games" prefetch={false} className="inline-flex text-sm font-semibold text-[#03E690] hover:text-emerald-300">
         Browse all games <span aria-hidden="true" className="ml-1">→</span>
       </Link>
     </aside>

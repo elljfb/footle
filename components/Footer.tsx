@@ -14,7 +14,7 @@ export default function Footer() {
       <footer className="border-t border-gray-800 bg-gray-950/70">
         <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
           <div>
-            <Link href="/" aria-label="Footle home" className="inline-block">
+            <Link href="/" prefetch={false} aria-label="Footle home" className="inline-block">
               <Image
                 src="/footle-logo-main.png"
                 alt="Footle"
@@ -43,10 +43,10 @@ export default function Footer() {
           <div>
             <h2 className="text-sm font-bold uppercase tracking-wider text-white">Useful links</h2>
             <ul className="mt-4 space-y-3 text-sm text-gray-400">
-              <li><Link href="/about" className="transition-colors hover:text-[#03E690]">About Footle</Link></li>
-              <li><Link href="/privacy" className="transition-colors hover:text-[#03E690]">Privacy policy</Link></li>
-              <li><Link href="/terms" className="transition-colors hover:text-[#03E690]">Terms of service</Link></li>
-              <li><Link href="/contact" className="transition-colors hover:text-[#03E690]">Contact us</Link></li>
+              <li><Link href="/about" prefetch={false} className="transition-colors hover:text-[#03E690]">About Footle</Link></li>
+              <li><Link href="/privacy" prefetch={false} className="transition-colors hover:text-[#03E690]">Privacy policy</Link></li>
+              <li><Link href="/terms" prefetch={false} className="transition-colors hover:text-[#03E690]">Terms of service</Link></li>
+              <li><Link href="/contact" prefetch={false} className="transition-colors hover:text-[#03E690]">Contact us</Link></li>
             </ul>
           </div>
         </div>
