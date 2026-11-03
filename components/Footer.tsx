@@ -31,6 +31,7 @@ export default function Footer() {
             { href: '/games', label: 'All games' },
             { href: '/articles', label: 'Football articles' },
             { href: '/archive', label: 'Footle archive' },
+            { href: '/football-generators', label: 'Football generators' },
             { href: '/custom', label: 'Create a custom game' },
           ]} />
           <FooterColumn title="Popular games" links={[

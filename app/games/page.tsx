@@ -18,6 +18,7 @@ const games = [
   { href: '/recall', title: 'Footle Recall', label: 'Memory challenge', description: 'Study a footballer profile, then rely on your memory to choose the right player.' },
   { href: '/archive', title: 'Footle Archive', label: 'Past daily puzzles', description: 'Return to recent Footle daily puzzles and keep your football quiz streak going.' },
   { href: '/custom', title: 'Custom games', label: 'Make a challenge', description: 'Create a football guessing game of your own and share it with friends.' },
+  { href: '/football-generators', title: 'Football Generators', label: 'Random picks', description: 'Generate a random football player or club and share the result with friends.' },
 ];
 
 export default function GamesPage() {
