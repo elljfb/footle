@@ -1,5 +1,6 @@
 https://footle.club
 https://footle.club/privacy
+https://footle.club/about
 https://footle.club/league/premier-league
 https://footle.club/league/laliga
 https://footle.club/league/bundesliga
@@ -13,3 +14,7 @@ https://footle.club/squadle
 https://footle.club/recall
 https://footle.club/transfer-generator
 https://footle.club/eight-zero
+https://footle.club/player-of-the-season
+https://footle.club/football-generators
+https://footle.club/random-football-player-generator
+https://footle.club/random-football-team-generator
