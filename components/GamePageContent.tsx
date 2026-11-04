@@ -77,8 +77,7 @@ export default function GamePageContent({
           ))}
         </div>
         <p className="border-t border-gray-800 pt-4 text-sm text-gray-400">
-          Looking for another challenge? Browse the <Link href="/games" className="font-semibold text-[#03E690] hover:text-emerald-300">Footle game collection</Link> or
-          try <Link href="/grid" className="ml-1 font-semibold text-[#03E690] hover:text-emerald-300">Football Grid</Link>.
+          Looking for another challenge? Try <Link href="/grid" className="ml-1 font-semibold text-[#03E690] hover:text-emerald-300">Football Grid</Link>.
         </p>
       </section>
     </section>
