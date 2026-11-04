@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import { GameStats } from '../types/game';
 import { getStats, getWinPercentage, getGuessDistributionWithMax } from '../services/statsService';
 
@@ -15,22 +14,6 @@ interface Props {
 
 export default function StatsModal({ isOpen, onClose, gameType, maxGuesses, gameTitle }: Props) {
   const [stats, setStats] = useState<GameStats | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose();
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (isOpen) {
@@ -39,34 +22,24 @@ export default function StatsModal({ isOpen, onClose, gameType, maxGuesses, game
     }
   }, [isOpen, gameType]);
 
-  if (!mounted || !isOpen || !stats) return null;
+  if (!isOpen || !stats) return null;
 
   const winPercentage = getWinPercentage(stats);
   const distribution = getGuessDistributionWithMax(stats, maxGuesses);
 
-  return createPortal(
-    <div
-      className="pointer-events-auto fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4"
-      onClick={onClose}
-    >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="stats-modal-title"
-        className="max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-lg border border-gray-700 bg-gray-800 shadow-2xl"
-        onClick={(event) => event.stopPropagation()}
-      >
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+      <div className="bg-gray-800 rounded-lg max-w-lg w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           {/* Header */}
           <div className="flex justify-between items-center mb-6">
-            <h2 id="stats-modal-title" className="text-2xl font-bold">
+            <h2 className="text-2xl font-bold">
               {gameTitle ? `${gameTitle} Stats` : 'Statistics'}
             </h2>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-white text-2xl w-8 h-8 flex items-center justify-center"
-              aria-label="Close statistics"
-              type="button"
+              aria-label="Close"
             >
               ×
             </button>
@@ -154,7 +127,6 @@ export default function StatsModal({ isOpen, onClose, gameType, maxGuesses, game
           )}
         </div>
       </div>
-    </div>,
-    document.body,
+    </div>
   );
 }

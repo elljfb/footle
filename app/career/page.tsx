@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import CareerClient from './CareerClient';
-import GamePageContent from '../../components/GamePageContent';
 
 export const metadata: Metadata = {
   title: 'Football Career Path Quiz - Guess The Player Career Path',
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/career/opengraph-image',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Footle Career - football career path quiz',
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Football Career Path Quiz | Guess The Player Career Path',
     description: 'Play the daily football career path quiz and guess the mystery player in 3 guesses.',
-    images: ['/career/opengraph-image'],
+    images: ['/career_og_image.png'],
   },
 };
 
@@ -120,13 +119,6 @@ export default function CareerPage() {
           </p>
         </div>
       </section>
-      <GamePageContent
-        faqs={[
-          { question: 'How many guesses do I get in Footle Career?', answer: 'You have three guesses to identify the mystery player from their career history.' },
-          { question: 'What information is shown in a career puzzle?', answer: 'The puzzle reveals the player’s senior club spells and associated appearances and goals, adding more of the career path as you play.' },
-          { question: 'Does Career Mode have different difficulty settings?', answer: 'Yes. Choose a difficulty before starting. The selected difficulty is reflected in the game and its statistics.' },
-        ]}
-      />
     </>
   );
 }
