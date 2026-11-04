@@ -19,6 +19,14 @@ export default function Footer() {
         <Link href="/privacy" prefetch={false} className="hover:text-gray-700">
           Privacy Policy
         </Link>
+        {' | '}
+        <Link href="/terms" prefetch={false} className="hover:text-gray-700">
+          Terms
+        </Link>
+        {' | '}
+        <Link href="/contact" prefetch={false} className="hover:text-gray-700">
+          Contact
+        </Link>
       </footer>
 
       <AdvertiseModal
