@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import TransferGeneratorClient from './TransferGeneratorClient';
 
 export const metadata: Metadata = {
-  title: 'Fake Football Transfer Maker - Random Transfer Generator',
+  title: 'Fake Football Transfer Maker - Random Transfer Generator | Footle',
   description:
     'Use the Footle fake football transfer maker to create random transfer rumours, fake transfer news, and shareable transfer rumour templates in one click.',
   keywords: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: 'Fake Football Transfer Maker - Random Transfer Generator',
+    title: 'Fake Football Transfer Maker - Random Transfer Generator | Footle',
     description:
       'Generate random transfer rumours and fake football transfer news to share with friends.',
     url: 'https://footle.club/transfer-generator',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/og-image.png',
+        url: '/transfer-generator/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Footle fake football transfer maker',
@@ -38,10 +38,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fake Football Transfer Maker | Random Transfer Generator',
+    title: 'Fake Football Transfer Maker | Random Transfer Generator | Footle',
     description:
       'Create fake football transfer rumors and random transfer news to share in seconds.',
-    images: ['/og-image.png'],
+    images: ['/transfer-generator/opengraph-image'],
   },
 };
 

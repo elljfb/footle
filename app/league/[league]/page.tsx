@@ -6,7 +6,7 @@ export async function generateMetadata({ params }: { params: Promise<{ league?: 
   const { league: slug } = await params;
   const leagueName = slug ? (slugToLeagueName[slug] ?? decodeURIComponent(slug)) : undefined;
 
-  const title = leagueName ? `Guess The ${leagueName} player` : 'Footle - The Daily Football Player Guessing Game';
+  const title = leagueName ? `Guess The ${leagueName} player | Footle` : 'Footle - The Daily Football Player Guessing Game';
   const description = leagueName
     ? `Try to guess today's mystery ${leagueName} player. Get feedback on position, age, nationality, club and more.`
     : 'Test your football knowledge by guessing today\'s mystery football player. Get feedback on position, age, nationality, club, and more with each guess.';
@@ -21,12 +21,12 @@ export async function generateMetadata({ params }: { params: Promise<{ league?: 
       description,
       url,
       siteName: 'Footle',
-      images: [{ url: '/og-image.png' }],
+      images: [{ url: `/league/${slug}/opengraph-image` }],
     },
     twitter: {
       title,
       description,
-      images: ['/og-image.png'],
+      images: [`/league/${slug}/opengraph-image`],
       card: 'summary_large_image',
     },
   };

@@ -19,12 +19,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `https://footle.club/custom/${slug}`,
       siteName: 'Footle',
-      images: [{ url: '/og-image.png' }],
+      images: [{ url: `/custom/${slug}/opengraph-image` }],
     },
     twitter: {
       title,
       description,
-      images: ['/og-image.png'],
+      images: [`/custom/${slug}/opengraph-image`],
       card: 'summary_large_image',
     },
   };
@@ -35,4 +35,3 @@ export default async function CustomGamePage({ params }: Props) {
 
   return <CustomGameClient slug={slug} />;
 }
-

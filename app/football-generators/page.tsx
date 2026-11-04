@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Football Generators: Random Player & Team',
+  title: 'Football Generators: Random Player & Team | Footle',
   description: 'Try free football generators from Footle. Pick a random football player or club, discover someone new, and share your result with friends.',
   alternates: { canonical: '/football-generators' },
   openGraph: {
@@ -11,11 +11,13 @@ export const metadata: Metadata = {
     url: 'https://footle.club/football-generators',
     siteName: 'Footle',
     type: 'website',
+    images: [{ url: '/football-generators/opengraph-image' }],
   },
   twitter: {
     card: 'summary',
     title: 'Football Generators | Footle',
     description: 'Pick a random football player or club with Footle’s free generators.',
+    images: ['/football-generators/opengraph-image'],
   },
 };
 
@@ -58,10 +60,10 @@ export default function FootballGeneratorsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
-      <header className="space-y-4">
+      <header className="space-y-4 text-center">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#03E690]">Free football tools</p>
-        <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">Football Generators</h1>
-        <p className="max-w-3xl text-lg leading-8 text-gray-300">
+        <h1 className="text-4xl font-bold text-white md:text-5xl">Football Generators</h1>
+        <p className="mx-auto max-w-3xl text-lg text-gray-300">
           Need a random footballer for a quiz or a club to build a challenge around? Use Footle’s free football generators
           to get an instant pick, then share it with friends.
         </p>

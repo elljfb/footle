@@ -2,14 +2,14 @@ import type { Metadata } from 'next';
 import EightZeroClient from './EightZeroClient';
 
 export const metadata: Metadata = {
-  title: '8-0 - World Cup Draft Game',
+  title: '8-0 - World Cup Draft Game | Footle',
   description:
     'Play 8-0, the Footle World Cup draft mode. Build an XI from random World Cup squads, simulate the tournament, and try to go undefeated.',
   alternates: {
     canonical: '/eight-zero',
   },
   openGraph: {
-    title: '8-0 - World Cup Draft Game',
+    title: '8-0 - World Cup Draft Game | Footle',
     description: 'Draft a World Cup XI and chase an undefeated tournament run.',
     url: 'https://footle.club/eight-zero',
     siteName: 'Footle',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: '8-0 - World Cup Draft Game',
+    title: '8-0 - World Cup Draft Game | Footle',
     description: 'Build a World Cup XI from random countries and years, then simulate the full path to the final.',
     images: ['/8-0-og.jpg'],
   },

@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     description: 'Choose leagues, set a target player, and share your own Footle challenge link.',
     url: 'https://footle.club/custom',
     siteName: 'Footle',
-    images: [{ url: '/og-image.png' }],
+    images: [{ url: '/custom/opengraph-image' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Create Custom Footle Challenge',
     description: 'Create and share your own Footle challenge.',
-    images: ['/og-image.png'],
+    images: ['/custom/opengraph-image'],
   },
 };
 

@@ -1,3 +1,23 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Footle',
+  description: 'Learn how Footle collects, uses, and protects information when you play our football games.',
+  openGraph: {
+    title: 'Privacy Policy | Footle',
+    description: 'Learn how Footle collects, uses, and protects information when you play our football games.',
+    url: 'https://footle.club/privacy',
+    siteName: 'Footle',
+    images: [{ url: '/privacy/opengraph-image' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy | Footle',
+    description: 'Learn how Footle collects, uses, and protects information when you play our football games.',
+    images: ['/privacy/opengraph-image'],
+  },
+};
+
 export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-gray-900 text-white p-4 md:p-8">

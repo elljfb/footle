@@ -3,13 +3,13 @@ import PlayerOfTheSeasonClient from './PlayerOfTheSeasonClient';
 import GamePageContent from '../../components/GamePageContent';
 
 export const metadata: Metadata = {
-  title: 'Player of the Season',
+  title: 'Player of the Season | Footle',
   description: 'Create your own Premier League footballer, choose a club, distribute attribute points and simulate a full season to see if you win Player of the Season.',
   alternates: {
     canonical: '/player-of-the-season',
   },
   openGraph: {
-    title: 'Player of the Season',
+    title: 'Player of the Season | Footle',
     description: 'Build a footballer, pick your Premier League club and simulate a season to see if you become Player of the Season.',
     url: 'https://footle.club/player-of-the-season',
     siteName: 'Footle',
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Player of the Season',
+    title: 'Player of the Season | Footle',
     description: 'Design, simulate and share your Premier League season story.',
     images: ['/player-of-the-season/opengraph-image'],
   },

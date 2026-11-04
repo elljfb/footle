@@ -220,12 +220,12 @@ export default function PlayerOfTheSeasonClient() {
 
   return (
     <main className="space-y-10 pb-12">
-      <header className="space-y-4">
+      <header className="space-y-4 text-center">
         <p className="text-sm font-bold uppercase tracking-[0.25em] text-[#03E690]">Player of the Season</p>
-        <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
+        <h1 className="text-4xl font-bold text-white md:text-5xl">
           {isSeasonComplete ? 'Your season is complete' : season ? 'Matchday by matchday' : 'Build a star and simulate the Premier League'}
         </h1>
-        <p className="max-w-3xl text-lg text-gray-300">
+        <p className="mx-auto max-w-3xl text-lg text-gray-300">
           {isSeasonComplete
             ? `The final whistle has gone for ${build.name}. Here is the full story of their Premier League season.`
             : season

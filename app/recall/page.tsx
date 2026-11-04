@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     url: 'https://footle.club/recall',
     siteName: 'Footle',
     type: 'website',
-    images: [{ url: '/og-image.png' }],
+    images: [{ url: '/recall/opengraph-image' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Footle Recall - Football Player Memory Game',
     description:
       'A fast football memory quiz built from Footle player data.',
-    images: ['/og-image.png'],
+    images: ['/recall/opengraph-image'],
   },
 };
 

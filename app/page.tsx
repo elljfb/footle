@@ -95,6 +95,12 @@ export default function Home() {
       description: 'Create fake transfer rumors to share',
       accent: 'border-yellow-500/30 text-yellow-200',
     },
+    {
+      href: '/football-generators',
+      title: 'Football Generators',
+      description: 'Pick a random football player or club',
+      accent: 'border-yellow-500/30 text-yellow-200',
+    },
   ];
 
   const handleStartPlaying = () => {

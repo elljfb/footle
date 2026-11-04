@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import CareerClient from './CareerClient';
 
 export const metadata: Metadata = {
-  title: 'Football Career Path Quiz - Guess The Player Career Path',
+  title: 'Football Career Path Quiz - Guess The Player Career Path | Footle',
   description: 'Play Footle Career, a daily football career path quiz where you guess the mystery player from their clubs, appearances, and goals in just 3 guesses.',
   keywords: [
     'football career path quiz',
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: 'Football Career Path Quiz | Guess The Player Career Path',
+    title: 'Football Career Path Quiz | Guess The Player Career Path | Footle',
     description: 'Guess the mystery footballer from their career path, club history, appearances, and goals. A new Footle Career puzzle every day.',
     url: 'https://footle.club/career',
     siteName: 'Footle',
     type: 'website',
     images: [
       {
-        url: '/og-image.png',
+        url: '/career/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Footle Career - football career path quiz',
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Football Career Path Quiz | Guess The Player Career Path',
+    title: 'Football Career Path Quiz | Guess The Player Career Path | Footle',
     description: 'Play the daily football career path quiz and guess the mystery player in 3 guesses.',
-    images: ['/career_og_image.png'],
+    images: ['/career/opengraph-image'],
   },
 };
 
