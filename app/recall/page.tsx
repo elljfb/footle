@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import MemoryClient from './MemoryClient';
-import GamePageContent from '../../components/GamePageContent';
 
 export const metadata: Metadata = {
   title: 'Footle Recall - Football Player Memory Game',
@@ -52,14 +51,6 @@ export default function RecallPage() {
           </p>
         </div>
       </section>
-      <GamePageContent
-        faqs={[
-          { question: 'How long do I see the player profile?', answer: 'The mystery player profile is shown for five seconds before you select from the answer options.' },
-          { question: 'How is the Recall score calculated?', answer: 'A correct answer earns 10 points. An incorrect answer can earn partial points based on how closely the selected player matches the visible player attributes.' },
-          { question: 'How many rounds are there?', answer: 'A Recall run consists of five rounds, with a maximum possible score of 50 points.' },
-          { question: 'Can I play Footle Recall more than once?', answer: 'Recall is an unlimited memory game, so you can start another run after completing a set of rounds.' },
-        ]}
-      />
     </>
   );
 }

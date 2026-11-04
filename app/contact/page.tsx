@@ -1,41 +1,46 @@
 import type { Metadata } from 'next';
-import ContactForm from './ContactForm';
 
 export const metadata: Metadata = {
   title: 'Contact Footle',
-  description: 'Contact the Footle team about football games, feedback, privacy requests, advertising or partnerships.',
+  description: 'Get in touch with the Footle team about the games, your feedback, or a question.',
   alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact Footle',
+    description: 'Get in touch with the Footle team.',
+    url: 'https://footle.club/contact',
+    siteName: 'Footle',
+    images: [{ url: '/contact/opengraph-image' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact Footle',
+    description: 'Get in touch with the Footle team.',
+    images: ['/contact/opengraph-image'],
+  },
 };
 
 export default function ContactPage() {
   return (
-    <main className="mx-auto max-w-3xl space-y-8">
-      <header className="space-y-4">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#03E690]">Get in touch</p>
-        <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">Contact us</h1>
-        <p className="text-lg leading-8 text-gray-300">
-          Have a question about a game, spotted an issue, or want to discuss advertising or a partnership?
-          Send the Footle team a message.
+    <main className="space-y-8 pt-10 text-gray-200">
+      <header className="text-center">
+        <p className="mb-3 text-sm uppercase tracking-[0.2em] text-blue-300">We&apos;re listening</p>
+        <h1 className="mb-4 text-4xl font-bold text-white">Contact Footle</h1>
+        <p className="mx-auto max-w-2xl text-lg text-gray-300">
+          Have feedback, spotted a problem, or have a question? Send us an email.
         </p>
       </header>
 
-      <ContactForm />
-
-      <section className="space-y-3 rounded-2xl border border-gray-800 bg-gray-900/70 p-6">
-        <h2 className="text-xl font-bold text-white">Prefer to email us directly?</h2>
-        <p className="leading-7 text-gray-300">
-          Write to{' '}
-          <a
-            href="mailto:dailyguessthefootballer@gmail.com"
-            className="font-semibold text-[#03E690] underline decoration-[#03E690]/40 underline-offset-4 hover:text-emerald-300"
-          >
-            dailyguessthefootballer@gmail.com
-          </a>
-          . For game issues, include the game name and what happened so we can understand the problem.
+      <section className="mx-auto max-w-2xl space-y-4 rounded-2xl border border-gray-800 bg-gray-900/70 p-6 text-center">
+        <h2 className="text-2xl font-bold text-white">Email us</h2>
+        <p>
+          For general questions, feedback, or support, contact the Footle team at:
         </p>
-        <p className="text-sm leading-6 text-gray-400">
-          Privacy and data requests can also be sent to this address. Please avoid including passwords or other sensitive information.
-        </p>
+        <a
+          className="inline-block font-semibold text-blue-300 hover:text-blue-200"
+          href="mailto:dailyguessthefootballer@gmail.com"
+        >
+          dailyguessthefootballer@gmail.com
+        </a>
       </section>
     </main>
   );

@@ -8,7 +8,7 @@ const title = 'Random Football Player Generator';
 const description = 'Generate a random football player from thousands of names in the Footle player database. Discover a footballer, start a quiz or share a pick with friends.';
 
 export const metadata: Metadata = {
-  title: 'Random Football Player Generator',
+  title: 'Random Football Player Generator | Footle',
   description,
   keywords: ['random football player generator', 'football player picker', 'random soccer player generator', 'random footballer'],
   alternates: { canonical: pageUrl },
@@ -66,10 +66,10 @@ export default function RandomFootballPlayerGeneratorPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
-      <header className="space-y-4">
+      <header className="space-y-4 text-center">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#03E690]">Free football tool</p>
-        <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">Random Football Player Generator</h1>
-        <p className="max-w-3xl text-lg leading-8 text-gray-300">
+        <h1 className="text-4xl font-bold text-white md:text-5xl">Random Football Player Generator</h1>
+        <p className="mx-auto max-w-3xl text-lg text-gray-300">
           Pick a footballer at random from Footle&apos;s database of more than 2,600 players. Each result includes
           their current listed team, playing position and age, giving you a ready-made pick for a football quiz,
           player guessing game or challenge with friends.

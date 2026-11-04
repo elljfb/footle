@@ -5,5 +5,5 @@ export const contentType = gameOgImageContentType;
 export const runtime = 'nodejs';
 
 export default function OpenGraphImage() {
-  return createGameOgImage('Custom Footle', 'Create and share your own football guessing challenge');
+  return createGameOgImage('Custom Footle Challenge', 'Create and share your own football guessing game');
 }

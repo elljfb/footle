@@ -5,5 +5,5 @@ export const contentType = gameOgImageContentType;
 export const runtime = 'nodejs';
 
 export default function OpenGraphImage() {
-  return createGameOgImage('Transfer Generator', 'Create a shareable football transfer rumour');
+  return createGameOgImage('Footle Transfer Generator', 'Create fake football transfer rumours to share');
 }

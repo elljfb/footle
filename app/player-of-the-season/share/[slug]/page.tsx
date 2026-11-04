@@ -17,13 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!share) {
     return {
-      title: 'Shared Premier League season',
+      title: 'Shared Premier League season | Footle',
       description: 'See this created player’s Premier League season results.',
       robots: { index: false, follow: false },
     };
   }
 
-  const title = `${share.player_build.name} - ${getSeasonSummaryLabel(share.season, share.player_build.age)}`;
+  const title = `${share.player_build.name} - ${getSeasonSummaryLabel(share.season, share.player_build.age)} | Footle`;
   const description = getPlayerOfTheSeasonShareText(share.player_build, share.season);
   const url = `https://footle.club/player-of-the-season/share/${slug}`;
   const image = `/player-of-the-season/share/${slug}/og`;

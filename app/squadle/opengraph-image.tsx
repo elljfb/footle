@@ -5,5 +5,5 @@ export const contentType = gameOgImageContentType;
 export const runtime = 'nodejs';
 
 export default function OpenGraphImage() {
-  return createGameOgImage('Squadle', 'Identify the club from a starting XI blueprint');
+  return createGameOgImage('Squadle', 'Guess the club from its starting XI clues');
 }

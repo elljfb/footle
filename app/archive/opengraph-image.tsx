@@ -5,5 +5,5 @@ export const contentType = gameOgImageContentType;
 export const runtime = 'nodejs';
 
 export default function OpenGraphImage() {
-  return createGameOgImage('Footle Archive', 'Play past daily football player puzzles');
+  return createGameOgImage('Footle Archive', 'Play past daily football puzzles');
 }

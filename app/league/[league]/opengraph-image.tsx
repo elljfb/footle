@@ -5,8 +5,13 @@ export const size = gameOgImageSize;
 export const contentType = gameOgImageContentType;
 export const runtime = 'nodejs';
 
-export default async function OpenGraphImage({ params }: { params: Promise<{ league: string }> }) {
-  const { league } = await params;
-  const leagueName = slugToLeagueName[league] ?? league.replace(/-/g, ' ');
-  return createGameOgImage(`${leagueName} Footle`, `Guess today's mystery ${leagueName} player`);
+interface Props {
+  params: Promise<{ league: string }>;
+}
+
+export default async function OpenGraphImage({ params }: Props) {
+  const { league: slug } = await params;
+  const leagueName = slugToLeagueName[slug] ?? decodeURIComponent(slug);
+
+  return createGameOgImage(`${leagueName} Footle`, `The daily ${leagueName} player guessing game`);
 }

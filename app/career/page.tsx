@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import CareerClient from './CareerClient';
-import GamePageContent from '../../components/GamePageContent';
 
 export const metadata: Metadata = {
-  title: 'Football Career Path Quiz - Guess The Player Career Path',
+  title: 'Football Career Path Quiz - Guess The Player Career Path | Footle',
   description: 'Play Footle Career, a daily football career path quiz where you guess the mystery player from their clubs, appearances, and goals in just 3 guesses.',
   keywords: [
     'football career path quiz',
@@ -25,7 +24,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: 'Football Career Path Quiz | Guess The Player Career Path',
+    title: 'Football Career Path Quiz | Guess The Player Career Path | Footle',
     description: 'Guess the mystery footballer from their career path, club history, appearances, and goals. A new Footle Career puzzle every day.',
     url: 'https://footle.club/career',
     siteName: 'Footle',
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Football Career Path Quiz | Guess The Player Career Path',
+    title: 'Football Career Path Quiz | Guess The Player Career Path | Footle',
     description: 'Play the daily football career path quiz and guess the mystery player in 3 guesses.',
     images: ['/career/opengraph-image'],
   },
@@ -120,13 +119,6 @@ export default function CareerPage() {
           </p>
         </div>
       </section>
-      <GamePageContent
-        faqs={[
-          { question: 'How many guesses do I get in Footle Career?', answer: 'You have three guesses to identify the mystery player from their career history.' },
-          { question: 'What information is shown in a career puzzle?', answer: 'The puzzle reveals the player’s senior club spells and associated appearances and goals, adding more of the career path as you play.' },
-          { question: 'Does Career Mode have different difficulty settings?', answer: 'Yes. Choose a difficulty before starting. The selected difficulty is reflected in the game and its statistics.' },
-        ]}
-      />
     </>
   );
 }

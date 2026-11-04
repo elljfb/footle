@@ -9,7 +9,6 @@ import SearchBar from '../components/SearchBar';
 import InstructionsModal from '../components/InstructionsModal';
 import Leaderboard from '../components/Leaderboard';
 import StatsModal from '../components/StatsModal';
-import GamePageContent from '../components/GamePageContent';
 import { GameState } from '../types/game';
 import { saveGameResult } from '../services/statsService';
 import { trackEvent } from '../lib/analytics';
@@ -94,6 +93,12 @@ export default function Home() {
       href: '/transfer-generator',
       title: 'Transfer Generator',
       description: 'Create fake transfer rumors to share',
+      accent: 'border-yellow-500/30 text-yellow-200',
+    },
+    {
+      href: '/football-generators',
+      title: 'Football Generators',
+      description: 'Pick a random football player or club',
       accent: 'border-yellow-500/30 text-yellow-200',
     },
   ];
@@ -336,7 +341,7 @@ export default function Home() {
         </div>
 
         <header className="text-center mb-8">
-          <h1 className="mb-2 text-4xl font-bold text-[#03E690]">Footle</h1>
+          <h1 className="text-4xl font-bold mb-2">Footle</h1>
           {gameStarted ? (
             <p className="text-gray-400 text-lg">
               {!gameState.gameOver ? (
@@ -374,7 +379,7 @@ export default function Home() {
               </div>
               <section className="max-w-4xl mx-auto text-left bg-gray-800/80 border border-gray-700 rounded-2xl p-5">
                 <div className="mb-4 text-center">
-                  <p className="text-sm uppercase tracking-[0.2em] text-[#03E690]">Play More Modes</p>
+                  <p className="text-sm uppercase tracking-[0.2em] text-blue-300">Play More Modes</p>
                   <h3 className="text-xl font-semibold text-white mt-1">More ways to play Footle</h3>
                   <p className="text-sm text-gray-400 mt-2">
                     Jump into league-specific dailies, catch up in the archive, or try a different format.
@@ -509,45 +514,6 @@ export default function Home() {
         gameType="all"
         maxGuesses={maxGuesses}
         gameTitle="Footle"
-      />
-      <GamePageContent
-        title="A daily football player guessing game"
-        introduction={[
-          'Footle is a free daily football player guessing game. You have ten attempts to identify the mystery player, choosing each guess from the game’s player list. After every valid guess, the result compares eight details: position, sub-position, age, nationality, club, league, height and preferred foot.',
-          'The clues are designed to make each attempt useful, even when the name is wrong. Treat confirmed matches as anchors, use close matches to build a shortlist, and pay attention to the age and height arrows before committing to your next guess.',
-        ]}
-        sections={[
-          {
-            heading: 'How to interpret each Footle clue',
-            paragraphs: [
-              'Green means the attribute is an exact match; grey means it is not. Orange is reserved for specific near matches: an age within three years, a height within five centimetres, a nationality from the same continent, another club in the same league, or a different sub-position within the same broad position. Position, league and preferred foot must match exactly.',
-              'For age and height, the arrow adds direction: it shows whether the mystery player is older or younger, or taller or shorter, than your guess. Use that direction alongside the displayed value instead of treating an orange result as an exact answer.',
-              'Compare clues together. If a guess confirms the league and broad position but points to a different club in that league, keep those confirmed details and test a different candidate. A nationality from the same continent is a useful lead, but it does not confirm the player’s country.',
-            ],
-          },
-          {
-            heading: 'A practical way to narrow down the answer',
-            paragraphs: [
-              'Start with a player you can identify confidently in the searchable list, then read the whole result before making another guess. Note the exact matches first, then use each orange result to set a boundary: a maximum three-year age difference, a maximum five-centimetre height difference, or a shared continent or league.',
-              'Choose a next guess that tests more than one open question. For example, if you have narrowed the answer to a league and broad position, pick a player from that league whose nationality or age can help distinguish between the remaining possibilities. Avoid repeating a guess that would only confirm information you already know.',
-              'The player list is based on players from Europe’s five major leagues. It is a maintained dataset rather than a live roster, so a player or recent transfer may not always appear. If a name is not accepted, search for another listed player from the same competition.',
-            ],
-          },
-          {
-            heading: 'Choose another kind of football challenge',
-            paragraphs: [
-              'Footle also offers league-specific daily games, including Premier League Guess, alongside Football Grid, Career Mode, Squadle, Recall and the 8-0 World Cup draft. Each format tests a different kind of football knowledge: player attributes, club history, line-ups, memory or squad building.',
-              'When you have finished today’s puzzle, the archive lets you revisit recent daily games. You can also browse all the games or read practical guides to player clues and football quiz strategy.',
-            ],
-          },
-        ]}
-        faqs={[
-          { question: 'How many guesses do I get in Footle?', answer: 'You have up to 10 guesses to identify the daily mystery footballer. The game shows how each guess compares with the answer.' },
-          { question: 'When does the daily Footle puzzle change?', answer: 'Footle provides a new daily puzzle each day. Your progress for the current puzzle is saved in your browser so you can come back and continue.' },
-          { question: 'What do the clue colours and arrows mean?', answer: 'Green is an exact match and grey is not a match. Orange means a specific near match: age within three years, height within five centimetres, nationality on the same continent, a different club in the same league, or a different sub-position in the same broad position. The age and height arrows show whether the mystery player is older or younger, or taller or shorter, than your guess.' },
-          { question: 'Why can’t I find a player to guess?', answer: 'Guesses must match a name in Footle’s player list. The list covers players from Europe’s five major leagues but is not a live roster, so some players or recent transfers may not be included.' },
-          { question: 'Can I play other football quizzes on Footle?', answer: 'Yes. Footle includes league-specific puzzles, Football Grid, Career Mode, Squadle, Recall, the 8-0 World Cup draft, an archive and custom challenges.' },
-        ]}
       />
     </>
   );

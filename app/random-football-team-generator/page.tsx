@@ -8,7 +8,7 @@ const title = 'Random Football Team Generator';
 const description = 'Generate a random football team from clubs in the Footle player database. Pick a club for a quiz, challenge, career save or a bit of football inspiration.';
 
 export const metadata: Metadata = {
-  title: 'Random Football Team Generator',
+  title: 'Random Football Team Generator | Footle',
   description,
   keywords: ['random football team generator', 'random soccer team generator', 'random football club generator', 'football team picker'],
   alternates: { canonical: pageUrl },
@@ -67,10 +67,10 @@ export default function RandomFootballTeamGeneratorPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
-      <header className="space-y-4">
+      <header className="space-y-4 text-center">
         <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#03E690]">Free football tool</p>
-        <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">Random Football Team Generator</h1>
-        <p className="max-w-3xl text-lg leading-8 text-gray-300">
+        <h1 className="text-4xl font-bold text-white md:text-5xl">Random Football Team Generator</h1>
+        <p className="mx-auto max-w-3xl text-lg text-gray-300">
           Get a random football club in one click. This free football team picker selects from clubs in the Footle
           database and shows each team&apos;s league, making it easy to choose a club for a quiz, career challenge,
           watch-along or friendly debate.

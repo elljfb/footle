@@ -5,5 +5,5 @@ export const contentType = gameOgImageContentType;
 export const runtime = 'nodejs';
 
 export default function OpenGraphImage() {
-  return createGameOgImage('Football Grid', 'Fill the daily 3 × 3 football trivia grid');
+  return createGameOgImage('Football Grid', 'Fill a daily grid with players who fit each clue');
 }

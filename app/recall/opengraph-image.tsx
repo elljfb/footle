@@ -5,5 +5,5 @@ export const contentType = gameOgImageContentType;
 export const runtime = 'nodejs';
 
 export default function OpenGraphImage() {
-  return createGameOgImage('Footle Recall', 'A football player memory challenge');
+  return createGameOgImage('Footle Recall', 'Memorise player stats, then pick the footballer');
 }

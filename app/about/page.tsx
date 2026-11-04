@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     url: 'https://footle.club/about',
     siteName: 'Footle',
     type: 'website',
-    images: [{ url: '/og-image.png' }],
+    images: [{ url: '/about/opengraph-image' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'About Footle',
     description:
       'Learn more about Footle, the daily football guessing game and its football quiz modes.',
-    images: ['/og-image.png'],
+    images: ['/about/opengraph-image'],
   },
 };
 

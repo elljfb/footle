@@ -2,8 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import './globals.css';
 import Footer from "../components/Footer";
-import SiteHeader from '../components/SiteHeader';
-import PopularGamesSidebar from '../components/PopularGamesSidebar';
+import LeagueMenu from '../components/LeagueMenu';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -12,16 +11,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: {
-    default: 'Footle — The Daily Football Player Guessing Game',
-    template: '%s | Footle',
-  },
+  title: 'Footle - The Daily Football Player Guessing Game',
   description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
   keywords: 'football, soccer, guessing game, daily game, player quiz, football quiz, football wordle, football game, football wordle game',
   authors: [{ name: 'Footle' }],
   metadataBase: new URL('https://footle.club'),
   openGraph: {
-    title: 'Footle — The Daily Football Player Guessing Game',
+    title: 'Footle - The Daily Football Player Guessing Game',
     description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
     type: 'website',
     url: 'https://footle.club',
@@ -31,13 +27,13 @@ export const metadata: Metadata = {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Footle — The daily football player guessing game',
+        alt: 'Footle - The Daily Football Player Guessing Game',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Footle — The Daily Football Player Guessing Game',
+    title: 'Footle - The Daily Football Player Guessing Game',
     description: 'Test your football knowledge by guessing today\'s mystery player. Get feedback on position, age, nationality, club, and more with each guess. Play daily!',
     images: ['/opengraph-image'],
   },
@@ -67,6 +63,39 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const serviceWorkerScript = process.env.NODE_ENV === 'production'
+    ? `
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(
+            function(registration) {
+              console.log('ServiceWorker registration successful');
+            },
+            function(err) {
+              console.log('ServiceWorker registration failed: ', err);
+            }
+          );
+        });
+      }
+    `
+    : `
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(async function(registrations) {
+          await Promise.all(registrations.map(function(registration) {
+            return registration.unregister();
+          }));
+          const cachesToClear = (await caches.keys()).filter(function(name) {
+            return name.startsWith('footle-');
+          });
+          await Promise.all(cachesToClear.map(function(name) {
+            return caches.delete(name);
+          }));
+        }).catch(function(error) {
+          console.error('Failed to clean up the Footle service worker in development:', error);
+        });
+      }
+    `;
+
   return (
     <html lang="en">
       <body className="font-sans">
@@ -85,29 +114,13 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-QVKN2HSME2');
 
-            if ('serviceWorker' in navigator) {
-              window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/sw.js').then(
-                  function(registration) {
-                    console.log('ServiceWorker registration successful');
-                  },
-                  function(err) {
-                    console.log('ServiceWorker registration failed: ', err);
-                  }
-                );
-              });
-            }
+            ${serviceWorkerScript}
           `}
         </Script>
-        <div className="min-h-screen bg-gray-900 text-white">
-          <SiteHeader />
-          <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:py-10">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
-              <div className="min-w-0">{children}</div>
-              <div className="lg:pt-2">
-                <PopularGamesSidebar />
-              </div>
-            </div>
+        <div className="min-h-screen bg-gray-900 text-white p-4 md:p-8">
+          <div className="max-w-3xl mx-auto relative">
+            <LeagueMenu />
+            {children}
           </div>
           <Footer />
         </div>

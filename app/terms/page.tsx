@@ -1,87 +1,86 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Terms of Service',
-  description: 'Read the terms and conditions for using Footle football games, quizzes and website services.',
+  title: 'Terms of Use | Footle',
+  description: 'Read the terms for using Footle games, generators, and other features.',
   alternates: { canonical: '/terms' },
+  openGraph: {
+    title: 'Terms of Use | Footle',
+    description: 'Read the terms for using Footle games, generators, and other features.',
+    url: 'https://footle.club/terms',
+    siteName: 'Footle',
+    images: [{ url: '/terms/opengraph-image' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Terms of Use | Footle',
+    description: 'Read the terms for using Footle games, generators, and other features.',
+    images: ['/terms/opengraph-image'],
+  },
 };
 
-export default function TermsOfServicePage() {
+const updatedDate = 'November 4, 2026';
+
+export default function TermsPage() {
   return (
-    <article className="mx-auto max-w-3xl space-y-8">
-      <header className="space-y-3">
-        <p className="text-sm font-bold uppercase tracking-[0.2em] text-[#03E690]">Legal</p>
-        <h1 className="text-4xl font-black tracking-tight text-white">Terms of Service</h1>
-        <p className="text-gray-400">Last updated: 22 October 2026</p>
+    <main className="space-y-8 pt-10 text-gray-200">
+      <header className="text-center">
+        <p className="mb-3 text-sm uppercase tracking-[0.2em] text-blue-300">Footle</p>
+        <h1 className="mb-4 text-4xl font-bold text-white">Terms of Use</h1>
+        <p className="mx-auto max-w-2xl text-lg text-gray-300">
+          These terms explain the basic rules for using Footle and its games.
+        </p>
       </header>
-      <div className="space-y-7 leading-7 text-gray-300">
-        <section className="space-y-2">
-          <h2 className="text-xl font-bold text-white">Using Footle</h2>
-          <p>
-            These terms apply when you access or use the Footle website and its football games. By using the site, you agree to these
-            terms. If you do not agree, please do not use the site. Footle provides its games for personal, non-commercial
-            entertainment, subject to these terms and applicable law.
-          </p>
-        </section>
-        <section className="space-y-2">
-          <h2 className="text-xl font-bold text-white">Games and availability</h2>
-          <p>
-            We aim to keep the games available and accurate, but features, puzzle data and availability may change or be interrupted.
-            We do not guarantee uninterrupted access, error-free operation, or that game data will always be complete or current.
-            Your game progress may be stored in your browser and can be lost if browser data is cleared.
-          </p>
-        </section>
-        <section className="space-y-2">
-          <h2 className="text-xl font-bold text-white">Acceptable use</h2>
-          <p>
-            You must not misuse the site, interfere with its operation, attempt to gain unauthorised access to its systems, or use
-            automated methods in a way that disrupts the service. Do not submit unlawful, abusive or misleading material to public
-            features such as leaderboards or shared challenges.
-          </p>
-        </section>
-        <section className="space-y-2">
-          <h2 className="text-xl font-bold text-white">User submissions and shared content</h2>
-          <p>
-            You are responsible for content you submit, including leaderboard names and custom game details. Do not submit content
-            that infringes another person&apos;s rights or violates the law. We may remove submissions or restrict access to features
-            where reasonably necessary to protect users or the service.
-          </p>
-        </section>
-        <section className="space-y-2">
-          <h2 className="text-xl font-bold text-white">Third-party services and links</h2>
-          <p>
-            The site may use third-party services or link to external websites. Those services are governed by their own terms and
-            privacy notices. We are not responsible for third-party content, services or availability.
-          </p>
-        </section>
-        <section className="space-y-2">
-          <h2 className="text-xl font-bold text-white">Intellectual property</h2>
-          <p>
-            The Footle name, branding, website design and original site content are protected by applicable intellectual property
-            laws. These terms do not transfer ownership to you. Football names, clubs and related references belong to their
-            respective owners and are used for identification and informational purposes.
-          </p>
-        </section>
-        <section className="space-y-2">
-          <h2 className="text-xl font-bold text-white">Disclaimer and liability</h2>
-          <p>
-            To the extent permitted by law, the site is provided “as is” without warranties that cannot be excluded by law. Nothing
-            in these terms limits liability where doing so would be unlawful, including liability for fraud or for death or personal
-            injury caused by negligence. Otherwise, to the extent permitted by law, Footle is not liable for indirect or
-            consequential loss arising from use of the site.
-          </p>
-        </section>
-        <section className="space-y-2">
-          <h2 className="text-xl font-bold text-white">Changes and contact</h2>
-          <p>
-            We may update these terms as the site changes. The updated version will be posted on this page with a revised date.
-            Questions about these terms can be sent to{' '}
-            <a href="mailto:dailyguessthefootballer@gmail.com" className="font-semibold text-[#03E690] hover:text-emerald-300">
-              dailyguessthefootballer@gmail.com
-            </a>.
-          </p>
-        </section>
-      </div>
-    </article>
+
+      <section className="space-y-4 rounded-2xl border border-gray-800 bg-gray-900/70 p-6">
+        <h2 className="text-2xl font-bold text-white">Using Footle</h2>
+        <p>
+          By using Footle, you agree to use the site lawfully and not to disrupt, damage, or attempt to gain
+          unauthorized access to the site, its services, or other users&apos; data.
+        </p>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-gray-800 bg-gray-900/70 p-6">
+        <h2 className="text-2xl font-bold text-white">Games and user content</h2>
+        <p>
+          Footle provides football games, generators, and related features for personal entertainment. Game
+          results and generated content may be random or based on available data, and are not guaranteed to be
+          complete, current, or error-free.
+        </p>
+        <p>
+          If you submit a score, create a custom challenge, or share a result, you are responsible for the
+          content you provide. Do not submit unlawful, abusive, misleading, or otherwise harmful content.
+          Shared content may be accessible to anyone with its link.
+        </p>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-gray-800 bg-gray-900/70 p-6">
+        <h2 className="text-2xl font-bold text-white">Availability and changes</h2>
+        <p>
+          We may update, suspend, or discontinue any part of Footle at any time. We may also update these
+          terms; continued use of the site after an update means you accept the revised terms.
+        </p>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-gray-800 bg-gray-900/70 p-6">
+        <h2 className="text-2xl font-bold text-white">Disclaimer</h2>
+        <p>
+          Footle is provided on an &quot;as is&quot; and &quot;as available&quot; basis, without guarantees that the
+          service will always be available, uninterrupted, or free of errors. To the extent permitted by law,
+          Footle is not liable for indirect or consequential loss arising from your use of the site.
+        </p>
+      </section>
+
+      <section className="space-y-4 rounded-2xl border border-gray-800 bg-gray-900/70 p-6">
+        <h2 className="text-2xl font-bold text-white">Contact</h2>
+        <p>
+          Questions about these terms? Contact us at{' '}
+          <a className="text-blue-300 hover:text-blue-200" href="mailto:dailyguessthefootballer@gmail.com">
+            dailyguessthefootballer@gmail.com
+          </a>.
+        </p>
+        <p className="text-sm text-gray-400">Last updated: {updatedDate}</p>
+      </section>
+    </main>
   );
 }
