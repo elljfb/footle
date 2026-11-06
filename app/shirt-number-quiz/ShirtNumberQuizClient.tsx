@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Leaderboard from '../../components/Leaderboard';
 import type { ShirtNumberQuestion } from '../../lib/premier-league-shirt-numbers';
-import { getShirtColor, getShirtNumberColor } from '../../lib/premier-league-shirt-colors';
+import { getShirtColor, getShirtDesign, getShirtNumberColor } from '../../lib/premier-league-shirt-colors';
 
 type Phase = 'intro' | 'question' | 'feedback' | 'complete';
 
@@ -31,34 +32,27 @@ function Shirt({ club, number }: { club: string; number: number }) {
   const numberColor = getShirtNumberColor(shirtColor);
 
   return (
-    <svg
-      aria-label={`${club} shirt with squad number ${number}`}
-      className="h-52 w-48 drop-shadow-xl sm:h-60 sm:w-56"
-      role="img"
-      viewBox="0 0 100 110"
-    >
-      <path
-        d="M31 9 43 4h14l12 5 22 11-11 20-10-5v66H30V35l-10 5L9 20z"
-        fill={shirtColor}
-        stroke="rgba(255,255,255,0.65)"
-        strokeLinejoin="round"
-        strokeWidth="2"
+    <div className="relative h-56 w-56 drop-shadow-xl sm:h-64 sm:w-64">
+      <Image
+        alt={`${club} football shirt`}
+        className="object-contain"
+        fill
+        priority
+        sizes="(max-width: 640px) 224px, 256px"
+        src={getShirtDesign(club)}
       />
-      <path d="M43 4q7 12 14 0" fill="none" stroke="rgba(0,0,0,0.28)" strokeWidth="3" />
-      <path d="M31 35v66m38-66v66" fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth="1.5" />
-      <text
-        dominantBaseline="middle"
-        fill={numberColor}
-        fontFamily="Arial, sans-serif"
-        fontSize="30"
-        fontWeight="800"
-        textAnchor="middle"
-        x="50"
-        y="62"
+      <span
+        aria-label={`Squad number ${number}`}
+        className="absolute left-1/2 top-[43%] -translate-x-1/2 -translate-y-1/2 text-[2.7rem] font-black leading-none sm:text-[3.5rem]"
+        style={{
+          color: numberColor,
+          WebkitTextStroke: `1px ${numberColor === '#FFFFFF' ? '#111827' : '#FFFFFF'}`,
+          paintOrder: 'stroke fill',
+        }}
       >
         {number}
-      </text>
-    </svg>
+      </span>
+    </div>
   );
 }
 

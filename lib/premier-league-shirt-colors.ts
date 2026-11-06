@@ -55,6 +55,67 @@ const clubShirtColors: Record<string, string> = {
   'Wolverhampton Wanderers': '#FDB913',
 };
 
+const clubShirtDesigns: Record<string, string> = {
+  'AFC Bournemouth': 'stripes-red-black-football-shirt.svg',
+  Arsenal: 'sleeves-red-white-football-shirt.svg',
+  'Aston Villa': 'sleeves-maroon-skyblue-football-shirt.svg',
+  Barnsley: 'hoops-red-white-football-shirt.svg',
+  'Birmingham City': 'plain-blue-football-shirt.svg',
+  'Blackburn Rovers': 'hoops-blue-white-football-shirt.svg',
+  Blackpool: 'plain-orange-football-shirt.svg',
+  'Bolton Wanderers': 'band-white-navy-skyblue-football-shirt.svg',
+  'Bradford City': 'stripes-red-black-football-shirt.svg',
+  Brentford: 'hoops-red-white-football-shirt.svg',
+  'Brighton & Hove Albion': 'stripes-white-skyblue-football-shirt.svg',
+  Burnley: 'sleeves-maroon-skyblue-football-shirt.svg',
+  'Cardiff City': 'plain-blue-football-shirt.svg',
+  'Charlton Athletic': 'plain-red-football-shirt.svg',
+  Chelsea: 'plain-blue-football-shirt.svg',
+  'Coventry City': 'plain-skyblue-football-shirt.svg',
+  'Crystal Palace': 'halves-red-blue-football-shirt.svg',
+  'Derby County': 'sleeves-white-black-football-shirt.svg',
+  Everton: 'plain-blue-football-shirt.svg',
+  Fulham: 'sleeves-white-black-football-shirt.svg',
+  'Huddersfield Town': 'hoops-blue-white-football-shirt.svg',
+  'Hull City': 'stripes-yellow-black-football-shirt.svg',
+  Ipswich: 'plain-blue-football-shirt.svg',
+  'Ipswich Town': 'plain-blue-football-shirt.svg',
+  'Leeds United': 'plain-white-football-shirt.svg',
+  'Leicester City': 'plain-blue-football-shirt.svg',
+  Liverpool: 'plain-red-football-shirt.svg',
+  'Luton Town': 'plain-orange-football-shirt.svg',
+  'Manchester City': 'plain-skyblue-football-shirt.svg',
+  'Manchester United': 'plain-red-football-shirt.svg',
+  Middlesbrough: 'plain-red-football-shirt.svg',
+  'Newcastle United': 'stripes-white-black-football-shirt.svg',
+  'Norwich City': 'plain-yellow-football-shirt.svg',
+  'Nottingham Forest': 'plain-red-football-shirt.svg',
+  'Oldham Athletic': 'plain-blue-football-shirt.svg',
+  Portsmouth: 'plain-blue-football-shirt.svg',
+  'Queens Park Rangers': 'hoops-blue-white-football-shirt.svg',
+  Reading: 'hoops-blue-white-football-shirt.svg',
+  'Sheffield United': 'hoops-red-white-football-shirt.svg',
+  'Sheffield Wednesday': 'stripes-white-blue-football-shirt.svg',
+  Southampton: 'hoops-red-white-football-shirt.svg',
+  Stoke: 'hoops-red-white-football-shirt.svg',
+  'Stoke City': 'hoops-red-white-football-shirt.svg',
+  Sunderland: 'hoops-red-white-football-shirt.svg',
+  Swansea: 'plain-white-football-shirt.svg',
+  'Swansea City': 'plain-white-football-shirt.svg',
+  'Swindon Town': 'plain-red-football-shirt.svg',
+  'Tottenham Hotspur': 'sleeves-white-navy-football-shirt.svg',
+  Watford: 'stripes-yellow-black-football-shirt.svg',
+  'West Bromwich Albion': 'stripes-white-navy-football-shirt.svg',
+  'West Ham United': 'sleeves-maroon-skyblue-football-shirt.svg',
+  'Wigan Athletic': 'plain-blue-football-shirt.svg',
+  Wimbledon: 'plain-blue-football-shirt.svg',
+  'Wolverhampton Wanderers': 'plain-gold-football-shirt.svg',
+};
+
+export function getShirtDesign(club: string): string {
+  return `/football-shirts-svg/${clubShirtDesigns[club] ?? 'plain-blue-football-shirt.svg'}`;
+}
+
 export function getShirtColor(club: string): string {
   return clubShirtColors[club] ?? '#374151';
 }
