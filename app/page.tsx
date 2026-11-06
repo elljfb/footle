@@ -90,6 +90,12 @@ export default function Home() {
       accent: 'border-indigo-500/30 text-indigo-200',
     },
     {
+      href: '/shirt-number-quiz',
+      title: 'Premier League Shirt Number Quiz',
+      description: 'Name the player from their club, season, and squad number',
+      accent: 'border-rose-500/30 text-rose-200',
+    },
+    {
       href: '/transfer-generator',
       title: 'Transfer Generator',
       description: 'Create fake transfer rumors to share',
