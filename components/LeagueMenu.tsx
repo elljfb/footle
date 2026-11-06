@@ -99,6 +99,14 @@ export default function LeagueMenu({ className = '' }: LeagueMenuProps) {
             Footle Recall
           </Link>
           <Link
+            href="/shirt-number-quiz"
+            prefetch={false}
+            onClick={() => setOpen(false)}
+            className="block px-3 py-2 rounded hover:bg-gray-800 text-white"
+          >
+            Shirt Number Quiz
+          </Link>
+          <Link
             href="/player-of-the-season"
             prefetch={false}
             onClick={() => setOpen(false)}
