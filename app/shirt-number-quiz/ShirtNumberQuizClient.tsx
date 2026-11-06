@@ -195,36 +195,30 @@ export default function ShirtNumberQuizClient({
 
   if (phase === 'intro') {
     return (
-      <main className="mx-auto max-w-2xl">
-        <section className="overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-gray-800 via-gray-800 to-slate-950 shadow-2xl shadow-black/30">
-          <div className="px-6 py-10 text-center sm:px-12 sm:py-14">
-            <p className="inline-flex items-center gap-2 rounded-full border border-blue-300/20 bg-blue-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-blue-200">
-              <span className="h-2 w-2 rounded-full bg-blue-300" />
-              Today&apos;s challenge
-            </p>
-            <h1 className="mx-auto mt-6 max-w-xl text-3xl font-extrabold leading-tight text-white sm:text-5xl">
-              Premier League<br className="hidden sm:block" /> Shirt Number Quiz
-            </h1>
-            <p className="mx-auto mt-5 max-w-lg text-base leading-relaxed text-gray-300 sm:text-lg">
-              Every day, the same five shirt-number questions for everyone. Pick the player who wore the number and see how you rank.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <button
-                className="min-w-52 rounded-xl bg-blue-500 px-10 py-4 text-lg font-bold text-white shadow-lg shadow-blue-950/40 transition hover:-translate-y-0.5 hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
-                disabled={!hasLoadedSavedQuiz}
-                onClick={handleStart}
-                type="button"
-              >
-                {hasLoadedSavedQuiz ? 'Start today’s quiz' : 'Loading…'}
-              </button>
-            </div>
-            <p className="mt-4 text-sm text-gray-500">One attempt per day · New questions at midnight UTC</p>
+      <main className="space-y-10 pb-12 pt-4">
+        <header className="space-y-4 text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-300">Today&apos;s challenge</p>
+          <h1 className="text-4xl font-bold text-white md:text-5xl">
+            Premier League Shirt Number Quiz
+          </h1>
+          <p className="mx-auto max-w-3xl text-lg text-gray-300">
+            Every day, everyone gets the same five shirt-number questions. Pick the player who wore the number and see how you rank.
+          </p>
+        </header>
+
+        <section className="mx-auto max-w-3xl rounded-3xl border border-gray-800 bg-gray-900/70 p-6 text-center sm:p-8">
+          <p className="text-gray-300">Club colours · Five rounds · Score more and finish faster</p>
+          <div className="mt-6 flex justify-center">
+            <button
+              className="min-w-52 rounded-xl bg-blue-500 px-10 py-4 text-lg font-bold text-white shadow-lg shadow-blue-950/40 transition hover:-translate-y-0.5 hover:bg-blue-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-300"
+              disabled={!hasLoadedSavedQuiz}
+              onClick={handleStart}
+              type="button"
+            >
+              {hasLoadedSavedQuiz ? 'Start today’s quiz' : 'Loading…'}
+            </button>
           </div>
-          <div className="border-t border-white/10 bg-black/10 px-6 py-4 text-center">
-            <p className="text-sm text-gray-400">
-              Club colours · Five rounds · Score more and finish faster
-            </p>
-          </div>
+          <p className="mt-4 text-sm text-gray-500">One attempt per day · New questions at midnight UTC</p>
         </section>
       </main>
     );
@@ -232,7 +226,7 @@ export default function ShirtNumberQuizClient({
 
   if (phase === 'complete') {
     return (
-      <main className="space-y-6">
+      <main className="space-y-6 pt-4">
         <header className="space-y-2 text-center">
           <p className="text-sm uppercase tracking-[0.24em] text-blue-300">Premier League Shirt Number Quiz</p>
           <h1 className="text-4xl font-bold text-white">Quiz complete</h1>
@@ -287,7 +281,7 @@ export default function ShirtNumberQuizClient({
   }
 
   return (
-    <main className="space-y-5">
+    <main className="space-y-5 pt-4">
       <header className="space-y-3 text-center">
         <p className="text-xs uppercase tracking-[0.24em] text-blue-300 sm:text-sm">Premier League Shirt Number Quiz</p>
         <h1 className="text-2xl font-bold text-white sm:text-4xl">Question {questionIndex + 1} of {questions.length}</h1>
