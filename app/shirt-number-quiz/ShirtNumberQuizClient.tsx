@@ -29,7 +29,7 @@ function getStorageKey(challengeDate: string): string {
 
 function Shirt({ club, number }: { club: string; number: number }) {
   const shirtColor = getShirtColor(club);
-  const numberColor = getShirtNumberColor(shirtColor);
+  const numberColor = getShirtNumberColor(shirtColor, club);
 
   return (
     <div className="relative h-56 w-56 drop-shadow-xl sm:h-64 sm:w-64">

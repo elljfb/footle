@@ -112,6 +112,12 @@ const clubShirtDesigns: Record<string, string> = {
   'Wolverhampton Wanderers': 'plain-gold-football-shirt.svg',
 };
 
+const darkNumberClubs = new Set([
+  'Blackburn Rovers',
+  'Brighton & Hove Albion',
+  'Manchester City',
+]);
+
 export function getShirtDesign(club: string): string {
   return `/football-shirts-svg/${clubShirtDesigns[club] ?? 'plain-blue-football-shirt.svg'}`;
 }
@@ -120,7 +126,11 @@ export function getShirtColor(club: string): string {
   return clubShirtColors[club] ?? '#374151';
 }
 
-export function getShirtNumberColor(shirtColor: string): string {
+export function getShirtNumberColor(shirtColor: string, club: string): string {
+  if (darkNumberClubs.has(club)) {
+    return '#111827';
+  }
+
   const color = shirtColor.replace('#', '');
   const red = parseInt(color.slice(0, 2), 16);
   const green = parseInt(color.slice(2, 4), 16);
